@@ -9,5 +9,5 @@ Build Setup
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:800
+# serve with hot reload at localhost:8000
 npm start
