@@ -1,0 +1,26 @@
+1.form表单多个验证规则：
+	rules: [
+    	{ required: true, message: 'Please input your username!' },
+    	{ pattern: /^1[34578]\d{9}$/, message: 'Phone number error!' },
+    ]
+
+
+2.样式相关，样式局部化，切换等，classnames 结合  less 结合  css modules
+	const  cls  = classnames({
+		[styles.title]: false,
+		[styles['title-two']]: true,
+	})
+	
+	
+3.css modules引入全局的动画库，类名全局化后动画名被局部化
+	写法：
+	:global{
+	    .bounce {  //类名用全局化处理方式，包裹在global里面
+	      :local{
+	            -webkit-animation-name: bounce;  //动画名这里包裹在local里面
+	            animation-name: bounce;
+	      }
+	      -webkit-transform-origin: center bottom;
+	      transform-origin: center bottom;
+	    }
+	}

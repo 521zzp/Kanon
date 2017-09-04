@@ -1,0 +1,15 @@
+send:
+{
+	token: '',
+	datas: {}
+}
+
+
+return:
+{
+	status: true/false,
+	code: 200,
+	msg: '',
+	datas: {}
+}
+
