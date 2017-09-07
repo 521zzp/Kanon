@@ -113,3 +113,64 @@ export const getModel = () =>{
 		}
 	}
 }
+
+/*
+ * put method 
+ */
+export const putModel = ( params ) => {
+	return {
+		method: 'put',
+		credentials: 'include',
+		headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify( 
+			Object.assign(params)
+		)
+	}
+}
+
+/*
+ * delete method
+ */
+export const deleteModel = ( params ) => {
+	return {
+		method: 'delete',
+		credentials: 'include',
+		headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify( 
+			Object.assign(params)
+		)
+	}
+}
+
+/*
+ * patch method
+ */
+export const patchModel = ( params ) => {
+	return {
+		method: 'PATCH',
+		credentials: 'include',
+		headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify( 
+			Object.assign(params)
+		)
+	}
+}
+
+/*
+ * restful url 拼接
+ */
+export const restful = (url, obj) => {
+	Object.keys(obj).forEach(function (key) {
+	    url = url.replace(new RegExp('{'+key+'}', 'g'), obj[key]);
+	});
+	return url;
+}

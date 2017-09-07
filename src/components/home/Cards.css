@@ -1,0 +1,41 @@
+
+.normal {
+	
+}
+.item{
+	position: relative;
+	padding: 0;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+.icon-money-in{
+	color: greenyellow;
+	font-size: 60px;
+	float: left;
+}
+.icon-users{
+	color: rgb(143, 201, 251);
+	font-size: 60px;
+	float: left;
+}
+.icon-money-out{
+	color: #FF5722;
+	font-size: 60px;
+	float: left;
+}
+.icon-cost{
+	color: #FFB800;
+	font-size: 60px;
+	float: left;
+}
+.info{
+	margin-left: 80px;
+}
+.title{
+	display: block;
+	font-size: 16px;
+}
+.value{
+	display: block;
+	font-size: 24px;
+}

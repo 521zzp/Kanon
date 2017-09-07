@@ -15,6 +15,9 @@ import AddNews from "./routes/News/AddNews.js"; //添加新闻
 import NewList from "./routes/News/NewList.js"; //新闻列表
 
 
+import Home from "./routes/Home.js";
+
+
 /*function RouterConfig({ history }) {
   return (
     <Router history={history}>
@@ -31,6 +34,7 @@ const Routers = function ({ history, app}) {
 		{
 			path: '/',
 			component: IndexPage,
+			indexRoute:{ component: Home },
 			childRoutes: [
 				{
 					path: '/gathered',

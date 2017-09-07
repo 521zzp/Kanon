@@ -6,10 +6,58 @@
 }
 
 .logo{
-	width: 120px;
-	height: 31px;
-	background: #333;
+	width: 100%;
 	border-radius: 6px;
-	margin: 16px 28px 16px 0;
-	float: left;
+	text-align: center;
+}
+.logo-img{
+	width: 100%;
+}
+.logo-link{
+	display: inline-block;
+	width: 80%;
+	line-height: 0;
+}
+.header{
+	background-color: #ffffff;
+}
+.sider{
+	position: absolute;
+	height: calc(100vh);
+	background-color: #FFFFFF;
+	transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.sider.dark{
+	background-color: #404040;
+}
+.main{
+	position: relative;
+	height: calc(100vh);
+}
+.menu{
+	
+}
+.face{
+	display: inline-block;
+	vertical-align: -10px;
+	margin-right: 20px;
+}
+.content-wrap{
+	background: #f8f8f8; 
+	padding: 12px; 
+	margin: 0; 
+}
+
+.switch-wrap{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 0 6px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 46px;
+	align-items: center;
+	color: #999;
+	background-color: ;
 }

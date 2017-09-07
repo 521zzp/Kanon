@@ -1,3 +1,9 @@
 
 .normal {
+	background-color: #FFFFFF;
+	padding: 12px;
+	min-height: calc(100vh - 88px);
+}
+.money{
+	color: #FF5722;
 }

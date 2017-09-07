@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 import { Link } from 'dva/router'
-import { Layout, Menu, Breadcrumb, Icon, Avatar, Button, Popconfirm  } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Avatar, Button, Popconfirm, Switch  } from 'antd';
 import { browserHistory } from 'dva/router';
+import classnames from 'classnames'
+
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -16,7 +18,8 @@ class IndexPage extends Component {
    		super(props)
 	    this.state = { 
 	    	openKeys: [],
-	    	current: '1',
+	    	current: '',
+	    	theme: 'light',
 	    }
 	    console.log('indexpage init:')
 	    console.log(this.props)
@@ -58,37 +61,48 @@ class IndexPage extends Component {
 		})
 	}
 	
+	themeChange = checked => checked ? this.setState({ ...this.state, theme: 'dark' }) : this.setState({ ...this.state, theme: 'light' })
+	
 	
 	render() {
-		const minHeight = document.documentElement.clientHeight - 64;
+		
+		const switchWrap = classnames({
+			clearfix: true,
+			[styles['switch-wrap']]: true,
+		})
+		
+		const siderClass = classnames({
+			[styles.sider]: true,
+			[styles.dark]: this.state.theme === 'dark'
+		})
+		
 		
 	    return (
-		    <Layout>
-			    <Header className="header">
-			      <div className={styles.logo} />
-			      <div className="fr">
-			    	<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-			    	<Popconfirm title="确认退出系统" okText="退出" cancelText="取消" onConfirm={ this.logout }>
-						<Button type="primary" shape="circle" icon="logout" />
-					</Popconfirm>
-			      </div>
-			    </Header>
+		    <Layout className={styles.main}>
 			    <Layout>
-			      <Sider width={ 200 } style={{ background: '#fff' }}>
-			        <Menu
+			      <Sider width={ 200 } className={ siderClass }>
+			      	<div className={ styles.logo }>
+		          		<Link to="/" className={ styles['logo-link'] }>
+		          			<img className={ styles['logo-img'] }  alt="LOGO" src={ require('../assets/common/logo.png') }/>
+		          		</Link> 
+			        </div>
+			        <Menu className={styles.menu}
 			          mode="inline"
+			          theme={this.state.theme}
 			          selectedKeys={[this.state.current]}
 			          onOpenChange={this.onOpenChange}
 			          onClick={this.handleClick}
-			          defaultOpenKeys={['sub1']}
+			          /*defaultOpenKeys={['sub1']}*/
 			          openKeys={this.state.openKeys}
-			          style={{ height: '100%', borderRight: 0 }}
+			          style={{ borderRight: 0 }}
 			        >
+			         
+			          
 			          <SubMenu key="sub1" title={<span><Icon type="red-envelope" />收款管理</span>}>
 			            <Menu.Item key="1"><Link to="/gathered">已收款</Link></Menu.Item>
 			            <Menu.Item key="2">代收款</Menu.Item>
 			            <Menu.Item key="3">明细</Menu.Item>
-			            <Menu.Item key="4">回收站</Menu.Item>
+			            <Menu.Item key="4"><Link to="/">回收站</Link></Menu.Item>
 			          </SubMenu>
 			          <SubMenu key="sub2" title={<span><Icon type="team" />商户管理</span>}>
 			            <Menu.Item key="5">商户列表</Menu.Item>
@@ -127,10 +141,23 @@ class IndexPage extends Component {
 			            <Menu.Item key="25"><Link to="/raise">其他设置</Link></Menu.Item>
 			          </SubMenu>
 			        </Menu>
+			        
+			        <div className = { switchWrap } >
+			        	<span>Switch Theme</span>
+			        	<Switch checkedChildren="Dark" unCheckedChildren="Light" onChange={ this.themeChange }/>
+			        </div>
 			      </Sider>
-			      <Layout style={{ padding: '12px 12px', minHeight: minHeight }}>
-			        <Content style={{ background: '#fff', padding: 12, margin: 0, minHeight: 780 }}>
-			          {this.props.children}
+			      <Layout style={{  height: '100vh',marginLeft: '200px',overflow: 'auto'}}>
+			      	<Header className={styles.header}>
+				      <div className="fr">
+				    	<Avatar className={styles.face} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+				    	<Popconfirm title="确认退出系统" okText="退出" cancelText="取消" onConfirm={ this.logout }>
+							<Button type="primary" shape="circle" icon="logout"/>
+						</Popconfirm>
+				      </div>
+				    </Header>
+			        <Content className={styles['content-wrap']}>
+			          	{this.props.children}
 			        </Content>
 			      </Layout>
 			    </Layout>

@@ -16,6 +16,9 @@ function Gathered({
   dispatch,
   total,
   current,
+  loading,
+  pageSize,
+  list,
   form: {
     getFieldDecorator,
     validateFieldsAndScroll,
@@ -28,78 +31,99 @@ function Gathered({
     validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        dispatch({
+		      type: 'gathered/getTotal',
+		      payload: values,
+		    });
       }
-      console.log(values)
     });
   }
 	//列条目
 	const userNameError = isFieldTouched('userName') && getFieldError('userName');
-		const columns = [{
-	  title: 'Name',
-	  dataIndex: 'name',
-	  key: 'name',
-	  render: text => <a href="#">{text}</a>,
-	}, {
-	  title: 'Age',
-	  dataIndex: 'age',
-	  key: 'age',
-	}, {
-	  title: 'Address',
-	  dataIndex: 'address',
-	  key: 'address',
-	}, {
-	  title: 'Action',
-	  key: 'action',
-	  render: (text, record) => (
-	    <span>
-	      <a href="#">Action 一 {record.name}</a>
-	      <span className="ant-divider" />
-	      <a href="#">Delete</a>
-	      <span className="ant-divider" />
-	      <a href="#" className="ant-dropdown-link">
-	        More actions <Icon type="down" />
-	      </a>
-	    </span>
-	  ),
-	}];
-	//列数据
-	const data = [{
-	  key: '1',
-	  name: 'John Brown',
-	  age: 32,
-	  address: 'New York No. 1 Lake Park',
-	}, {
-	  key: '2',
-	  name: 'Jim Green',
-	  age: 42,
-	  address: 'London No. 1 Lake Park',
-	}, {
-	  key: '3',
-	  name: 'Joe Black',
-	  age: 32,
-	  address: 'Sidney No. 1 Lake Park',
-	}];
+		const columns = [
+			{
+			  title: '商户账号',
+			  dataIndex: 'account',
+			  key: 'account',
+			},
+			{
+			  title: '真实姓名',
+			  dataIndex: 'name',
+			  key: 'name',
+			},
+			{
+			  title: '订单编号',
+			  dataIndex: 'order',
+			  key: 'order',
+			},
+			{
+			  title: '富友对账编号',
+			  dataIndex: 'fyOrder',
+			  key: 'fyOrder',
+			},
+			{
+			  title: '订单金额',
+			  dataIndex: 'money',
+			  key: 'money',
+			  render: text => <span className={ styles.money }>{text}</span>,
+			},
+			{
+			  title: '通道费率',
+			  dataIndex: 'portRate',
+			  key: 'portRate',
+			},
+			{
+			  title: '接口费率',
+			  dataIndex: 'interfaceRate',
+			  key: 'interfaceRate',
+			},
+			{
+			  title: '付款银行',
+			  dataIndex: 'bank',
+			  key: 'bank',
+			},
+			{
+			  title: '创建时间',
+			  dataIndex: 'createTime',
+			  key: 'createTime',
+			},
+			{
+			  title: '订单状态',
+			  dataIndex: 'status',
+			  key: 'status',
+			},
+			{
+			  title: '操作',
+			  key: 'action',
+			  render: (text, record) => (
+			    <span>
+			      <a href="#">Delete</a>
+			      <span className="ant-divider" />
+			      <a href="#" className="ant-dropdown-link">
+			        More actions <Icon type="down" />
+			      </a>
+			    </span>
+			  ),
+			}
+		];
 	
 	const pagination = {
-		current: current, 
-		total: total,
+		current, 
+		total,
+		pageSize,
 		onChange: (page, pageSize) => {
-			console.log('page: ' + page)
 			dispatch({
-	      type: 'gathered/getTotal',
+	      type: 'gathered/getList',
 	      payload: page,
 	    });
 		}
 	}
 	
   return (
-    <div className={styles.normal}>
+    <div className={styles.normal} >
     	<div>
     		<Form layout="inline" >
-	        <FormItem label="商户账号："
-	          validateStatus={userNameError ? 'error' : ''}
-	          help={userNameError || ''}
-	        >
+	        <FormItem label="商户账号：">
 	          {getFieldDecorator('account', {
 	            rules: [{ pattern: /^1[34578]\d{9}$/, message: '商户账号格式不正确!' }],
 	          })(
@@ -132,6 +156,7 @@ function Gathered({
 	        <FormItem>
 	          <Button
 	            type="primary"
+	            icon="search"
 	            htmlType="button"
 	            onClick={handleSubmit}
 	            disabled={hasErrors(getFieldsError())}
@@ -141,21 +166,24 @@ function Gathered({
 	      </Form>
     	</div>
     	<div className="table-plabe" style={{marginTop: '10px'}}>
-    		<Table columns={columns} dataSource={data} pagination={pagination} />
+    		<Table loading={loading} columns={columns} dataSource={ list } pagination={pagination} />
     	</div>
     </div>
   );
 }
 
 function mapStateToProps(state) {
-	//const { total, current } = state.gathered;
-	const temp = state.gathered;
+	const { total, current, pageSize, list } = state.gathered;
 	console.log('state temp')
-	console.log(temp)
+	console.log(total)
 	console.log('state tepm end')
   return {
-  	total: 100,
-  	current: 2
+  	loading: state.loading.models.gathered,
+  	total,
+  	current,
+  	pageSize,
+  	list,
+  	
   };
 }
 

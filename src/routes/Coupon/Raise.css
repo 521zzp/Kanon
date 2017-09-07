@@ -1,3 +1,11 @@
 
 .normal {
+	background-color: #FFFFFF;
+	padding: 12px;
+	min-height: calc(100vh - 88px);
+	border-radius: 4px;
+}
+
+.table-plant{
+	margin-top: 20px;
 }

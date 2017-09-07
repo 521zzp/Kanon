@@ -5,11 +5,11 @@ import createLoading from 'dva-loading';
 import { browserHistory } from 'dva/router';
 
 
-
 // 1. Initialize
 const app = dva({
 	history: browserHistory,
 	onError(e, dispatch) {
+		console.log(e)
 		dispatch({
 	      type: e.message,
 	    })
@@ -20,6 +20,10 @@ const app = dva({
 app.use(createLoading());
 
 app.model(require("./models/login"));
+
+app.model(require("./models/couopn/raise"));
+
+app.model(require("./models/home"));
 
 app.model(require("./models/gathering/gathered"));
 
