@@ -122,7 +122,7 @@ class IndexPage extends Component {
 			            <Menu.Item key="12">红包</Menu.Item>
 			          </SubMenu>
 			          <SubMenu key="sub4" title={<span><Icon type="book" />理财产品</span>}>
-			            <Menu.Item key="13"><Link to="/raise">发布理财</Link></Menu.Item>
+			            <Menu.Item key="13"><Link to="/product">发布理财</Link></Menu.Item>
 			            <Menu.Item key="14"><Link to="/raise">已发布理财</Link></Menu.Item>
 			            <Menu.Item key="15"><Link to="/experience">资金明细</Link></Menu.Item>
 			            <Menu.Item key="16"><Link to="/raise">理财统计</Link></Menu.Item>

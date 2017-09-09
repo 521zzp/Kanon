@@ -13,12 +13,14 @@
     "antd": "^2.12.6",
     "babel-runtime": "^6.9.2",
     "classnames": "^2.2.5",
+    "draftjs-to-html": "^0.7.5",
     "dva": "^1.2.1",
     "dva-loading": "^0.2.3",
     "less-vars-to-js": "^1.2.0",
     "react": "^15.4.0",
     "react-countup": "^2.2.0",
     "react-dom": "^15.4.0",
+    "react-draft-wysiwyg": "^1.10.8",
     "recharts": "^1.0.0-alpha.4"
   },
   "devDependencies": {

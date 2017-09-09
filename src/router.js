@@ -14,6 +14,9 @@ import Raise from "./routes/Coupon/Raise.js"; //加息券
 import AddNews from "./routes/News/AddNews.js"; //添加新闻
 import NewList from "./routes/News/NewList.js"; //新闻列表
 
+//理财产品
+import Product from './routes/Financing/Product.js' //理财产品
+
 
 import Home from "./routes/Home.js";
 
@@ -57,6 +60,11 @@ const Routers = function ({ history, app}) {
 				{
 					path: '/news/list',
 					component: NewList,
+				},
+				/*理财产品*/
+				{
+					path: '/product',
+					component: Product,
 				},
 			]
 		},
