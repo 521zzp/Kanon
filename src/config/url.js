@@ -28,3 +28,12 @@ export const GATHERED_LIST = BASEURL + '/gathered/list' //已收款数据集合
 //加息券管理
 export const RAISE_TOTAL = BASEURL + '/raise/total' //加息券总条数
 export const RAISE_LIST = BASEURL + '/raise/list' //加息券数据集合
+
+
+/*
+ * 理财产品
+ */
+//已发布理财&&发布理财
+export const PRODUCT_TOAL = BASEURL + '/product/total' //理财产品总条数
+export const PRODUCT_LIST = BASEURL + '/product/list' //理财产品数据集合
+export const PRODUCT_DETAILS = BASEURL + '/product/details' //产品更详细信息

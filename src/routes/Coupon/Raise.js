@@ -46,7 +46,7 @@ function Raise({
 	
 	const close = () => {
 		dispatch({
-      type: 'raise/closeAddModal',
+      	type: 'raise/closeAddModal',
     });
 	}
 	

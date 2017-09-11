@@ -39,7 +39,7 @@ function Gathered({
     });
   }
 	//列条目
-	const userNameError = isFieldTouched('userName') && getFieldError('userName');
+	  //const userNameError = isFieldTouched('userName') && getFieldError('userName');
 		const columns = [
 			{
 			  title: '商户账号',
@@ -174,9 +174,6 @@ function Gathered({
 
 function mapStateToProps(state) {
 	const { total, current, pageSize, list } = state.gathered;
-	console.log('state temp')
-	console.log(total)
-	console.log('state tepm end')
   return {
   	loading: state.loading.models.gathered,
   	total,
