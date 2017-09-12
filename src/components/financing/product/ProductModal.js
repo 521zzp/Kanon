@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Form, Input, Modal, Select, InputNumber, Row, Col, Switch, Collapse, DatePicker   } from 'antd'
-import QueueAnim from 'rc-queue-anim';
+import moment from 'moment';
 import Editor from '../../common/Editor';
 
 
@@ -11,7 +11,7 @@ const FormItem = Form.Item;
 const Panel = Collapse.Panel;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
-
+const dateFormat = 'YYYY-MM-DD';
 
 const formItemLayout = {
   labelCol: {
@@ -41,11 +41,11 @@ function ProductModal({
 	visiable,
 	productTypeChange,
 	productRateChange,
+	editorChange,
 	close,
 	form: {
     getFieldDecorator,
-    validateFieldsAndScroll,
-    getFieldsError, getFieldError, isFieldTouched,validateFields
+    validateFields
   }
 }) {
 	
@@ -81,6 +81,7 @@ function ProductModal({
 	
 	const loanEnterpriseChange = (text) => {
 		console.log(text)
+		editorChange(text)
 	}
 	
   return (
@@ -97,7 +98,8 @@ function ProductModal({
         		<Col span={ 12 }>
         			<FormItem label="产品类别：" hasFeedback {...formItemLayout}>
 			          {getFieldDecorator('type', {
-			          	 rules: [{ required: true, message: '请选择产品类型！' }],
+			          	initialValue: (item.type === undefined ? '0' : ('' + item.type)) ,
+			          	rules: [{ required: true, message: '请选择产品类型！' }],
 			          })(
 							     	<Select placeholder="请选择产品类型"  onChange={ productTypeChange }>
 								       { productTypes.map( item => <Select.Option value={`${item.type}`} key={`${item.type}`}>{item.name}</Select.Option>)}
@@ -232,7 +234,7 @@ function ProductModal({
         			{
         				item.type == 3 && <FormItem label="预售时间：" hasFeedback {...formItemLayout}>
 				          {getFieldDecorator('preSaleTime', {
-				          	initialValue: item.preSaleTime,
+				          	initialValue: item.preSaleTime ? moment(item.preSaleTime, dateFormat) : '',
 				            rules: [{ required: true, message: '请选择预售时间！' }],
 				          })(
 				            <DatePicker  placeholder="请选择预售时间" style={{ width: '100%'}}/>
@@ -242,7 +244,8 @@ function ProductModal({
         			{
         				item.type == 2 && <FormItem label="销售时间：" hasFeedback {...formItemLayout}>
 				          {getFieldDecorator('saleTimeRange', {
-				          	initialValue: item.saleTimeRange,
+				          	initialValue: (item.saleTimeRange ? 
+				          		[moment(item.saleTimeRange[0], dateFormat),moment(item.saleTimeRange[1], dateFormat)] : ''),
 				            rules: [{ required: true, message: '请选择销售时间！' }],
 				          })(
 				            <RangePicker  />
@@ -253,19 +256,18 @@ function ProductModal({
         		</Col>
         	</Row>
         	
-        
         	
         	<Row>
         		<Col span={ 22 } offset={ 1 } >
         			<Collapse>
 						    <Panel  header="借款企业信息：" key="1">
-						      <Editor change= { loanEnterpriseChange } config={ editorConfig } />
+						      <Editor change= { loanEnterpriseChange } initState={item.loanEnterprise} config={ editorConfig } />
 						    </Panel>
 						    <Panel header="安全保障：" key="2">
-						      <Editor change= { loanEnterpriseChange } config={ editorConfig } />
+						      <Editor change= { loanEnterpriseChange } initState={item.safeGuarantee} config={ editorConfig } />
 						    </Panel>
 						    <Panel header="回款计划：" key="3">
-						      <Editor change= { loanEnterpriseChange } config={ editorConfig } />
+						      <Editor change= { loanEnterpriseChange } initState={item.repaymentPlan} config={ editorConfig } />
 						    </Panel>
 						  </Collapse>
         		</Col>

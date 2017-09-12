@@ -17,6 +17,7 @@
     "dva": "^1.2.1",
     "dva-loading": "^0.2.3",
     "less-vars-to-js": "^1.2.0",
+    "moment": "^2.18.1",
     "rc-queue-anim": "^1.2.2",
     "react": "^15.4.0",
     "react-countup": "^2.2.0",

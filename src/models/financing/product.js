@@ -1,5 +1,6 @@
 import { PRODUCT_TOAL, PRODUCT_LIST, PRODUCT_DETAILS } from '../../config/url'
 import { postModel, onanaly } from '../../utils/net'
+import { htmlToEditor, editorToHtml } from '../../utils/editor'
 
 export default {
   namespace: 'product',
@@ -35,9 +36,9 @@ export default {
   		status: 0, //0：上架状态，1：下架状态
   		repaymentWay: '', //还款方式
   		startProfitDay: '', //起始受益日， 提示：T+输入的数字
-  		loanEnterprise: '', //借款企业信息
-  		safeGuarantee: '', //安全保障,
-  		repaymentPlan: '', //回款计划
+  		loanEnterprise: null, //借款企业信息
+  		safeGuarantee: null, //安全保障,
+  		repaymentPlan: null, //回款计划
   	}
   },
   reducers: {
@@ -50,11 +51,7 @@ export default {
   		return { ...state, modalValue: temp }
   	},
   	productRateChange (state, { payload: value }) {
-  		console.log('value:')
-  		console.log(value)
   		const temp = { ...state.modalValue, rate: value}
-  		console.log(temp)
-  		console.log({ ...state, modalValue: temp })
   		return { ...state, modalValue: temp }
   	},
   	update (state, { payload: obj }) {
@@ -64,18 +61,29 @@ export default {
   		return { ...state, ...obj }
   	},
   	editProductRedux (state, { payload: obj }) {
-  		const tempModal = { ...state, ...obj, modalTitle: '编辑产品', modalType: 'edit' }
+  		console.log('loanEnterprise')
+  		console.log(obj.loanEnterprise)
+  		const tempModal = { ...state.modalValue, ...obj, modalTitle: '编辑产品', modalType: 'edit',
+  			loanEnterprise: htmlToEditor(obj.loanEnterprise), 
+  			safeGuarantee: htmlToEditor(obj.safeGuarantee), 
+  			repaymentPlan: htmlToEditor(obj.repaymentPlan)
+  		}
+  		console.log('tempModal')
+  		console.log(tempModal)
+  		
   		return { ...state, modalValue: tempModal, modalVisiable: true }
-
   	},
+  	editorContentChange (state, { payload: obj }) {
+  		return { ...state, modalValue: { ...state.modalValue, ...obj } }
+  	}
   	
   },
   effects: {
   	*getTotal ({ payload: obj }, { put, select }) {
   		obj ? yield put({ type: 'listUpdate', payload: obj }) : ''
   		yield put({ type: 'update', payload: { current: 1 } })
-  		const { account, order, time, status } = yield select(state => state.gathered);
-  		const result = yield fetch(PRODUCT_TOAL, postModel({ account, order, time, status })).then(onanaly);
+  		const { time, name, status } = yield select(state => state.product);
+  		const result = yield fetch(PRODUCT_TOAL, postModel({ time, name, status })).then(onanaly);
   		yield put({ type: 'update', payload: { total: result.total } });
   	 	if (result.total > 0) {
   			yield put({ type: 'getList' });
@@ -85,8 +93,8 @@ export default {
   	},
   	*getList ({ payload: obj }, { put, select }) {
   		obj ? yield put({ type: 'update', payload: { current: obj } }) : ''
-  		const params = { ...(yield select(state => state.gathered)), current: obj ? obj : 1 };
-  		delete params.list;
+  		const { time, name, pageSize, status } = yield select(state => state.product)
+  		const params = { time, pageSize, name, status, current: obj ? obj : 1 };
   		const result = yield fetch(PRODUCT_LIST, postModel(params)).then(onanaly);
 			const list = result.map(
 				(item, index) => ({ ...item, key: index })
@@ -94,7 +102,7 @@ export default {
   		yield put({ type: 'listUpdate', payload: { list: list } })
   	},
   	*editProductById ({ payload: id }, { put, select }) {
-  		const result = fetch(PRODUCT_DETAILS, postModel({id})).then(onanaly);
+  		const result = yield fetch(PRODUCT_DETAILS, postModel({id})).then(onanaly);
   		yield put({ type: 'editProductRedux', payload: result })
   	}
   },

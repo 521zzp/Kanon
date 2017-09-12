@@ -21,6 +21,8 @@ app.use(createLoading());
 
 app.model(require("./models/login"));
 
+app.model(require("./models/news/newsList"));
+
 app.model(require("./models/financing/product"));
 
 app.model(require("./models/couopn/raise"));

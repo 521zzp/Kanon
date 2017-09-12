@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'dva';
 import { Form, Icon, Input, Button, DatePicker, Select, Table,  } from 'antd';
 import DropOption from '../../components/common/DropOption';
-import styles from './Product.less';
+import NewsModal from '../../components/news/NewsModal'
+
+import styles from './NewsList.css';
 
 import ProductModal from '../../components/financing/product/ProductModal'
 
@@ -19,16 +21,16 @@ function hasErrors(fieldsError) {
 function Product({
 	total,
 	loading,
-  	current,
-  	dispatch,
-  	pageSize,
-  	productTypes,
-  	modalValue,
-  	list,
-  	form: {
+	current,
+	dispatch,
+	pageSize,
+	modalValue,
+	newsTypesConfig,
+	list,
+	form: {
 	    getFieldDecorator,
 	    validateFieldsAndScroll,
-		getFieldsError, getFieldError, isFieldTouched,validateFields
+			getFieldsError, getFieldError, isFieldTouched,validateFields
 	},
 	modalVisiable,
 }) {
@@ -55,55 +57,35 @@ function Product({
 	//列条目
 	const columns = [
 		{
-		  title: '产品名称',
-		  dataIndex: 'name',
-		  key: 'name',
-		},
-		{
-		  title: '发布时间',
-		  dataIndex: 'createTime',
-		  key: 'createTime',
-		},
-		{
-		  title: '周期（天）',
-		  dataIndex: 'term',
-		  key: 'term',
-		},
-		{
-		  title: '利率',
-		  dataIndex: 'rate',
-		  key: 'rate',
-		},
-		{
-		  title: '资金上限（元）',
-		  dataIndex: 'limit',
-		  key: 'limit',
-		},
-		{
-		  title: '已投金额（元）',
-		  dataIndex: 'money',
-		  key: 'money',
-		},
-		{
-		  title: '起投金额（元）',
-		  dataIndex: 'startMoney',
-		  key: 'startMoney',
-		},
-		{
-		  title: '产品类别',
+		  title: '新闻类型',
 		  dataIndex: 'type',
 		  key: 'type',
 		},
 		{
+		  title: '新闻标题',
+		  dataIndex: 'title',
+		  key: 'title',
+		},
+		{
+		  title: '点击量',
+		  dataIndex: 'clickTimes',
+		  key: 'clickTimes',
+		},
+		{
+		  title: '创建时间',
+		  dataIndex: 'createTime',
+		  key: 'createTime',
+		},
+		{
 		  title: '操作',
 		  key: 'action',
-		  render: (text, record) => <DropOption 
-		  		onMenuClick={e => handleMenuClick(record, e)} 
-		  		menuOptions={[
-		  			{ key: 'edit', name: '编辑产品' }, 
-		  			status == 0 ? { key: 'off', name: '产品下架' } : { key: 'on', name: '产品上架' }, 
-		  			{ key: 'delete', name: '删除产品' },
-		  		]} />
+		  render: (text, record) => (
+			    <span>
+			      <a><Icon type="edit" />编辑</a>
+			      <span className="ant-divider" />
+			      <a><Icon type="delete" />删除</a>
+			    </span>
+			  ),
 		},
 	];
 	const pagination = {
@@ -117,6 +99,16 @@ function Product({
 	    });
 		}
 	}
+	
+	const datas = [
+		{
+			key: "1",
+			type: 1,
+			title: '公告测试',
+			clickTimes: 100,
+			createTime: '2017-07-23'
+		}
+	]
 	
 	const close = () => {
 		console.log('close modal')
@@ -148,43 +140,20 @@ function Product({
 		}
 	}
 	
-	
-	const modalProductTypeChange = (value) => {
+	const addNews = () =>{
 		dispatch({
-			type: 'product/productTypeChange',
-			payload: value
+			type: 'newsList/addNews',
 		})
 	}
 	
-	const modalProductRateChange = (value) => {
+	const closeModal = () => {
 		dispatch({
-			type: 'product/productRateChange',
-			payload: value
+			type: 'newsList/closeModal',
 		})
 	}
 	
-	const modalProductEditorChange = (value) => {
-		console.log('editor value')
-		console.log(value)
-
-		dispatch({
-			type: 'product/editorContentChange',
-			payload: { loanEnterprise: value }
-		})
-	}
 	
-	const releaseProduct = () => {
-		dispatch({
-			type:'product/update',
-			payload: {
-				modalVisiable: true,
-				modalValue: {
-					modalTitle: '发布产品',
-					modalType: 'release'
-				}
-			}
-		})
-	}
+	
 	
   return (
     <div className={styles.normal}>
@@ -192,24 +161,25 @@ function Product({
 	    	<Form layout="inline" >
 		        
 		        <FormItem
-		          label="选择时间"
+		          label="发布时间"
 		        >
 		          {getFieldDecorator('time')(
 		            <RangePicker />
 		          )}
 		        </FormItem>
-		        <FormItem label="产品名称：">
+		        <FormItem label="新闻标题：">
 		          {getFieldDecorator('account', {})(
-		            <Input  placeholder="请输入产品名称" />
+		            <Input  placeholder="请输入新闻标题" />
 		          )}
 		        </FormItem>
 		        <FormItem 
-		          label="付款状态">
-		          {getFieldDecorator('status')(
-		            <Select placeholder="请选择"  style={{width: '100px'}}> 
-		              <Option value="">全部</Option>
-		              <Option value="0">已上架</Option>
-		              <Option value="1">已下架</Option>
+		          label="新闻类型">
+		          {getFieldDecorator('type')(
+		            <Select placeholder="新闻类型"  style={{width: '100px'}}> 
+		            <Option value=''  key=''>全部</Option>
+		            	{
+		            		newsTypesConfig.map( item => <Option value={`${item.type}`}  key={`${item.type}`}>{item.name}</Option> ) 
+		            	}
 		            </Select>
 		          )}
 		        </FormItem>
@@ -228,37 +198,32 @@ function Product({
 		            type="primary"
 		            icon="plus"
 		            htmlType="button"
-		            onClick={ releaseProduct }
-		          >发布产品
+		            onClick={ addNews }
+		          >发布新闻
 		          </Button>
 		        </FormItem>
 		    </Form>
     	</div>
     
     	<div  style={{marginTop: '10px'}}>
-    		<Table loading={ loading }  columns={ columns } dataSource={ list } pagination={ pagination } />
+    		<Table loading={ loading }  columns={ columns } dataSource={ datas } pagination={ pagination } />
     	</div>
     
-    <ProductModal 
-    	visiable={ modalVisiable } 
-    	close={ close } 
-    	productTypes={ productTypes } 
-    	productTypeChange={ modalProductTypeChange }
-    	productRateChange={ modalProductRateChange }
-    	editorChange = { modalProductEditorChange }
-    	item={ modalValue }/>
+    <NewsModal newsTypesConfig={ newsTypesConfig } item={ modalValue } visiable={ modalVisiable } close={ closeModal }/>
     </div>
   );
 }
 
 function mapStateToProps(state) {
-	const { modalVisiable, productTypes, modalValue, list, total, current, pageSize } = state.product
+	const { modalVisiable, list, total, current, pageSize, newsTypesConfig, modalValue } = state.newsList
+	
+	
 	return {
 		loading: state.loading.models.product,
 	  	total,
-	  	modalValue,
 	  	current,
-	  	productTypes,
+	  	modalValue,
+	  	newsTypesConfig,
 	  	pageSize,
 	  	list,
 	  	modalVisiable,
