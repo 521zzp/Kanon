@@ -37,3 +37,11 @@ export const RAISE_LIST = BASEURL + '/raise/list' //加息券数据集合
 export const PRODUCT_TOAL = BASEURL + '/product/total' //理财产品总条数
 export const PRODUCT_LIST = BASEURL + '/product/list' //理财产品数据集合
 export const PRODUCT_DETAILS = BASEURL + '/product/details' //产品更详细信息
+
+
+/*
+ * 新闻管理
+*/
+//新闻列表
+export const NEWS_TOTAL = BASEURL + '/news/total' //新闻总条数
+export const NEWS_LIST = BASEURL + '/news/list' //新闻集合

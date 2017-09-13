@@ -33,7 +33,7 @@ export default {
   },
   effects: {
   	*getTotal ({ payload: obj }, { put, select }) {
-  		obj ? yield put({ type: 'listUpdate', payload: obj }) : ''
+  		obj ? yield put({ type: 'update', payload: obj }) : ''
   		yield put({ type: 'currentUpdate', payload: { current: 1 } })
   		const { account, order, time, status } = yield select(state => state.gathered);
   		const result = yield fetch(GATHERED_TOTAL, postModel({ account, order, time, status })).then(onanaly);
@@ -59,6 +59,16 @@ export default {
   	setup({ dispatch, history }) {
       history.listen(({ pathname }) => {
         if (pathname === '/gathered') {
+        	//查询参数初始化
+           dispatch({
+            type: 'update',
+            payload: {
+            	account: '', //商户账号
+					  	order: '', //订单编号
+					  	time: [null, null],  //时间范围
+					  	status: '', //状态
+            }
+          });
           dispatch({
             type: 'getTotal'
           });

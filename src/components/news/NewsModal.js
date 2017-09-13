@@ -20,7 +20,7 @@ const formItemLayout = {
 
 const editorConfig = {
 		editorStyle: {
-	    minHeight: 200,
+	    minHeight: 150,
 	  }
 	}
 
