@@ -206,7 +206,7 @@ function Product({
     	</div>
     
     	<div  style={{marginTop: '10px'}}>
-    		<Table loading={ loading }  columns={ columns } dataSource={ datas } pagination={ pagination } />
+    		<Table loading={ loading }  columns={ columns } dataSource={ list } pagination={ pagination } />
     	</div>
     
     <NewsModal newsTypesConfig={ newsTypesConfig } item={ modalValue } visiable={ modalVisiable } close={ closeModal }/>

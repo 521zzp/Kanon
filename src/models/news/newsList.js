@@ -1,3 +1,6 @@
+import { NEWS_TOTAL, NEWS_LIST } from '../../config/url'
+import { postModel, onanaly } from '../../utils/net'
+
 
 export default {
   namespace: 'newsList',
@@ -33,6 +36,9 @@ export default {
   	currentUpdate (state, { payload: obj }) {
   		return { ...state, ... obj }
   	},
+  	update (state, { payload: obj }) {
+  		return { ...state, ... obj }
+  	},
   },
   effects: {
   	*getTotal({ payload: obj }, { put, select }) {
@@ -40,10 +46,9 @@ export default {
   		obj ? yield put({ type: 'paramsUpdate', payload: obj }) : ''
   		//请求总数要把当前页数置为1
   		yield put({ type: 'currentUpdate', payload: { current: 1 } })
-  		const params = { time, title, type } = yield select(state => state.newsList)
-  		debugger
+  		const { time, title, type } = yield select(state => state.newsList);
   		//查询总页数
-  		const result = yield fetch(GATHERED_TOTAL, postModel(params)).then(onanaly);
+  		const result = yield fetch(NEWS_TOTAL, postModel({ time, title, type })).then(onanaly);
   		yield put({ type: 'totalUpdate', payload: { total: result.total } });
   		if (result.total > 0) {
   			yield put({ type: 'getList' });
@@ -53,8 +58,8 @@ export default {
   	},
   	*getList ({ payload: obj }, { put, select }) {
   		obj ? yield put({ type: 'currentUpdate', payload: { current: obj } }) : ''
-  		const params = { time, title, type, current, pageSize } = yield select(state => state.newsList)
-  		const result = yield fetch(GATHERED_LIST, postModel(params)).then(onanaly);
+  		const { time, title, type, current, pageSize } = yield select(state => state.newsList)
+  		const result = yield fetch(NEWS_LIST, postModel({ time, title, type, current, pageSize })).then(onanaly);
 			const list = result.map(
 				(item, index) => ({ ...item, key: index })
 			)
@@ -66,7 +71,14 @@ export default {
       history.listen(({ pathname }) => {
         if (pathname === '/news/list') {
         	//查询参数初始化
-       
+           dispatch({
+            type: 'update',
+            payload: {
+            	time: [null, null],
+					  	title: '', 
+					  	type: '', 
+            }
+          });
           dispatch({
             type: 'getTotal'
           });
