@@ -279,4 +279,8 @@ function ProductModal({
   );
 }
 
+ProductModal.propTypes = {
+  item: PropTypes.object,
+}
+
 export default Form.create()(ProductModal);

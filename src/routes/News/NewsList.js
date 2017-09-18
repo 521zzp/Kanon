@@ -32,7 +32,7 @@ function Product({
 	    validateFieldsAndScroll,
 			getFieldsError, getFieldError, isFieldTouched,validateFields
 	},
-	modalVisiable,
+	modalVisible,
 }) {
 	
 	const change = (result) => {
@@ -49,6 +49,25 @@ function Product({
 	      }
 	    });
 	}
+	
+	//编辑
+	const editNews = (id) => {
+		console.log('id')
+		console.log(id)
+		dispatch({
+			type: 'newsList/getDetails',
+			payload: id
+		})
+	}
+	
+	//上传文件回调地址
+	const upload = (path) => {
+		dispatch({
+			type: 'newsList/unpoadPath',
+			payload: path
+		})
+	}
+	
 	
 	const html =
 	  '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
@@ -79,9 +98,9 @@ function Product({
 		{
 		  title: '操作',
 		  key: 'action',
-		  render: (text, record) => (
+		  render: (text) => (
 			    <span>
-			      <a><Icon type="edit" />编辑</a>
+			      <a onClick={ () => editNews(text.id)  }><Icon type="edit" />编辑</a>
 			      <span className="ant-divider" />
 			      <a><Icon type="delete" />删除</a>
 			    </span>
@@ -113,10 +132,17 @@ function Product({
 	const close = () => {
 		console.log('close modal')
 		dispatch({
-			type: 'product/update',
+			type: 'newsList/update',
 			payload: {
-				modalVisiable: false
+				modalVisible: false
 			}
+		})
+	}
+	
+	const newsTypeChange = (type) => {
+		dispatch({
+			type: 'newsList/newsTypeChange',
+			payload: type
 		})
 	}
 	
@@ -208,14 +234,15 @@ function Product({
     	<div  style={{marginTop: '10px'}}>
     		<Table loading={ loading }  columns={ columns } dataSource={ list } pagination={ pagination } />
     	</div>
+    { modalVisible &&  <NewsModal upload= { upload } newsTypeChange={ newsTypeChange } newsTypesConfig={ newsTypesConfig } item={ modalValue } visiable={ modalVisible } close={ closeModal }/>}
     
-    <NewsModal newsTypesConfig={ newsTypesConfig } item={ modalValue } visiable={ modalVisiable } close={ closeModal }/>
+    
     </div>
   );
 }
 
 function mapStateToProps(state) {
-	const { modalVisiable, list, total, current, pageSize, newsTypesConfig, modalValue } = state.newsList
+	const { modalVisible, list, total, current, pageSize, newsTypesConfig, modalValue } = state.newsList
 	
 	
 	return {
@@ -226,7 +253,7 @@ function mapStateToProps(state) {
 	  	newsTypesConfig,
 	  	pageSize,
 	  	list,
-	  	modalVisiable,
+	  	modalVisible,
 	};
 }
 

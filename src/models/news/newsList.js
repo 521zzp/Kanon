@@ -1,11 +1,11 @@
-import { NEWS_TOTAL, NEWS_LIST } from '../../config/url'
+import { NEWS_TOTAL, NEWS_LIST, NEWS_DETAILS } from '../../config/url'
 import { postModel, onanaly } from '../../utils/net'
 
 
 export default {
   namespace: 'newsList',
   state: {
-  	modalVisiable: false,
+  	modalVisible: false,
   	total: 0, //总页码
   	current: 1, //当前页码
   	pageSize: 10, //每页数据条数
@@ -18,8 +18,10 @@ export default {
   		{ name: '图片新闻', type: 2 },
   		{ name: '官方公告', type: 3 },
   	],
+  	operation: 'add', //保存时的操作
   	modalValue: {
   		modalTitle: '添加新闻',
+  		path: '', //文本新闻的地址
   		type: '',
   		title: 'safafsa',
   		link: '',
@@ -28,16 +30,25 @@ export default {
   },
   reducers: {
   	addNews (state) {
-  		return { ...state, modalValue: { modalTitle: '添加新闻', type: 2 }, modalVisiable: true }
+  		return { ...state, modalValue: { modalTitle: '添加新闻', type: undefined }, modalVisible: true, operation: 'add' }
+  	},
+  	editNews (state, { payload: obj }) {
+  		return { ...state, modalValue: { modalTitle: '编辑新闻', ...obj }, modalVisible: true, operation: 'edit' }
   	},
   	closeModal (state) {
-  		return { ...state, modalVisiable: false}
+  		return { ...state, modalVisible: false}
   	},
   	currentUpdate (state, { payload: obj }) {
   		return { ...state, ... obj }
   	},
   	update (state, { payload: obj }) {
   		return { ...state, ... obj }
+  	},
+  	newsTypeChange (state, { payload: obj }) {
+  		return { ...state, modalValue: { ...state.modalValue, type: obj } }
+  	},
+  	unpoadPath (state, { payload: obj }) {
+  		return { ...state, modalValue: { ...state.modalValue, path: obj } }
   	},
   },
   effects: {
@@ -65,6 +76,13 @@ export default {
 			)
   		yield put({ type: 'update', payload: { list: list } })
   	},
+  	*getDetails({ payload: obj }, { put, select }) {
+  		console.log(obj)
+  		const result = yield fetch(NEWS_DETAILS, postModel({ id: obj })).then(onanaly);
+  		result
+  		
+  	}
+  	
   },
   subscriptions: {
   	setup({ dispatch, history }) {

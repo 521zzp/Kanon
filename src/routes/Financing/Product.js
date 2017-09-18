@@ -30,7 +30,7 @@ function Product({
 	    validateFieldsAndScroll,
 		getFieldsError, getFieldError, isFieldTouched,validateFields
 	},
-	modalVisiable,
+	modalVisible,
 }) {
 	
 	const change = (result) => {
@@ -123,7 +123,7 @@ function Product({
 		dispatch({
 			type: 'product/update',
 			payload: {
-				modalVisiable: false
+				modalVisible: false
 			}
 		})
 	}
@@ -177,7 +177,7 @@ function Product({
 		dispatch({
 			type:'product/update',
 			payload: {
-				modalVisiable: true,
+				modalVisible: true,
 				modalValue: {
 					modalTitle: '发布产品',
 					modalType: 'release'
@@ -239,20 +239,21 @@ function Product({
     		<Table loading={ loading }  columns={ columns } dataSource={ list } pagination={ pagination } />
     	</div>
     
-    <ProductModal 
-    	visiable={ modalVisiable } 
+    {modalVisible && <ProductModal 
+    	visiable={ modalVisible } 
     	close={ close } 
     	productTypes={ productTypes } 
     	productTypeChange={ modalProductTypeChange }
     	productRateChange={ modalProductRateChange }
     	editorChange = { modalProductEditorChange }
-    	item={ modalValue }/>
+    	item={ modalValue }/>}
+    
     </div>
   );
 }
 
 function mapStateToProps(state) {
-	const { modalVisiable, productTypes, modalValue, list, total, current, pageSize } = state.product
+	const { modalVisible, productTypes, modalValue, list, total, current, pageSize } = state.product
 	return {
 		loading: state.loading.models.product,
 	  	total,
@@ -261,7 +262,7 @@ function mapStateToProps(state) {
 	  	productTypes,
 	  	pageSize,
 	  	list,
-	  	modalVisiable,
+	  	modalVisible,
 	};
 }
 

@@ -12,7 +12,7 @@ export default {
   	name: '', //产品名称
   	status: '', //0:上架状态,1下架状态
   	list: [],
-  	modalVisiable: false,
+  	modalVisible: false,
   	productTypes: [ //产品类别配置
   		{ type: 0, name: '正常标' },
   		{ type: 1, name: '新手标' },
@@ -71,7 +71,7 @@ export default {
   		console.log('tempModal')
   		console.log(tempModal)
   		
-  		return { ...state, modalValue: tempModal, modalVisiable: true }
+  		return { ...state, modalValue: tempModal, modalVisible: true }
   	},
   	editorContentChange (state, { payload: obj }) {
   		return { ...state, modalValue: { ...state.modalValue, ...obj } }
