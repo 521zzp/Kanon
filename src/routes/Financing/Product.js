@@ -19,15 +19,15 @@ function hasErrors(fieldsError) {
 function Product({
 	total,
 	loading,
-  	current,
-  	dispatch,
-  	pageSize,
-  	productTypes,
-  	modalValue,
-  	list,
-  	form: {
-	    getFieldDecorator,
-	    validateFieldsAndScroll,
+	current,
+	dispatch,
+	pageSize,
+	productTypes,
+	modalValue,
+	list,
+	form: {
+    getFieldDecorator,
+    validateFieldsAndScroll,
 		getFieldsError, getFieldError, isFieldTouched,validateFields
 	},
 	modalVisible,

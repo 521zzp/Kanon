@@ -6,6 +6,10 @@ import IndexPage from './routes/IndexPage';
 import Login from "./routes/Login.js";
 import Gathered from "./routes/Gathering/Gathered.js";
 
+//用户管理
+import UserList from "./routes/User/UserList.js"; //用户列表
+
+
 //礼券管理
 import Experience from "./routes/Coupon/Experience.js"; //体验金
 import Raise from "./routes/Coupon/Raise.js"; //加息券
@@ -39,6 +43,13 @@ const Routers = function ({ history, app}) {
 			component: IndexPage,
 			indexRoute:{ component: Home },
 			childRoutes: [
+				/*用户管理*/
+				{
+					path: '/users',
+					component: UserList,
+				},
+				
+				
 				{
 					path: '/gathered',
 					component: Gathered,

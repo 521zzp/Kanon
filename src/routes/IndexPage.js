@@ -96,7 +96,13 @@ class IndexPage extends Component {
 			          openKeys={this.state.openKeys}
 			          style={{ borderRight: 0 }}
 			        >
-			         
+			          
+			          <SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
+			            <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
+			            <Menu.Item key="6">会员关系</Menu.Item>
+			            <Menu.Item key="7">添加商户</Menu.Item>
+			            <Menu.Item key="8">会员列表</Menu.Item>
+			          </SubMenu>
 			          
 			          <SubMenu key="sub1" title={<span><Icon type="red-envelope" />收款管理</span>}>
 			            <Menu.Item key="1"><Link to="/gathered">已收款</Link></Menu.Item>
@@ -104,12 +110,7 @@ class IndexPage extends Component {
 			            <Menu.Item key="3">明细</Menu.Item>
 			            <Menu.Item key="4"><Link to="/">回收站</Link></Menu.Item>
 			          </SubMenu>
-			          <SubMenu key="sub2" title={<span><Icon type="team" />商户管理</span>}>
-			            <Menu.Item key="5">商户列表</Menu.Item>
-			            <Menu.Item key="6">会员关系</Menu.Item>
-			            <Menu.Item key="7">添加商户</Menu.Item>
-			            <Menu.Item key="8">会员列表</Menu.Item>
-			          </SubMenu>
+			          
 			          <SubMenu key="sub7" title={<span><Icon type="wallet" />提现管理</span>}>
 			          	<Menu.Item key="26"><Link to="/news/list">提现申请</Link></Menu.Item>
 			            <Menu.Item key="27"><Link to="/experience">等待支付</Link></Menu.Item>

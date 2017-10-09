@@ -19,6 +19,14 @@ export const EXIT = BASEURL + '/logout'  //退出
 export const HOME_CARDS = BASEURL +'/home/cards' //主页4个统计卡片
 export const HOME_WEEK_DATA = BASEURL + '/home/weeks'
 
+/*
+ * 用户管理
+ */
+//用户列表
+export const USERS_TOTAL = BASEURL+ '/users/total' //用户列表总条数
+export const USERS_LIST = BASEURL + '/users/list' //用户列表集合
+export const USER_DETAILS = BASEURL + 'user/details' //用户详情信息
+
 
 /*
  * 收款管理

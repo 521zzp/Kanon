@@ -1,0 +1,23 @@
+{
+	"userLevel": [
+		{
+			"key": "普通用户",
+			"value": 0
+		}, {
+			"key": "初级VIP",
+			"value": 1
+		}, {
+			"key": "中级VIP",
+			"value": 2
+		}, {
+			"key": "高级VIP",
+			"value": 3
+		}, {
+			"key": "特级VIP",
+			"value": 4
+		}, {
+			"key": "至尊VIP",
+			"value": 5
+		}
+	]
+}

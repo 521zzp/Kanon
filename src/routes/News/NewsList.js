@@ -19,6 +19,7 @@ function hasErrors(fieldsError) {
 }
 
 function Product({
+	searching,
 	total,
 	loading,
 	current,
@@ -46,14 +47,16 @@ function Product({
 	    validateFields((err, values) => {
 	      if (!err) {
 	        console.log('Received values of form: ', values);
+	        dispatch({
+	        	type: 'newsList/getTotal',
+	        	payload: values
+	        })
 	      }
 	    });
 	}
 	
 	//编辑
 	const editNews = (id) => {
-		console.log('id')
-		console.log(id)
 		dispatch({
 			type: 'newsList/getDetails',
 			payload: id
@@ -68,10 +71,7 @@ function Product({
 		})
 	}
 	
-	
-	const html =
-	  '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
-	  '<a href="http://www.facebook.com">Example link</a>';
+
 	  
 	//列条目
 	const columns = [
@@ -146,6 +146,13 @@ function Product({
 		})
 	}
 	
+	const editorChange = (content) => {
+		dispatch({
+			type: 'newsList/editorChange',
+			payload: content
+		})
+	}
+	
 	const handleMenuClick = (record, e) => {
 		console.log(record)
 		switch (e.key){
@@ -213,6 +220,7 @@ function Product({
 		          <Button
 		            type="primary"
 		            icon="search"
+		            loading = { searching }
 		            htmlType="button"
 		            onClick={ handleSubmit }
 		            disabled={ hasErrors(getFieldsError()) }
@@ -234,7 +242,7 @@ function Product({
     	<div  style={{marginTop: '10px'}}>
     		<Table loading={ loading }  columns={ columns } dataSource={ list } pagination={ pagination } />
     	</div>
-    { modalVisible &&  <NewsModal upload= { upload } newsTypeChange={ newsTypeChange } newsTypesConfig={ newsTypesConfig } item={ modalValue } visiable={ modalVisible } close={ closeModal }/>}
+    { modalVisible &&  <NewsModal upload= { upload } editorChange = { editorChange } newsTypeChange={ newsTypeChange } newsTypesConfig={ newsTypesConfig } item={ modalValue } visiable={ modalVisible } close={ closeModal }/>}
     
     
     </div>
@@ -242,12 +250,15 @@ function Product({
 }
 
 function mapStateToProps(state) {
-	const { modalVisible, list, total, current, pageSize, newsTypesConfig, modalValue } = state.newsList
+	const { searching, modalVisible, list, total, current, pageSize, newsTypesConfig, modalValue } = state.newsList
 	
+	console.log('total:')
+	console.log(total)
 	
 	return {
 		loading: state.loading.models.product,
 	  	total,
+	  	searching,
 	  	current,
 	  	modalValue,
 	  	newsTypesConfig,

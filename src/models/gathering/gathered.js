@@ -16,19 +16,19 @@ export default {
   },
   reducers: {
   	paramsSave (state, { payload: obj }) {
-  		return { ...state, ... obj }
+  		return { ...state, ...obj }
   	},
   	totalUpdate (state, { payload: obj }) {
-  		return { ...state, ... obj }
+  		return { ...state, ...obj }
   	},
   	listUpdate (state, { payload: obj }) {
-  		return { ...state, ... obj}
+  		return { ...state, ...obj}
   	}, 
   	currentUpdate (state, { payload: obj }) {
-  		return { ...state, ... obj }
+  		return { ...state, ...obj }
   	},
   	update (state, { payload: obj }) {
-  		return { ...state, ... obj }
+  		return { ...state, ...obj }
   	},
   },
   effects: {

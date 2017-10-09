@@ -28,6 +28,7 @@ function NewsModall({
 	item = {},
 	visiable,
 	upload,
+	editorChange,
 	newsTypesConfig,
 	contentChange,
 	newsTypeChange,
@@ -142,7 +143,7 @@ function NewsModall({
 					     	<Input  placeholder="若无外链可不填。" />
 	          )}
 	        </FormItem>
-	        <Editor change= { contentChange } initState={item.content} config={ editorConfig } />
+	        <Editor change= { editorChange } initState={item.content} config={ editorConfig } />
 	      </Form>
       </Modal>
     </div>

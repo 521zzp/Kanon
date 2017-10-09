@@ -179,7 +179,7 @@ function Raise({
     	<div className={ styles['table-plant'] }>
     		<Table loading={ loading } columns={columns} dataSource={ list }  pagination={ pagination } />
     	</div>
-    	<ModalAdd visiable={ addModalVisiable } close={ close }/>
+    	{ addModalVisiable && <ModalAdd visiable={ addModalVisiable } close={ close }/>}
     	<ModalSend visiable = { sendModalVisiable } close={ sendClose } />
     </div>
   );
