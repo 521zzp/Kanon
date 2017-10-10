@@ -12,7 +12,16 @@ export const status = (response) => {
 	if (response.status >= 200 && response.status < 300) {
 	    	return response
 	  }
-	throw new Error(response.statusText)
+	
+	const err = {
+		type: 0, //0表示需要中断程序的异常，1表示可修复异常发出一个action
+		action: '', //表示要执行的action
+		payload: null, //action带的参数,
+		msg: '您的网络有异常！', //异常原因，提示语
+	}
+	
+	throw new Error(JSON.stringify(err))
+	//throw new Error(response.statusText)
 } 
 /*
  * 不需要登陆即可请求的接口
@@ -45,7 +54,14 @@ export const onanaly = (response) => Promise.resolve(response).then(status).then
 	(dp) => {
 		console.log('登录状态失效')
 		if (!dp.status) {
-			throw new Error('main/offLine')
+			const err = {
+				type: 1, //0表示需要中断程序的异常，1表示可修复异常发出一个action
+				action: 'main/offLine', //表示要执行的action
+				payload: null, //action带的参数,
+				msg: '', //异常原因，提示语
+			}
+			
+			throw new Error(JSON.stringify(err))
 		} else{
 			return dp;
 		}

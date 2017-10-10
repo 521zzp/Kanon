@@ -1,6 +1,6 @@
-import { USERS_TOTAL, USERS_LIST, USER_DETAILS } from '../../config/url'
+import { USERS_TOTAL, USERS_LIST, USER_DETAILS, USER_DETAILS_UPDATE } from '../../config/url'
 import { postModel, onanaly } from '../../utils/net'
-
+import { message, notification  } from 'antd';
 
 
 export default {
@@ -10,9 +10,11 @@ export default {
   	total: 52,
   	list: [],
   	pageSize: 10,
-  	params: {},
+  	params: {}, //筛选参数列表
+  	editAccount: '',
   	modalVisiable: false, //弹窗是否可见
   	modalItem: {},
+  	updateLoading: false, //是否在保存中
   },
   reducers: {
   	update (state, { payload: obj }) {
@@ -29,7 +31,6 @@ export default {
   		} finally {
   			yield put({ type: 'update', payload: { searching: false } })
   		}
-  		
   		yield put({ type: 'update', payload: { total: result.total } })
   		if (result.total > 0) {
   			yield put({ type: 'getList', payload: 1 })
@@ -46,8 +47,26 @@ export default {
   		yield put({ type: 'update', payload: { list } })
   	},
   	*getDetails ({ payload: obj }, { put, select }) {
+  		yield put({ type: 'update', payload: { editAccount: obj.account } })
   		const result = yield fetch(USER_DETAILS, postModel(obj)).then(onanaly);
   		yield put({ type: 'update', payload: { modalVisiable: true, modalItem: result } })
+  	},
+  	*editSave ({ payload: obj }, { put, select }) {
+  		const { editAccount } = yield select(state => state.userList);
+  		const params = { ...obj, account: editAccount }
+  		yield put({ type: 'update', payload: { updateLoading: true } })
+			try { 
+				const { code, msg } = yield fetch(USER_DETAILS_UPDATE, postModel(params)).then(onanaly);
+				if (code === 200) {
+					notification .success({ message: '通知！', description: msg})
+					yield put({ type: 'update', payload: { modalVisiable: false } })
+					
+				} else {
+					notification .error({ message: '通知！', description: msg})
+				}
+			} finally {
+				yield put({ type: 'update', payload: { updateLoading: false } })
+			}
   	}
   },
   subscriptions: {

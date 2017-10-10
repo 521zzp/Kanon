@@ -8,6 +8,7 @@ import Gathered from "./routes/Gathering/Gathered.js";
 
 //用户管理
 import UserList from "./routes/User/UserList.js"; //用户列表
+import UserRecords from "./routes/User/UserRecords.js"; //用户列表
 
 
 //礼券管理
@@ -48,8 +49,10 @@ const Routers = function ({ history, app}) {
 					path: '/users',
 					component: UserList,
 				},
-				
-				
+				{
+					path: '/userRecords',
+					component: UserRecords,
+				},
 				{
 					path: '/gathered',
 					component: Gathered,

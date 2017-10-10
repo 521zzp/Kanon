@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Table,  } from 'antd';
+import { Form, Input, Button, Select, Table, Modal,  } from 'antd';
 import styles from './UserList.less';
 import config from '../../config/config.json'
 import { PHONE, IDCARD } from '../../utils/regx'
@@ -10,7 +10,7 @@ import UserDetailsModal from '../../components/user/userList/UserDetailsModal'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
+const confirm = Modal.confirm;
 
 class UserList extends Component {
 	
@@ -99,14 +99,27 @@ class UserList extends Component {
 	
 	close = () => {
 		this.props.dispatch({
-      type: 'userList/update',
-      payload: { modalVisiable: false },
-    });
+	      type: 'userList/update',
+	      payload: { modalVisiable: false },
+	    });
 	}
 	
-	editUser = (account) => {
-		
+	editUser = (values) => {
+		const dispatch = this.props.dispatch
+		confirm({
+		    title: '警告！',
+		    content: '确认更新该用户信息?',
+		    okText: '确认',
+		    cancelText: '取消',
+		    onOk() {
+		      dispatch({
+			      type: 'userList/editSave',
+			      payload: values,
+			    });
+		    },
+		});
 	}
+	
 
 	
 	render () {
@@ -239,6 +252,8 @@ class UserList extends Component {
 	    		visiable = { this.props.modalVisiable } 
 	    		item = { this.props.modalItem }
 	    		close = { this.close } 
+	    		ok = { this.editUser }
+	    		updateLoading = { this.props.updateLoading }
 	    		/> }
 	    	
 	    	
@@ -248,7 +263,7 @@ class UserList extends Component {
 }
 
 function mapStateToProps(state) {
-	const { total, list, pageSize, searching, modalVisiable, modalItem } = state.userList;
+  const { total, list, pageSize, searching, modalVisiable, modalItem, updateLoading } = state.userList;
   return {
   	loading: state.loading.models.userList,
   	total,
@@ -257,6 +272,7 @@ function mapStateToProps(state) {
   	searching,
   	modalVisiable,
   	modalItem,
+  	updateLoading,
   };
 }
 

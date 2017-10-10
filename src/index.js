@@ -3,16 +3,14 @@ import './index.css';
 import './config/common.less';
 import createLoading from 'dva-loading';
 import { browserHistory } from 'dva/router';
+import exception from './utils/exception'
 
 
 // 1. Initialize
 const app = dva({
 	history: browserHistory,
 	onError(e, dispatch) {
-		console.log(e)
-		dispatch({
-	      type: e.message,
-	    })
+		exception(e, dispatch)
 	  },
 });
 
@@ -20,6 +18,10 @@ const app = dva({
 app.use(createLoading());
 
 app.model(require("./models/login"));
+
+app.model(require("./models/user/userRecordsCoupon"));
+
+app.model(require("./models/user/userRecords"));
 
 app.model(require("./models/user/userList"));
 

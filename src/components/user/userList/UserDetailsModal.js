@@ -26,6 +26,8 @@ function UserDetailsModal({
 	item,
 	visiable,
 	close,
+	updateLoading, 
+	ok,
 	form: {
     getFieldDecorator,
     validateFieldsAndScroll,
@@ -34,39 +36,30 @@ function UserDetailsModal({
 }) {
 	
 	const handleCancel = () => {
-    console.log('Clicked cancel button');
     close()
   }
-	
-	const handleOk = () => {
-		console.log('ok')
-	}
 	
 	const handleSubmit = (e) => {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        dispatch({
-		      type: 'gathered/getTotal',
-		      payload: values,
-		    });
+        console.log('Received values of modal form: ', values);
+        ok(values)
       }
     });
   }
 	
-	const modalClose = () => console.log('close')
 	
 	
   return (
     <div className={styles.normal}>
-      <Modal title="用户设置" afterClose={ modalClose }
+      <Modal title="用户设置" 
           visible={ visiable }
           onOk={ handleSubmit }
-          confirmLoading={false}
+          confirmLoading={updateLoading}
           onCancel={handleCancel}
+          okText='保存'
         >
-      
         <Form  >
         <QueueAnim>
 	        <div  key="s1">
@@ -94,7 +87,7 @@ function UserDetailsModal({
 		          {getFieldDecorator('superiorsName', {
 		          	initialValue: item.superiorsName
 		          })(
-		           <Input  placeholder="上级姓名" />
+		           <Input disabled={true}  placeholder="上级姓名" />
 		          )}
 		        </FormItem>
 	        </div>
@@ -128,7 +121,7 @@ function UserDetailsModal({
 		        </FormItem>
 	        </div>
 	        { item.activate === false && <div key="s7">
-				          <span className={ styles['freeze-time'] }>已冻结: <b style={{ color: 'red' }}>35</b> 天</span>
+				          <span className={ styles['freeze-time'] }>已冻结: <b style={{ color: 'red' }}>{item.freezeDay}</b> 天</span>
 			        </div>
 	        }
 	        </QueueAnim>

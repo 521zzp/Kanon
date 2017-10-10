@@ -99,7 +99,7 @@ class IndexPage extends Component {
 			          
 			          <SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
 			            <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
-			            <Menu.Item key="6">会员关系</Menu.Item>
+			            <Menu.Item key="6"><Link to="/userRecords">用户记录</Link></Menu.Item>
 			            <Menu.Item key="7">添加商户</Menu.Item>
 			            <Menu.Item key="8">会员列表</Menu.Item>
 			          </SubMenu>

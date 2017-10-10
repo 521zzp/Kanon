@@ -75,7 +75,7 @@ class Login extends Component {
 				    	<Row>
 					      <Col span={4} offset={10}>
 					    		<div className={styles['form-wrap']}>
-					    			<span className={ styles.title }>蓬宝金融管理员系统</span><br/>
+					    			<span className={ styles.title }>掌柜金服管理员系统</span><br/>
 						    		<Form onSubmit={this.handleSubmit} className="login-form">
 								        <FormItem>
 								          {getFieldDecorator('account', {

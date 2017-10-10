@@ -26,6 +26,11 @@ export const HOME_WEEK_DATA = BASEURL + '/home/weeks'
 export const USERS_TOTAL = BASEURL+ '/users/total' //用户列表总条数
 export const USERS_LIST = BASEURL + '/users/list' //用户列表集合
 export const USER_DETAILS = BASEURL + 'user/details' //用户详情信息
+export const USER_DETAILS_UPDATE = BASEURL + '/user/details/update' //更新用户数据
+//用户记录
+export const USER_RE_COMMON = BASEURL + '/user/records/common' //用户基本信息
+export const USER_RE_COUPON_TOTAL = BASEURL + '/user/records/coupon/total' //用户持有礼券总条数
+export const USER_RE_COUPON_LIST = BASEURL + '/user/records/coupon/list' //用户持有礼券集合
 
 
 /*
