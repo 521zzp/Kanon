@@ -141,6 +141,9 @@ class IndexPage extends Component {
 			            <Menu.Item key="24"><Link to="/experience">Banner设置</Link></Menu.Item>
 			            <Menu.Item key="25"><Link to="/raise">其他设置</Link></Menu.Item>
 			          </SubMenu>
+			          <SubMenu key="sub8" title={<span><Icon type="customer-service" />在线客服</span>}>
+			            <Menu.Item key="31"><Link to="/onlineService">我的客服</Link></Menu.Item>
+			          </SubMenu>
 			        </Menu>
 			        
 			        <div className = { switchWrap } >

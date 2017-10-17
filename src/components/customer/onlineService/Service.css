@@ -1,0 +1,7 @@
+
+.normal {
+	min-height: calc(100vh - 88px);
+}
+.write{
+	margin-top: 10px;
+}

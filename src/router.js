@@ -23,6 +23,9 @@ import NewsList from "./routes/News/NewsList.js"; //新闻列表
 import Product from './routes/Financing/Product.js' //理财产品
 
 
+//在线客服
+import OnlineService from './routes/Customer/OnlineService'  //在线服务
+
 import Home from "./routes/Home.js";
 
 
@@ -79,6 +82,13 @@ const Routers = function ({ history, app}) {
 				{
 					path: '/product',
 					component: Product,
+				},
+				/*
+				 * 在线客服
+				 */
+				{
+					path: '/onlineService',
+					component: OnlineService,
 				},
 			]
 		},

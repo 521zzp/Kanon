@@ -1,0 +1,96 @@
+
+.normal {
+	height: calc(100vh - 294px);
+	overflow: auto;
+	
+}
+.record:after{
+	display: block;
+	content: '';
+	clear: both;
+}
+
+.content-wrap{
+	composes: record;
+	display: block;
+	padding: 0 60px;
+	
+}
+
+.clerk, .customer{
+	composes: record;
+	margin-top: 20px;
+	padding-right: 30px;
+	animation: mtFadeIn .8s ease;
+}
+.clerk .face{
+	float: right;
+}
+.clerk .content{
+	display: inherit;
+	background-color: #DCDCDC;
+	float: right;
+	padding: 8px 20px;
+	font-size: 14px;
+	border-radius: 6px;
+	position: relative;
+}
+.clerk .content:after{
+	display: block;
+	content: '';
+	position: absolute;
+	right: -10px;
+	top: 10px;
+	border-left: 10px solid #DCDCDC;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+}
+.clerk .time{
+	display: block;
+	text-align: right;
+	margin-top: 5px;
+	float: right;
+	width: 100%;
+}
+
+.customer .time{
+	display: block;
+	text-align: left;
+	margin-top: 5px;
+	float: left;
+	width: 100%;
+}
+.customer .face{
+	float: left;
+}
+.customer .content{
+	display: inherit;
+	background-color: #DCDCDC;
+	padding: 8px 20px;
+	font-size: 14px;
+	border-radius: 6px;
+	position: relative;
+	float: left;
+}
+.customer .content:after{
+	display: block;
+	content: '';
+	position: absolute;
+	left: -10px;
+	top: 10px;
+	border-right: 10px solid #DCDCDC;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+}
+
+
+@keyframes mtFadeIn{
+	from{
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to{
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

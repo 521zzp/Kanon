@@ -19,6 +19,20 @@ app.use(createLoading());
 
 app.model(require("./models/login"));
 
+app.model(require("./models/customer/onlineService"));
+
+app.model(require("./models/user/userRecordsInvite"));
+
+app.model(require("./models/user/userRecordsPoint"));
+
+app.model(require("./models/user/userRecordsShopExchange"));
+
+app.model(require("./models/user/userRecordsRecharge"));
+
+app.model(require("./models/user/userRecordsCapitalStatements"));
+
+app.model(require("./models/user/userRecordsInvest"));
+
 app.model(require("./models/user/userRecordsCoupon"));
 
 app.model(require("./models/user/userRecords"));

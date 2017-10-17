@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Table, Modal,  } from 'antd';
+import { Form, Input, Button, Select, Table, Modal, Icon  } from 'antd';
 import styles from './UserList.less';
 import config from '../../config/config.json'
 import { PHONE, IDCARD } from '../../utils/regx'
@@ -85,14 +85,14 @@ class UserList extends Component {
 		  title: '操作',
 		  key: 'action',
 		  render: (text, record) => (
-		    <Button type="primary" onClick={ () => {
+		  	<span>
+		      <a onClick={ () => {
 			    	this.props.dispatch({
 				      type: 'userList/getDetails',
 				      payload: { account: text.account },
 				    });
-		    	}  }>
-		    	更多
-		    </Button>
+		    	}  }><Icon type="edit" />编辑</a>
+		    </span>
 		  ),
 		}
 	];
@@ -255,8 +255,6 @@ class UserList extends Component {
 	    		ok = { this.editUser }
 	    		updateLoading = { this.props.updateLoading }
 	    		/> }
-	    	
-	    	
 	    </div>
 		)
 	}

@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button, Table, Modal, Card, Row, Col   } from 'antd';
+import { Coupon, Invest, CapitalStatements, Recharge, ShopExchange, Point, Invite } from '../../components/user/userRecords'
+
+import { PHONE, IDCARD } from '../../utils/regx'
 import CountUp from 'react-countup'
 import styles from './UserRecords.css';
 
@@ -13,6 +16,8 @@ function hasErrors(fieldsError) {
 }
 
 function UserRecords({
+	account,
+	idCard,
 	dispatch,
 	baseInfo,
 	form: {
@@ -31,13 +36,40 @@ function UserRecords({
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         dispatch({
 					type: 'userRecords/update',
 					payload: values
 				})
         dispatch({
 					type: 'userRecords/getCommonInfo'
+				})
+        /*持有礼券*/
+        dispatch({
+					type: 'userRecordsCoupon/getTotal'
+				})
+        /*投资记录*/
+        dispatch({
+					type: 'userRecordsInvest/getTotal'
+				})
+        /*资金流水*/
+        dispatch({
+					type: 'userRecordsCapitalStatements/getTotal'
+				})
+        /*充值提现记录*/
+        dispatch({
+					type: 'userRecordsRecharge/getTotal'
+				})
+        /*商城兑换记录*/
+        dispatch({
+					type: 'userRecordsShopExchange/getTotal'
+				})
+        /*积分流水*/
+        dispatch({
+					type: 'userRecordsPoint/getTotal'
+				})
+        /*邀请记录*/
+        dispatch({
+					type: 'userRecordsInvite/getTotal'
 				})
       }
     });
@@ -93,20 +125,22 @@ function UserRecords({
 	
 	const list =  baseInfo ? [baseInfo] : []
 	
-	
   return (
     <div className={styles.normal}>
-	    <Card bordered={false}>
+	    <Card bordered={false} >
 	    	<Form layout="inline" >
 	        <FormItem label="商户账号：">
 	          {getFieldDecorator('account', {
-	            rules: [{ pattern: /^1[34578]\d{9}$/, message: '商户账号格式不正确!' }],
+	          	initialValue: account,
+	            rules: [{ pattern: PHONE, message: '商户账号格式不正确!' }],
 	          })(
 	            <Input  placeholder="商户账号" />
 	          )}
 	        </FormItem>
 	        <FormItem label="身份证号：">
 	          {getFieldDecorator('idCard', {
+	          	initialValue: idCard,
+	          	rules: [{ pattern: IDCARD, message: '身份证号格式不正确!' }],
 	          })(
 	            <Input placeholder="身份证号" />
 	          )}
@@ -123,7 +157,7 @@ function UserRecords({
 	        </FormItem>
 	      </Form>
       </Card>
-      <Card title="基本信息" bordered={false}  style={{'margin-top': '10px'}}>
+      <Card title="基本信息" bordered={false}  style={{marginTop: '10px'}}>
       	<div  style={{marginBottom: '10px'}}>
 	    		<Table  columns={ columns } dataSource={ list } pagination={ false }/>
 	    	</div>
@@ -183,14 +217,39 @@ function UserRecords({
       
       
     	<Row gutter={20}>
-    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{'margin-top': '10px'}}>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
     			<Card title="持有礼券" bordered={false} className={styles.item} >
-    				asf
+    				<Coupon/>
 					</Card>
     		</Col>
-    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{'margin-top': '10px'}}>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
     			<Card title="投资记录" bordered={false} className={styles.item} >
-    				asf
+    				<Invest/>
+					</Card>
+    		</Col>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
+    			<Card title="资金流水" bordered={false} className={styles.item} >
+    				<CapitalStatements/>
+					</Card>
+    		</Col>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
+    			<Card title="充值&提现记录" bordered={false} className={styles.item} >
+    				<Recharge/>
+					</Card>
+    		</Col>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
+    			<Card title="商城兑换记录" bordered={false} className={styles.item} >
+    				<ShopExchange/>
+					</Card>
+    		</Col>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
+    			<Card title="积分流水" bordered={false} className={styles.item} >
+    				<Point/>
+					</Card>
+    		</Col>
+    		<Col lg={ 12 } md={ 12 } sm={ 24 } style={{marginTop: '10px'}}>
+    			<Card title="邀请记录" bordered={false} className={styles.item} >
+    				<Invite/>
 					</Card>
     		</Col>
     	</Row>
@@ -200,9 +259,11 @@ function UserRecords({
 }
 
 function mapStateToProps(state) {
-	const { baseInfo, couponTotal, couponCurrent, couponList } = state.userRecords;
+	const { baseInfo, account, idCard  } = state.userRecords;
   return {
-  	baseInfo
+  	baseInfo,
+  	account,
+  	idCard,
   };
 }
 

@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Table,  } from 'antd';
 import styles from './Coupon.css';
 
-function Coupon({
+function Point({
 	dispatch,
 	loading,
 	total, 
@@ -15,7 +15,7 @@ function Coupon({
   //列条目
 	const columns = [
 		{
-		  title: '礼券类型',
+		  title: '积分事件',
 		  dataIndex: 'type',
 		  key: 'type',
 		},
@@ -25,9 +25,9 @@ function Coupon({
 		  key: 'time',
 		},
 		{
-		  title: '额度',
-		  dataIndex: 'value',
-		  key: 'value',
+		  title: '积分变化',
+		  dataIndex: 'change',
+		  key: 'change',
 		},
 	];
 	
@@ -37,7 +37,7 @@ function Coupon({
 		pageSize,
 		onChange: (page, pageSize) => {
 			dispatch({
-		      type: 'userRecordsCoupon/getList',
+		      type: 'userRecordsPoint/getList',
 		      payload: page,
 		    });
 		}
@@ -50,13 +50,12 @@ function Coupon({
   );
 }
 
-function mapStateToProps(
-state) {
-	const { total, current, list } = state.userRecordsCoupon
+function mapStateToProps(state) {
+	const { total, current, list } = state.userRecordsPoint
 	const { pageSize } = state.userRecords
 	
 	return {
-		loading: state.loading.models.userRecordsCoupon,
+		loading: state.loading.models.userRecordsPoint,
 		total, 
 		current, 
 		list,
@@ -64,5 +63,5 @@ state) {
 	}
 }
 
-export default connect(mapStateToProps)(Coupon);
+export default connect(mapStateToProps)(Point);
 

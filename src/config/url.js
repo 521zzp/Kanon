@@ -31,6 +31,20 @@ export const USER_DETAILS_UPDATE = BASEURL + '/user/details/update' //更新用�
 export const USER_RE_COMMON = BASEURL + '/user/records/common' //用户基本信息
 export const USER_RE_COUPON_TOTAL = BASEURL + '/user/records/coupon/total' //用户持有礼券总条数
 export const USER_RE_COUPON_LIST = BASEURL + '/user/records/coupon/list' //用户持有礼券集合
+export const USER_RE_INVEST_TOTAL = BASEURL + '/user/records/invest/total' //用户投资记录总条数
+export const USER_RE_INVEST_LIST = BASEURL + '/user/records/invest/list' //用户投资记录集合
+export const USER_RE_CAPITAL_STATEMENTS_TOTAL = BASEURL + '/user/records/capital/statements/total' //用户资金流水总条数
+export const USER_RE_CAPITAL_STATEMENTS_LIST = BASEURL + '/user/records/capital/statements/list' //用户资金流水集合
+export const USER_RE_RECHARGE_TOTAL = BASEURL + '/user/records/recharge/total' //用户充值记录条数
+export const USER_RE_RECHARGE_LIST = BASEURL + '/user/records/recharge/list' //用户充值记录集合
+export const USER_RE_SHOP_EXCHANGE_TOTAL = BASEURL + 'user/records/shop/exchange/total' //用户商城兑换记录条数
+export const USER_RE_SHOP_EXCHANGE_LIST = BASEURL + '/user/records/shop/exchange/list' //用户商城兑换记录集合
+export const USER_RE_POINT_TOTAL = BASEURL + '/user/records/point/total' //用户积分流水总记录数
+export const USER_RE_POINT_LIST = BASEURL + '/user/records/point/list' //用户积分流水集合
+export const USER_RE_INVITE_TOTAL = BASEURL + '/user/records/invte/total' //用户邀请记录总条数
+export const USER_RE_INVITE_LIST = BASEURL + '/user/records/invete/list' //用户邀请记录集合
+
+
 
 
 /*

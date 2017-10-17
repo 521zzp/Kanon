@@ -1,9 +1,9 @@
-import { USER_RE_COUPON_TOTAL, USER_RE_COUPON_LIST } from '../../config/url'
+import { USER_RE_CAPITAL_STATEMENTS_TOTAL, USER_RE_CAPITAL_STATEMENTS_LIST } from '../../config/url'
 import { postModel, onanaly } from '../../utils/net'
 
 
 export default {
-  namespace: 'userRecordsCoupon',
+  namespace: 'userRecordsCapitalStatements',
   state: {
   	total: 0, 
   	current: 1,
@@ -17,10 +17,8 @@ export default {
   effects: {
   	*getTotal ({ payload: obj }, { put, select }) {
   		const { account, idCard } = yield select(state => state.userRecords)
-  		const { total } = yield fetch(USER_RE_COUPON_TOTAL, postModel({account, idCard})).then(onanaly)
+  		const { total } = yield fetch(USER_RE_CAPITAL_STATEMENTS_TOTAL, postModel({account, idCard})).then(onanaly)
 			yield put({ type: 'update', payload: { total } })
-			console.log('total:')
-			console.log(total)
 			if (total > 0) {
 				yield put({ type: 'getList', payload: 1 })
 			}
@@ -28,7 +26,7 @@ export default {
   	*getList ({ payload: obj }, { put, select }) {
   		yield put({ type: 'update', payload: { current: obj } })
   		const { account, idCard, pageSize } = yield select(state => state.userRecords)
-  		const list = yield fetch(USER_RE_COUPON_LIST, postModel({current: obj, pageSize, account, idCard})).then(onanaly)
+  		const list = yield fetch(USER_RE_CAPITAL_STATEMENTS_LIST, postModel({current: obj, pageSize, account, idCard})).then(onanaly)
 			list.forEach((item, index) => item.key = index)
 			yield put({ type: 'update', payload: { list } })
   	}

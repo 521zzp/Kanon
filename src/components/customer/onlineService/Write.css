@@ -1,0 +1,15 @@
+
+.normal {
+	position: relative;
+}
+
+.text{
+	width: 100%;
+	resize: none;
+}
+
+.send{
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}

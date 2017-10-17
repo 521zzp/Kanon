@@ -21,9 +21,11 @@
     "rc-queue-anim": "^1.2.2",
     "react": "^15.4.0",
     "react-countup": "^2.2.0",
+    "react-custom-scrollbars": "^4.1.2",
     "react-dom": "^15.4.0",
     "react-draft-wysiwyg": "^1.10.8",
-    "recharts": "^1.0.0-alpha.4"
+    "recharts": "^1.0.0-alpha.4",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
