@@ -5,33 +5,29 @@ export default {
   namespace: 'onlineService',
   state: {
   	status: 0, // 0: 未连接, 1: 已连接, -1: 连接中，
-  	records: [
+  	records: [],
+  	chats: [
   		{
-  			id: '545465748asfsa8g0',
-  			user: 'fgkhsnfklhnkglfs',
-  			clerk: '0astgastgasg07',
-  			time: '2017-08-24 12:12',
-  			sender: 0, 
-  			userFace: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-  			userNickname: '喵帕斯',
-  			clerkNickname: '007',
-  			type: 1, //1表示text, 其余后续添加
-  			content: '豫章故郡，洪都新府',
+  			id: '',
+  			records: [],
+  			more: false,
+  			unread: 0,
+  			face: '',
+  			account: '',
+  			name: '',
+  			chatting: true,
   		},
   		{
-  			id: '545465748asfsa8g0',
-  			user: 'fgkhsnfklhnkglfs',
-  			clerk: '0astgastgasg07',
-  			time: '2017-08-24 12:12',
-  			sender: 1, 
-  			userFace: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-  			userNickname: '喵帕斯',
-  			clerkNickname: '007',
-  			type: 1, //1表示text, 其余后续添加
-  			content: '豫章故郡，洪都新府',
+  			id: '',
+  			records: [],
+  			more: false,
+  			unread: 7,
+  			face: '',
+  			account: '',
+  			name: '',
+  			chatting: false,
   		}
-  	
-  	],
+  	]
   },
   reducers: {
   	update (state, { payload: obj }) {
@@ -42,6 +38,23 @@ export default {
   		
   		return { ...state, records: [...state.records, obj ] }
   	},
+  	newCustomerPush (state, { payload: obj }) {
+  		var first = false
+  		if (state.chats.length === 0 ) {
+  			first = true
+  		}
+  		const chat = {
+  			id: '',
+  			records: obj.records,
+  			more: obj.more,
+  			unread: first ? 0 : 1,
+  			face: obj.face,
+  			account: obj.account,
+  			name: obj.name,
+  			chatting: first,
+  		}
+  		return { ...state, chats: [ ...state.chats, chat ] }
+  	}
   },
   effects: {
   	*connect ({ payload: obj }, { put, select }) {
@@ -49,7 +62,8 @@ export default {
   		yield put({ type: 'update', payload: { status: -1 } })
   		//Socket = new WebSocket("ws://192.168.3.8:8090/webSocketOneToOne/sss" );
   		//Socket = new WebSocket("ws://localhost:4000/customer/service" );
-  		Socket = new SockJS('http://192.168.3.8:8080/guestbook');
+  		Socket = new WebSocket("ws://192.168.3.8:8080/p2p_zgjf/websocket/0/3A7CEDEB-61A1-4107-868F-A1FDE925F75C");
+  		//Socket = new SockJS('http://192.168.3.8:8080/guestbook');
   		//Socket = new WebSocket("ws://192.168.3.8:8090/ws" );
   		//Socket = io('http://localhost:4000',)
   		//Socket = io("http://192.168.3.8:8090/socket" );
@@ -86,15 +100,32 @@ export default {
 	    };
   		Socket.onmessage = function (evt) 
       { 
-          var data = evt.data;
+          var data = JSON.parse(evt.data);
           console.log("数据已接收...");
           console.log(data)
           console.log(evt);
           
+          
+          
+          switch (data.type){
+						case 'CUSTOMER_CONNECT':
+							Dispatch({
+			      		type: 'newCustomerPush', 
+			      		payload: JSON.parse(data)
+			      	})
+						
+						
+							break;
+						default:
+							break;
+					}
+        	
+          
+          
           Dispatch({
-	      	 type: 'updateRecords', 
-	      	 payload: JSON.parse(data)
-	      })
+	      		type: 'updateRecords', 
+	      		payload: JSON.parse(data)
+	      	})
       };
   	},
   	*send ({ payload: obj }, { put, select }) {

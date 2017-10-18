@@ -3,3 +3,52 @@
 	height: calc(100vh - 136px);
 	overflow: auto;
 }
+
+
+
+.title{
+	border-bottom: 1px solid #000;
+	padding: 0 20px 5px 0;
+}
+
+.title .user-number{
+	float: right;
+}
+
+.title:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.group{
+	margin-top: 10px;
+	font-size: 14px;
+}
+.group>li:hover{
+	background-color: #DCDCDC;
+	cursor: pointer;
+	
+}
+.group>li.activity{
+	background-color: #DCDCDC;
+}
+.group>li{
+	display: block;
+	height: 40px;
+	padding: 0 20px 0 10px;
+	background-color: #FFFFFF;
+	transition: all .3s;
+}
+.group .name, .group .account{
+	display: inline-block;
+	overflow: hidden;
+	line-height: 40px;
+	margin-left: 16px;
+}
+.face{
+	vertical-align: super;
+}
+.badge{
+	float: right;
+	margin-top: 10px;
+}

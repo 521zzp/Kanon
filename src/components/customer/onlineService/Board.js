@@ -26,20 +26,20 @@ class Board extends Component{
   	const content = this.props.records.map((item,index) => {
   		if (item.sender === 0) {
   			return <div className={styles.clerk} key={index}>
-									<Avatar className={ styles.face } icon="customer-service" />
-									<div className={ styles['content-wrap'] }>
-										<span className={ styles.content }>{item.content}</span>
-										<span className={ styles.time }>{item.time}</span>
-									</div>
-								</div>
+						<Avatar className={ styles.face } icon="customer-service" />
+						<div className={ styles['content-wrap'] }>
+							<span className={ styles.content }>{item.content}</span>
+							<span className={ styles.time }>{item.time}</span>
+						</div>
+					</div>
   		} else {
   			return <div className={styles.customer} key={index}>
-				    			<Avatar className={ styles.face } src={item.userFace} />
-				    			<div className={ styles['content-wrap'] }>
-				    				<span className={ styles.content }>{item.content}</span>
-										<span className={ styles.time }>{item.time}</span>
-				    			</div>
-				    		</div>
+		    			<Avatar className={ styles.face } src={item.userFace} />
+		    			<div className={ styles['content-wrap'] }>
+		    				<span className={ styles.content }>{item.content}</span>
+								<span className={ styles.time }>{item.time}</span>
+		    			</div>
+		    		</div>
   		}
   	})
   	

@@ -9,6 +9,7 @@ import styles from './OnlineService.css';
 function OnlineServicee({
 	dispatch,
 	status,
+	chats,
 	records,
 }) {
 	
@@ -29,17 +30,18 @@ function OnlineServicee({
   return (
     <div className={styles.normal}>
     	{ status !== 1 && <Connection status={ status } connect={ connect } send={ send }/> }
-    	{ status === 1 && <Service records={ records } send={ send }/> }
+    	{ status === 1 && <Service records={ records } send={ send } chats={ chats }/> }
     </div>
   );
 }
 
 function mapStateToProps(state) {
-	const { status, records } = state.onlineService
+	const { status, records, chats } = state.onlineService
 	
 	return {
 		status,
 		records,
+		chats,
 	};
 }
 

@@ -8,30 +8,30 @@ import Write from './Write';
 function Service({
 	send,
 	records,
+	chats,
 }) {
 	
-
+  const chat = chats.filter(
+  	item =>  item.chatting
+  )
 	
   return (
     <div className={styles.normal}>
     	<Row gutter={20}>
-	      <Col span={20} >
+	      <Col span={19} >
 	      	<Card bordered={false}>
-	        	<Board records={ records }/>
+	        	<Board records={ chat[0].records }/>
 	        </Card>
 	  	    <Card bordered={false} className={ styles.write }>
 	        	<Write send={ send }/>
 	        </Card>
 	      </Col>
-	      <Col  span={4}>
+	      <Col  span={5}>
 	        <Card bordered={false}>
-	        	<Customers/>
+	        	<Customers chats = { chats }/>
 	        </Card>
 	      </Col>
 	    </Row>
-    
-  		
-  		
     </div>
   );
 }
