@@ -26,11 +26,18 @@ function OnlineServicee({
 		});
 	}
 	
+	const chattingSwitch = (id) => {
+		dispatch({
+			type: 'onlineService/chattingSwitch',
+			payload: { id }
+		});
+	}
+	
 	
   return (
     <div className={styles.normal}>
-    	{ status !== 1 && <Connection status={ status } connect={ connect } send={ send }/> }
-    	{ status === 1 && <Service records={ records } send={ send } chats={ chats }/> }
+    	{ status !== 1 && <Connection status={ status } connect={ connect } /> }
+    	{ status === 1 && <Service records={ records } send={ send } chats={ chats } chattingSwitch= { chattingSwitch }/> }
     </div>
   );
 }

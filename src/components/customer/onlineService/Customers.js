@@ -7,11 +7,24 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 
 function Customers({
-	chats
+	chats,
+	chattingSwitch
 }) {
 	
-	const online = chats.map(
-		(item, index) => <li className={ styles.activity } key={ index }>
+	
+	const talkSwitch = (current, id) => {
+		console.log('click id:')
+		console.log(id)
+		console.log('is current')
+		console.log(current)
+		!current ? chattingSwitch(id) : ''
+	}
+	//onClick={ () => talkSwitch( item.chatting, item.id) }
+	
+	const online = chats.filter(
+		item => item.online
+	).map(
+		(item, index) => <li onClick={ item.chatting ? () => {} : () => chattingSwitch(item.id) } className={ item.chatting ? styles.activity : '' } key={ index }>
 			    			<Avatar className={ styles.face } 
 			    			src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" 
 			    			>{item.name[0]}</Avatar>
@@ -25,7 +38,7 @@ function Customers({
     <div className={ styles.normal }>
     	<div className={ styles.title }>
     		<span>用户列表</span> 
-    		<span className={ styles['user-number'] }>7</span>
+    		<span className={ styles['user-number'] }>{ chats.filter( item => item.online ).length }</span>
     	</div>
     	<Scrollbars style={{ width: '100%', height: 'calc(100vh - 160px)', paddingRight: '30px' }} autoHide>
     		<ul className={ styles.group }>
@@ -41,3 +54,5 @@ function Customers({
 }
 
 export default Customers;
+
+

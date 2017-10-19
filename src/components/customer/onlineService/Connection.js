@@ -4,7 +4,6 @@ import styles from './Connection.css';
 
 function Connection({
 	connect,
-	send,
 	status,
 }) {
   return (
@@ -12,7 +11,6 @@ function Connection({
       <Card bordered={ false }>
       	<div>
       		<Button type="primary" icon="fork" onClick={ connect }>连接系统</Button>
-      		<Button type="primary" icon="fork" onClick={ send }>发送消息</Button>
       	</div>
       </Card>
       { status === 0 && <Card bordered={ false } style={{ marginTop: '10px' }}>

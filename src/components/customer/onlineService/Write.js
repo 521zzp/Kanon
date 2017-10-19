@@ -22,6 +22,7 @@ class Write extends Component {
   	console.log('text:')
   	console.log(this.state.text.trim())
   	if (this.state.text.trim() !== '') {
+  		console.log('write send')
   		this.props.send(this.state.text)
 	  	this.setState({
 	  		text: ''

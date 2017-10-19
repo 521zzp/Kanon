@@ -1,33 +1,15 @@
 import io from 'socket.io-client'
 var Socket, Dispatch;
 
+// 'CUSTOMER_CONNECT', 'CLERK_CONNECT', 'CUSTOMER_SEND', 'CLERK_SEND', 'CUSTOMER_DISCONNECT' 
+
 export default {
   namespace: 'onlineService',
   state: {
   	status: 0, // 0: 未连接, 1: 已连接, -1: 连接中，
+  	serviceId: '',
   	records: [],
-  	chats: [
-  		{
-  			id: '',
-  			records: [],
-  			more: false,
-  			unread: 0,
-  			face: '',
-  			account: '',
-  			name: '',
-  			chatting: true,
-  		},
-  		{
-  			id: '',
-  			records: [],
-  			more: false,
-  			unread: 7,
-  			face: '',
-  			account: '',
-  			name: '',
-  			chatting: false,
-  		}
-  	]
+  	chats: []
   },
   reducers: {
   	update (state, { payload: obj }) {
@@ -44,8 +26,9 @@ export default {
   			first = true
   		}
   		const chat = {
-  			id: '',
+  			id: obj.userId,
   			records: obj.records,
+  			online: true,
   			more: obj.more,
   			unread: first ? 0 : 1,
   			face: obj.face,
@@ -53,7 +36,30 @@ export default {
   			name: obj.name,
   			chatting: first,
   		}
+  		console.log('new conncetion')
+  		console.log(chat)
   		return { ...state, chats: [ ...state.chats, chat ] }
+  	},
+  	clerkConnect (state, { payload: obj }) {
+  		return { ...state, serviceId: obj.serviceId }
+  	},
+  	chattingReceive (state, { payload: obj }) {
+  		//const chat = 
+  		
+  	},
+  	chattingSwitch (state, { payload: { id } }) {
+  		console.log('change -- == ')
+  		console.log(id)
+  		let current = state.chats.filter(
+  			item => item.chatting
+  		)[0]
+  		let target = state.chats.filter(
+  			item => item.id === id
+  		)[0]
+  		const temp = [].concat(state.chats)
+  		temp.splice(state.chats.indexOf(current), 1, { ...current, chatting: false })
+  		temp.splice(state.chats.indexOf(target), 1, { ...target, chatting: true, unread: 0 })
+  		return { ...state, chats: temp }
   	}
   },
   effects: {
@@ -81,7 +87,7 @@ export default {
 	      	 payload: { status: 1 }
 	      })
 			});*/
-  		 Dispatch({
+  		Dispatch({
 	      	 type: 'update', 
 	      	 payload: { status: 1 }
 	      })
@@ -96,42 +102,50 @@ export default {
 	      	 type: 'update', 
 	      	 payload: { status: 1 }
 	      })
-	      
 	    };
   		Socket.onmessage = function (evt) 
       { 
           var data = JSON.parse(evt.data);
           console.log("数据已接收...");
           console.log(data)
-          console.log(evt);
-          
-          
+          console.log(evt.data);
           
           switch (data.type){
 						case 'CUSTOMER_CONNECT':
 							Dispatch({
 			      		type: 'newCustomerPush', 
-			      		payload: JSON.parse(data)
+			      		payload: data
 			      	})
-						
-						
 							break;
+						case 'CUSTOMER_SEND':
+							Dispatch({
+			      		type: 'chattingReceive', 
+			      		payload: data
+			      	})
+							break;
+						case 'CLERK_CONNECT':
+							Dispatch({
+			      		type: 'clerkConnect', 
+			      		payload: data
+			      	})
+							break;
+							
 						default:
 							break;
 					}
-        	
           
-          
-          Dispatch({
-	      		type: 'updateRecords', 
-	      		payload: JSON.parse(data)
-	      	})
       };
   	},
   	*send ({ payload: obj }, { put, select }) {
+  		console.log('send obj')
+  		console.log(obj)
+  		
+  		const { serviceId } = yield select(state => state.onlineService)
+  		
   		console.log('send')
+  		console.log(serviceId)
   		//Socket.emit('msg', {rp:"fine,thank you"});
-  		Socket.send(JSON.stringify({ content: obj })); 
+  		Socket.send(JSON.stringify({ content: obj, serviceId, type: 0})); 
   	}
   },
   subscriptions: {

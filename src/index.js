@@ -4,8 +4,9 @@ import './config/common.less';
 import createLoading from 'dva-loading';
 import { browserHistory } from 'dva/router';
 import exception from './utils/exception'
+import {dateFormat} from './utils/date'
 
-
+dateFormat() //时间格式化方法
 // 1. Initialize
 const app = dva({
 	history: browserHistory,

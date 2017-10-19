@@ -9,6 +9,7 @@ function Service({
 	send,
 	records,
 	chats,
+	chattingSwitch,
 }) {
 	
   const chat = chats.filter(
@@ -20,7 +21,7 @@ function Service({
     	<Row gutter={20}>
 	      <Col span={19} >
 	      	<Card bordered={false}>
-	        	<Board records={ chat[0].records }/>
+	        	<Board records={ chat[0] ? chat[0].records : [] }/>
 	        </Card>
 	  	    <Card bordered={false} className={ styles.write }>
 	        	<Write send={ send }/>
@@ -28,7 +29,7 @@ function Service({
 	      </Col>
 	      <Col  span={5}>
 	        <Card bordered={false}>
-	        	<Customers chats = { chats }/>
+	        	<Customers chats = { chats } chattingSwitch={ chattingSwitch }/>
 	        </Card>
 	      </Col>
 	    </Row>
