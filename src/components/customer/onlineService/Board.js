@@ -45,10 +45,10 @@ class Board extends Component{
   		} else {
   			return <div className={styles.customer} key={index}>
 		    			<Avatar className={ styles.face } src={item.userFace}
-			    			>{item.name[0]}</Avatar>
+			    			>{item.userNickName[0]}</Avatar>
 		    			<div className={ styles['content-wrap'] }>
 		    				<span className={ styles.content }>{item.content}</span>
-								<span className={ styles.time }>{item.time}</span>
+								<span className={ styles.time }>{ this.timeFormat(item.time) }</span>
 		    			</div>
 		    		</div>
   		}
@@ -62,6 +62,11 @@ class Board extends Component{
 					ref="scrollbars"
 					start="bottom"
 				>
+				{
+					this.props.more && <div className={ styles['more-wrap'] }>
+						<span className={ styles.more }>加载更多</span>
+					</div>
+				}
 		        {content}
 	    		
 				 </Scrollbars>   

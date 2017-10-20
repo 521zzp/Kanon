@@ -4,6 +4,18 @@
 	overflow: auto;
 	
 }
+
+.more-wrap{
+	text-align: center;
+}
+.more{
+	padding: 5px 10px;
+	background-color: #DCDCDC;
+	border-radius: 4px;
+	line-height: 1;
+	display: inline-block;
+	cursor: pointer;
+}
 .record:after{
 	display: block;
 	content: '';
