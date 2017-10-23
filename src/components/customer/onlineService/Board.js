@@ -17,10 +17,14 @@ class Board extends Component{
 	
 	componentDidUpdate () {
 		console.log('组件更新')
-		
 		const { scrollbars } = this.refs;
-		scrollbars.scrollToBottom()
+		if (this.props.scrollBehavior === 'bottom') {
+			scrollbars.scrollToBottom()
+		} else if (this.props.scrollBehavior === 'top') {
+			scrollbars.scrollToTop()
+		}
 	}
+	
 	timeFormat = (time) => {
 		const length = new Date().getTime() - time
 		if (length <  60 * 1000 ) {
@@ -54,6 +58,8 @@ class Board extends Component{
   		}
   	})
   	
+  	console.log('长度：')
+  	console.log(content.length)
   	
   	return (
 	    <div className={styles.normal}>
@@ -64,7 +70,7 @@ class Board extends Component{
 				>
 				{
 					this.props.more && <div className={ styles['more-wrap'] }>
-						<span className={ styles.more }>加载更多</span>
+						<span className={ styles.more } onClick={ this.props.getHistoryRecords }>加载更多</span>
 					</div>
 				}
 		        {content}

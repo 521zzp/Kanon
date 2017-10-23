@@ -10,6 +10,8 @@ function Service({
 	records,
 	chats,
 	chattingSwitch,
+	getHistoryRecords,
+	scrollBehavior,
 }) {
 	
   const chat = chats.filter(
@@ -21,7 +23,10 @@ function Service({
     	<Row gutter={20}>
 	      <Col span={19} >
 	      	<Card bordered={false}>
-	        	<Board records={ chat[0] ? chat[0].records : [] } more={ chat[0] ? chat[0].more : false }/>
+	        	<Board  
+	        		getHistoryRecords={ getHistoryRecords } 
+	        		scrollBehavior={ scrollBehavior }
+	        		records={ chat[0] ? chat[0].records : [] } more={ chat[0] ? chat[0].more : false }/>
 	        </Card>
 	  	    <Card bordered={false} className={ styles.write }>
 	        	<Write send={ send }/>

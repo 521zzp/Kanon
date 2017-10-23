@@ -33,7 +33,12 @@
 	composes: record;
 	margin-top: 20px;
 	padding-right: 30px;
-	animation: mtFadeIn .8s ease;
+}
+.clerk{
+	animation: myRightFadeIn .8s ease;
+}
+.customer{
+	animation: myLeftFadeIn .8s ease;
 }
 .clerk .face{
 	float: right;
@@ -104,5 +109,26 @@
 	to{
 		transform: translateY(0);
 		opacity: 1;
+	}
+}
+
+@keyframes myLeftFadeIn{
+	from{
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	to{
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes myRightFadeIn{
+	from{
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to{
+		opacity: 1;
+		transform: translateX(0);
 	}
 }

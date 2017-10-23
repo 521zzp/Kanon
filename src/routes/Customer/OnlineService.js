@@ -11,6 +11,7 @@ function OnlineServicee({
 	status,
 	chats,
 	records,
+	scrollBehavior,
 }) {
 	
 	const connect = () => {
@@ -33,22 +34,38 @@ function OnlineServicee({
 		});
 	}
 	
+	const getHistoryRecords = () => {
+		console.log('加载更多')
+		dispatch({
+			type: 'onlineService/getHistoryRecords',
+		});
+	}
+	
 	
   return (
     <div className={styles.normal}>
     	{ status !== 1 && <Connection status={ status } connect={ connect } /> }
-    	{ status === 1 && <Service records={ records } send={ send } chats={ chats } chattingSwitch= { chattingSwitch }/> }
+    	{ status === 1 && 
+    		<Service 
+    			records={ records } 
+    			send={ send } 
+    			chats={ chats } 
+    			chattingSwitch={ chattingSwitch }
+    			getHistoryRecords={ getHistoryRecords }
+    			scrollBehavior={ scrollBehavior }
+    		/> }
     </div>
   );
 }
 
 function mapStateToProps(state) {
-	const { status, records, chats } = state.onlineService
+	const { status, records, chats, scrollBehavior } = state.onlineService
 	
 	return {
 		status,
 		records,
 		chats,
+		scrollBehavior,
 	};
 }
 

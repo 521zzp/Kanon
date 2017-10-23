@@ -9,6 +9,7 @@ export default {
   state: {
   	status: 0, // 0: 未连接, 1: 已连接, -1: 连接中，
   	serviceId: '',
+  	scrollBehavior: 'bottom',// top, bottom, stable
   	records: [],
   	chats: []
   },
@@ -35,7 +36,7 @@ export default {
   			face: obj.face,
   			account: obj.account,
   			name: obj.name,
-  			chatting: first,
+  			chatting: first, 
   		}
   		console.log('new conncetion')
   		console.log(chat)
@@ -56,7 +57,7 @@ export default {
 	  		}
 	  		const temp = [].concat(state.chats)
   		  temp.splice(state.chats.indexOf(current), 1, target)
-				return { ...state, chats: temp }  		
+				return { ...state, chats: temp, scrollBehavior: 'bottom' }  		
   		} catch (e) {
   			console.log(e)
   			return { ...state }
@@ -87,13 +88,13 @@ export default {
 	  		)[0]
 	  		const target = { 
 	  			...current, 
-	  			records: [ obj.records, ...current.records], 
+	  			records: [ ...obj.records, ...current.records], 
 	  			unread: current.chatting ? 0 : current.unread + obj.records.length,
 	  			more: obj.more,
 	  		}
 	  		const temp = [].concat(state.chats)
   		  temp.splice(state.chats.indexOf(current), 1, target)
-				return { ...state, chats: temp }  		
+				return { ...state, chats: temp, scrollBehavior: 'top' }  		
   		} catch (e) {
   			console.log(e)
   			return { ...state }
@@ -155,13 +156,7 @@ export default {
 			      		payload: data
 			      	})
 							break;
-						case 'CUSTOMER_SEND':
-							Dispatch({
-			      		type: 'chattingReceive', 
-			      		payload: data.record
-			      	})
-							break;
-						case 'CLERK_SEND':
+						case 'COMMON_SEND':
 							Dispatch({
 			      		type: 'chattingReceive', 
 			      		payload: data.record
@@ -173,7 +168,12 @@ export default {
 			      		payload: data
 			      	})
 							break;
-							
+						case 'CHAT_HISTORY_RECORDS':
+							Dispatch({
+			      		type: 'receiveHistoryRecords', 
+			      		payload: data
+			      	})
+							break;	
 						default:
 							break;
 					}
@@ -187,7 +187,7 @@ export default {
   		const { serviceId } = yield select(state => state.onlineService)
   		const userId = (yield select(state => state.onlineService)).chats.filter(
   			item => item.chatting
-  		)[0].id
+  		)[0].userId
   		console.log('send')
   		console.log(serviceId)
   		console.log('user')
@@ -199,7 +199,7 @@ export default {
   		const { serviceId } = yield select(state => state.onlineService)
   		const currentChat = (yield select(state => state.onlineService)).chats.filter(
   			item => item.chatting
-  		)
+  		)[0]
   		const userId = currentChat.userId
   		const id = currentChat.records[0].id
   		Socket.send(JSON.stringify({
