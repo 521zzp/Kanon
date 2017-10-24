@@ -45,6 +45,18 @@ export default {
   	clerkConnect (state, { payload: obj }) {
   		return { ...state, serviceId: obj.serviceId }
   	},
+  	customerDisconnected (state, { payload: obj }) {
+  		const disconnect = state.chats.filter(
+	  		item => item.userId === obj.userId
+	  	)[0]
+  		const temp = [].concat(state.chats)
+  		temp.splice(state.indexOf(disconnect), 1) 
+			if (temp.length > 0 && disconnect.chatting) {
+				const first = { ...temp[0], chatting: true }
+				temp.splice(0, 1, first)
+			}  	
+			return { ...state, chats: temp }
+  	},
   	chattingReceive (state, { payload: obj }) {
   		try {
   			const current =  state.chats.filter(
@@ -168,6 +180,12 @@ export default {
 			      		payload: data
 			      	})
 							break;
+						case 'CUSTOMER_DISCONNECT':
+							Dispatch({
+			      		type: 'customerDisconnected', 
+			      		payload: data
+			      	})
+							break;
 						case 'CHAT_HISTORY_RECORDS':
 							Dispatch({
 			      		type: 'receiveHistoryRecords', 
@@ -192,7 +210,6 @@ export default {
   		console.log(serviceId)
   		console.log('user')
   		console.log(userId)
-  		//Socket.emit('msg', {rp:"fine,thank you"});
   		Socket.send(JSON.stringify({ content: obj, socketType: 'COMMON_SEND', serviceId, userId, type: 1, sender: 0})); 
   	},
   	*getHistoryRecords ({ payload: obj }, { put, select }) {
@@ -213,19 +230,7 @@ export default {
   subscriptions: {
   	setup({ dispatch }) {
   		Dispatch = dispatch
-  		
-      /*websocket.listen((data) => {
-      	
-      	console.log('subscriptions data:')
-      	console.log(data)
-      	
-      });*/
     },
-    /*socketMessage({ dispatch }) {
-		  return service.listen((data) => {
-		  	console.log('socketMessage action')
-		  });
-		}*/
   },
 };
  

@@ -42,7 +42,11 @@ class Board extends Component{
   			return <div className={styles.clerk} key={index}>
 						<Avatar className={ styles.face } icon="customer-service" />
 						<div className={ styles['content-wrap'] }>
-							<span className={ styles.content }>{item.content}</span>
+							
+							
+							{ item.type === 1 && <span className={ styles.content }>{item.content}</span> }
+							{ item.type === 2 && <div className={ styles.content }><img className={ styles['content-image'] } src={item.content}/> </div>}
+							
 							<span className={ styles.time }>{ this.timeFormat(item.time) }</span>
 						</div>
 					</div>
@@ -51,8 +55,9 @@ class Board extends Component{
 		    			<Avatar className={ styles.face } src={item.userFace}
 			    			>{item.userNickName[0]}</Avatar>
 		    			<div className={ styles['content-wrap'] }>
-		    				<span className={ styles.content }>{item.content}</span>
-								<span className={ styles.time }>{ this.timeFormat(item.time) }</span>
+		    				{ item.type === 1 && <span className={ styles.content }>{item.content}</span> }
+							{ item.type === 2 && <div className={ styles.content } style={{padding: '8px 8px'}}><img className={ styles['content-image'] } src={item.content}/> </div>}
+							<span className={ styles.time }>{ this.timeFormat(item.time) }</span>
 		    			</div>
 		    		</div>
   		}

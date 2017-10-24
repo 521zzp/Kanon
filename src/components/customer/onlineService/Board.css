@@ -100,7 +100,11 @@
 	border-bottom: 5px solid transparent;
 }
 
-
+.content-image{
+	max-width: 500px;
+	display: block;
+	border-radius: 0.266666rem;
+}
 @keyframes mtFadeIn{
 	from{
 		opacity: 0;
