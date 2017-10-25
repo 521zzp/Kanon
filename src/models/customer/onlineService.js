@@ -50,12 +50,21 @@ export default {
 	  		item => item.userId === obj.userId
 	  	)[0]
   		const temp = [].concat(state.chats)
-  		temp.splice(state.indexOf(disconnect), 1) 
+  		temp.splice(state.chats.indexOf(disconnect), 1) 
 			if (temp.length > 0 && disconnect.chatting) {
 				const first = { ...temp[0], chatting: true }
 				temp.splice(0, 1, first)
 			}  	
 			return { ...state, chats: temp }
+  	},
+  	clerkDisconnect (state, { payload: obj }) {
+  		return  {
+		  	status: 0,
+		  	serviceId: '',
+		  	scrollBehavior: 'bottom',
+		  	records: [],
+		  	chats: []
+		  }
   	},
   	chattingReceive (state, { payload: obj }) {
   		try {
@@ -144,6 +153,9 @@ export default {
 	      })
   		Socket.onerror = function(evt) {
 			    console.log("WebSocketError!");
+			    Dispatch({
+	      	 type: 'clerkDisconnect',
+	      })
 			};
 			
 			Socket.onopen = function()

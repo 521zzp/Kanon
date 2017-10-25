@@ -10,10 +10,11 @@ export default {
   effects: {
   	*login ({ payload: info }, { put }){
   		 		const result = yield fetch(LOGIN, postModel(info)).then(onanaly)
-  		 		const { token, name, face, msg } = result
-  		 		localStorage.setItem('admin',JSON.stringify({ token, name, face })) 
+  		 		const { token, name, face, msg, nav } = result
+  		 		
+  		 		localStorage.setItem('admin',JSON.stringify({ token, name, face, nav })) 
   		 		message.success(msg)
-  		 		yield put({ type: 'main/loginStroage', payload: { token, name, face} })
+  		 		yield put({ type: 'main/loginStroage', payload: { token, name, face, nav } })
   		 		browserHistory.push('/')
   	},
   	*logout ({ payload: info }, { put }) {
@@ -23,7 +24,9 @@ export default {
   			const obj = {
 	  			token: '',
 	  			name: '',
-	  			face: ''
+	  			face: '',
+	  			nav: [],
+	  			power: [],
 	  		}
   			try{
 	  				localStorage.removeItem('admin')

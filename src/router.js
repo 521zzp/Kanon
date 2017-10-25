@@ -26,6 +26,10 @@ import Product from './routes/Financing/Product.js' //理财产品
 //在线客服
 import OnlineService from './routes/Customer/OnlineService'  //在线服务
 
+//其他功能
+import Forbidden from './routes/Other/Forbidden' //权限不足禁止访问
+
+
 import Home from "./routes/Home.js";
 
 
@@ -89,6 +93,13 @@ const Routers = function ({ history, app}) {
 				{
 					path: '/onlineService',
 					component: OnlineService,
+				},
+				/*
+				 * 其他功能
+				 */
+				{
+					path: '/forbidden',
+					component: Forbidden,
 				},
 			]
 		},

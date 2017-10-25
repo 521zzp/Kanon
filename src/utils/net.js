@@ -77,6 +77,8 @@ export const onanaly = (response) => Promise.resolve(response).then(status).then
  * 
  */
 export const postModel = ( params ) => {
+	console.log('1112222')
+	console.log(main.state)
 	console.log(main.state.token)
 	return {
 		method: 'post',

@@ -33,13 +33,14 @@
 	composes: record;
 	margin-top: 20px;
 	padding-right: 30px;
+	animation: mtFadeIn .8s ease;
 }
-.clerk{
+/*.clerk{
 	animation: myRightFadeIn .8s ease;
 }
 .customer{
 	animation: myLeftFadeIn .8s ease;
-}
+}*/
 .clerk .face{
 	float: right;
 }

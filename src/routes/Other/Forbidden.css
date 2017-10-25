@@ -1,0 +1,28 @@
+
+.normal {
+	min-height: calc(100vh - 88px);
+	background-color: #FFFFFF;
+	text-align: center;
+	position: relative;
+}
+.wrap{
+	height: 175px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.icon{
+	color: #f04134;
+	font-size: 100px;
+	display: inline-block;
+}
+.span{
+	color: #f04134;
+	font-size: 50px;
+	display: block;
+	text-align: center;
+	
+}
