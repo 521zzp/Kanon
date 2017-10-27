@@ -141,7 +141,7 @@ class IndexPage extends Component {
 }
 
 function mapStateToProps(state) {
-	const { token, nav, power } = state.main;
+	const { token, nav } = state.main;
 	console.log('nav:')
 	console.log(nav)
 	console.log('token')
@@ -149,7 +149,6 @@ function mapStateToProps(state) {
 	return {
 	  	token,
 	  	nav,
-	  	power,
 	};
 }
 

@@ -38,7 +38,7 @@ app.model(require("./models/user/userRecordsCoupon"));
 
 app.model(require("./models/user/userRecords"));
 
-app.model(require("./models/user/userList"));
+//app.model(require("./models/user/userList"));
 
 app.model(require("./models/news/newsList"));
 
@@ -46,7 +46,7 @@ app.model(require("./models/financing/product"));
 
 app.model(require("./models/couopn/raise"));
 
-app.model(require("./models/home"));
+//app.model(require("./models/home"));
 
 app.model(require("./models/gathering/gathered"));
 

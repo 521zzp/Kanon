@@ -1,4 +1,7 @@
-import io from 'socket.io-client'
+//import io from 'socket.io-client'
+import { notification } from 'antd';
+import { CUSTOMER_SERVICE_SOCKET } from '../../config/url'
+
 var Socket, Dispatch;
 
 // 'CUSTOMER_CONNECT', 'CLERK_CONNECT', 'CUSTOMER_SEND', 'CLERK_SEND', 'CUSTOMER_DISCONNECT' 
@@ -76,6 +79,20 @@ export default {
 	  			records: [ ...current.records, obj], 
 	  			unread: current.chatting ? 0 : current.unread + 1
 	  		}
+	  		//左侧移动浮窗提醒
+	  		console.log('左侧移动浮窗提醒ss')
+	  		console.log(obj)
+	  /*		notification.open({
+	  			message: obj.userNickName,
+	  			description: obj.content
+	  		})*/
+	  		if (!current.chatting) {
+	  			notification.open({
+				    message: obj.userNickName,
+				    description: obj.type === 1 ? obj.content : '图片',
+				    duration: 2,
+				  });
+	  		}
 	  		const temp = [].concat(state.chats)
   		  temp.splice(state.chats.indexOf(current), 1, target)
 				return { ...state, chats: temp, scrollBehavior: 'bottom' }  		
@@ -126,9 +143,17 @@ export default {
   	*connect ({ payload: obj }, { put, select }) {
   		console.log('try connect')
   		yield put({ type: 'update', payload: { status: -1 } })
+  		const { id } = yield select(state => state.main )
+  		
+  		console.log('客服id')
+  		console.log(id)
   		//Socket = new WebSocket("ws://192.168.3.8:8090/webSocketOneToOne/sss" );
   		//Socket = new WebSocket("ws://localhost:4000/customer/service" );
-  		Socket = new WebSocket("ws://192.168.3.8:8080/p2p_zgjf/websocket/0/3A7CEDEB-61A1-4107-868F-A1FDE925F75C");
+  		//const socketurl = "ws://" + location.host + CUSTOMER_SERVICE_SOCKET + "/0/" + id;
+    	//const socketurl = 'ws://www.zhangguijf.com:8090/websocket'+ "/0/" + id;
+		  const socketurl = 'ws://192.168.3.8:8090/websocket'+ "/0/" + id;
+  		console.log(socketurl)
+  		Socket = new WebSocket(socketurl);
   		//Socket = new SockJS('http://192.168.3.8:8080/guestbook');
   		//Socket = new WebSocket("ws://192.168.3.8:8090/ws" );
   		//Socket = io('http://localhost:4000',)

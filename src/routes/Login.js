@@ -81,9 +81,7 @@ class Login extends Component {
 								          {getFieldDecorator('account', {
 								            rules: [
 								            	{ required: true, message: '用户名不能为空!' },
-								            	{ pattern: /^1[34578]\d{9}$/, message: '用户名格式不正确!' },
 								            ],
-								            initialValue: '15773270836'
 								          })(
 								            <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="账号" />
 								          )}
@@ -91,7 +89,6 @@ class Login extends Component {
 								        <FormItem>
 								          {getFieldDecorator('password', {
 								            rules: [{ required: true, message: '密码不能为空!' }],
-								            initialValue: 'qwer1234',
 								          })(
 								            <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
 								          )}

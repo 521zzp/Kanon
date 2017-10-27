@@ -13,7 +13,7 @@ export default function (e, dispatch) {
 					break;
 				case 1: 
 					dispatch({
-				      type: err.message,
+				      type: err.action,
 				      payload: err.payload
 				   });
 					break;

@@ -27,10 +27,10 @@ function OnlineServicee({
 		});
 	}
 	
-	const chattingSwitch = (id) => {
+	const chattingSwitch = (userId) => {
 		dispatch({
 			type: 'onlineService/chattingSwitch',
-			payload: { id }
+			payload: { userId }
 		});
 	}
 	

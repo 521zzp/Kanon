@@ -1,25 +1,26 @@
 import { message } from 'antd';
 import { browserHistory } from 'dva/router';
 
-let token, name, face, nav, power;
+let token, name, face, id, nav;
 
 try{
 	//如果要将一个已经声明的变量用于解构赋值，必须非常小心.只有不将大括号写在行首，避免 JavaScript 将其解释为代码块，才能解决这个问题。
-	 ( { token, name, face, nav } = JSON.parse(localStorage.getItem('admin')) );
-	console.log('local stroage!!!')
-	console.log(nav)
-	power = []
-	nav.forEach( (item) => {
-		item.children.forEach(
-			innerItem => power.push(innerItem.path) 
-		)
-	})
+	
+	 ( { token, name, face, nav, id } = JSON.parse(localStorage.getItem('admin')) );
+	 console.log('从本地存储获取数据')
+	 console.log('token:' + token)
+	 console.log('name:' + name)
+	 console.log('face:' + face)
+	 console.log('nav:')
+	 console.log(nav)
+	 console.log('id:' + id)
 }catch(e){
-	alert(1)
+	console.log('从本地存储获取数据异常')
 	token = '';
 	name = '';
 	face = '';
-	power = []; 
+	id = '';
+	nav = [];
 }
 
 
@@ -29,12 +30,14 @@ export default {
   	token: token,
   	name: name,
   	face: face,
-  	power: power,
   	nav: nav,
+  	id: id,
   },
   reducers: {
   	loginStroage (state, { payload: info }) {
-  		return { ...state, ...info, power: power }
+  		console.log('login success rudecer state:')
+  		console.log(info)
+  		return { ...state, ...info }
   	},
     offLineUpdate (state, { payload: info }) {
   		return { ...state, ...info }
@@ -47,7 +50,8 @@ export default {
   			token: '',
   			name: '',
   			face: '',
-  			power: [],
+  			id: '',
+  			nav: [],
   		}
   		try{
   				localStorage.removeItem('admin')

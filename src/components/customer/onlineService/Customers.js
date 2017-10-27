@@ -24,7 +24,7 @@ function Customers({
 	const online = chats.filter(
 		item => item.online
 	).map(
-		(item, index) => <li onClick={ item.chatting ? () => {} : () => chattingSwitch(item.id) } className={ item.chatting ? styles.activity : '' } key={ index }>
+		(item, index) => <li onClick={ item.chatting ? () => {} : () => chattingSwitch(item.userId) } className={ item.chatting ? styles.activity : '' } key={ index }>
 			    			<Avatar className={ styles.face } 
 			    			src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" 
 			    			>{item.name[0]}</Avatar>

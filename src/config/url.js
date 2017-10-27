@@ -1,4 +1,4 @@
-export const BASEURL = '/api'
+export const BASEURL = '/adminapi'
 
 //export const TEST_LIST = BASEURL + '/api/test/{pageIndex}/{pageSize}'
 
@@ -11,8 +11,8 @@ export const IMG_UPLOAD = BASEURL + '/img/upload' //图片上传
 /*
  * 登录&退出
  */
-export const LOGIN = BASEURL + '/login' //登录
-export const EXIT = BASEURL + '/logout'  //退出
+export const LOGIN = BASEURL + '/login/{account}/{password}' //登录
+export const EXIT = BASEURL + '/logout/{token}'  //退出
 
 
 /******主页******/
@@ -79,3 +79,9 @@ export const PRODUCT_DETAILS = BASEURL + '/product/details' //产品更详细信
 export const NEWS_TOTAL = BASEURL + '/news/total' //新闻总条数
 export const NEWS_LIST = BASEURL + '/news/list' //新闻集合
 export const NEWS_DETAILS = BASEURL + 'news/detalis' //新闻详情信息
+
+
+/*
+ * 客服系统
+ */
+export const CUSTOMER_SERVICE_SOCKET = BASEURL + '/websocket'
