@@ -61,7 +61,7 @@ export default {
   	},
   	*powerValidate ({ payload: path }, { put, select }) {
   		//权限监控
-  		const { nav } = yield select(state => state.main)
+  		/*const { nav } = yield select(state => state.main)
   		const common = [ '/', '/login', '/forbidden', '/404' ]
   		if (!~common.indexOf(path)) {
   			const power = []
@@ -74,7 +74,7 @@ export default {
 	 		if (!~power.indexOf(path)) {
 	 			browserHistory.push('/forbidden')
 	 		}
-  		}
+  		}*/
   	}
   },
   subscriptions: {

@@ -29,7 +29,7 @@ class UserList extends Component {
         this.setState({ current: 1  })
         this.props.dispatch({
 		      type: 'userList/getTotal',
-		      payload: values,
+		      paylod: values,
 		    });
       }
     });

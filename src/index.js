@@ -20,9 +20,11 @@ app.use(createLoading());
 
 app.model(require("./models/login"));
 
-app.model(require("./models/customer/onlineService"));
+app.model(require("./models/setting/admins"));
 
 app.model(require("./models/user/userRecordsInvite"));
+
+app.model(require("./models/customer/onlineService"));
 
 app.model(require("./models/user/userRecordsPoint"));
 

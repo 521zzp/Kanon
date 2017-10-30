@@ -140,6 +140,27 @@ const Routers = function ({ history, app}) {
 					//component: Product,
 				},
 				/*
+				 * 系统设置
+				 */
+				{
+					path: '/admins', //权限管理
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Setting/Admins'))
+            }, 'admins')
+          },
+					//component: OnlineService,
+				},
+				{
+					path: '/power', //权限管理
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Setting/Power'))
+            }, 'power')
+          },
+					//component: OnlineService,
+				},
+				/*
 				 * 在线客服
 				 */
 				{
