@@ -255,7 +255,7 @@ function Product({
 function mapStateToProps(state) {
 	const { modalVisible, productTypes, modalValue, list, total, current, pageSize } = state.product
 	return {
-		loading: state.loading.models.product,
+		  loading: state.loading.models.product,
 	  	total,
 	  	modalValue,
 	  	current,

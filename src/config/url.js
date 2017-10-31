@@ -80,6 +80,12 @@ export const NEWS_TOTAL = BASEURL + '/news/total' //新闻总条数
 export const NEWS_LIST = BASEURL + '/news/list' //新闻集合
 export const NEWS_DETAILS = BASEURL + 'news/detalis' //新闻详情信息
 
+/*
+ * 系统设置
+ */
+export const ADMINS_TOTAL = BASEURL + '/admins/total' //管理员总页数
+export const ADMINS_LIST = BASEURL + '/admins/list/{pageSize}/{current}' //管理员集合
+export const ADMINS_POWER_GET = BASEURL + '/admins/power/{account}' //获取权限列表
 
 /*
  * 客服系统

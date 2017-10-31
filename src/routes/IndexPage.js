@@ -152,6 +152,7 @@ class IndexPage extends Component {
 				    <Menu.Item key="22"><Link to="/news/add">网站设置</Link></Menu.Item>
 				    <Menu.Item key="23"><Link to="/news/list">APP首页产品设置</Link></Menu.Item>
 				    <Menu.Item key="24"><Link to="/experience">Banner设置</Link></Menu.Item>
+				    <Menu.Item key="27"><Link to="/admins">管理员设置</Link></Menu.Item>
 				    <Menu.Item key="25"><Link to="/raise">其他设置</Link></Menu.Item>
 				  </SubMenu>
 				  <SubMenu key="sub8" title={<span><Icon type="customer-service" />在线客服</span>}>
@@ -186,10 +187,6 @@ class IndexPage extends Component {
 
 function mapStateToProps(state) {
 	const { token, nav } = state.main;
-	console.log('nav:')
-	console.log(nav)
-	console.log('token')
-	console.log(token)
 	return {
 	  	token,
 	  	nav,
