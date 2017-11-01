@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Form, Input, Modal, Select, Button, Switch, Popover, InputNumber  } from 'antd'
+import { Form, Input, Modal, Select, Button, Switch, InputNumber  } from 'antd'
 import QueueAnim from 'rc-queue-anim';
 import config from '../../../config/config.json'
 

@@ -46,7 +46,7 @@ function Power({
 	
 	const powers = power.map(
 		(item, index) => <Col lg={ 6 } md={ 12 } sm={ 12 } key={''+index} style={{marginBottom: '10px'}}> 
-				    		<Card title={item.name} bordered={false} 
+				    		<Card title={item.name} bordered={false} style={{minHeight: '200px'}}
 				    			extra={ <Checkbox onChange={ (e)=>groupCheck(e, item.name) }
 				    			checked={ totalChecked(item.children) } >全选</Checkbox> } >
 				    			{

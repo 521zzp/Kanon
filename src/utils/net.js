@@ -43,6 +43,9 @@ export const resultAny = (datas) => {
 			return Object.assign({}, {msg: datas.message}, datas.result )
 		}
 	} else {
+		if (datas.message) {
+			message.error(datas.message, )
+		}
 		return undefined
 	}
 }

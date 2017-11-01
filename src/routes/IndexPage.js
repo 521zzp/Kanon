@@ -141,6 +141,9 @@ class IndexPage extends Component {
 				    <Menu.Item key="15"><Link to="/experience">资金明细</Link></Menu.Item>
 				    <Menu.Item key="16"><Link to="/raise">理财统计</Link></Menu.Item>
 				  </SubMenu>
+				  <SubMenu key="sub9" title={<span><Icon type="shop" />商城管理</span>}>
+				    <Menu.Item key="16"><Link to="/raise">商品列表</Link></Menu.Item>
+				  </SubMenu>
 				  <SubMenu key="sub5" title={<span><Icon type="notification" />新闻管理</span>}>
 				    <Menu.Item key="17"><Link to="/news/add">发布新闻</Link></Menu.Item>
 				    <Menu.Item key="18"><Link to="/news/list">新闻列表</Link></Menu.Item>
