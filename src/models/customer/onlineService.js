@@ -150,8 +150,8 @@ export default {
   		//Socket = new WebSocket("ws://192.168.3.8:8090/webSocketOneToOne/sss" );
   		//Socket = new WebSocket("ws://localhost:4000/customer/service" );
   		//const socketurl = "ws://" + location.host + CUSTOMER_SERVICE_SOCKET + "/0/" + id;
-    	//const socketurl = 'ws://www.zhangguijf.com:8090/websocket'+ "/0/" + id;
-		  const socketurl = 'ws://192.168.3.8:8090/websocket'+ "/0/" + id;
+    	const socketurl = 'ws://www.shangnongtou.com:8090/websocket'+ "/0/" + id;
+		  //const socketurl = 'ws://192.168.3.8:8090/websocket'+ "/0/" + id;
   		console.log(socketurl)
   		Socket = new WebSocket(socketurl);
   		//Socket = new SockJS('http://192.168.3.8:8080/guestbook');

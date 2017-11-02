@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import { browserHistory } from 'dva/router';
+import { tokenSet }  from '../utils/net';
 
 let token, name, face, id, nav;
 
@@ -22,10 +23,11 @@ try{
 	id = '';
 	nav = [];
 }
-
+tokenSet(token) //本地打开获取token
 
 export default {
   namespace: 'main',
+  token,
   state: {
   	token: token,
   	name: name,
@@ -37,6 +39,9 @@ export default {
   	loginStroage (state, { payload: info }) {
   		console.log('login success rudecer state:')
   		console.log(info)
+  		tokenSet(info.token)
+  		console.log('inner tokenSet')
+  		console.log(tokenSet)
   		return { ...state, ...info }
   	},
     offLineUpdate (state, { payload: info }) {
@@ -54,7 +59,7 @@ export default {
   			nav: [],
   		}
   		try{
-  				localStorage.removeItem('admin')
+  			localStorage.removeItem('admin')
   		}catch(e){
   		}
   		yield put({ type: 'offLineUpdate', payload: obj })

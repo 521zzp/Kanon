@@ -26,10 +26,10 @@ export default {
   	},
   	singleCheckRedux (state, { payload: obj }) {
   		const superior = state.power.filter(
-  			item => item.name === obj.group
+  			item => item.id === obj.groupId
   		)[0]
   		const single = superior.children.filter(
-  			item => item.name === obj.name
+  			item => item.id === obj.singleId
   		)[0]
   		const children = [].concat(superior.children)
   		children.splice(children.indexOf(single), 1, { ...single, own: obj.own })
@@ -42,7 +42,7 @@ export default {
   	groupCheckRedux (state, { payload: obj }) {
   		const { own, group } = obj
   		const superior = state.power.filter(
-  			item => item.name === obj.group
+  			item => item.id === obj.groupId
   		)[0]
   		const children = [].concat(superior.children)
   		const resource = superior.children.filter(

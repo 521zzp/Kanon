@@ -83,11 +83,11 @@ export const NEWS_DETAILS = BASEURL + 'news/detalis' //新闻详情信息
 /*
  * 系统设置
  */
-export const ADMINS_TOTAL = BASEURL + '/admin/adminTotal' //管理员总页数
-export const ADMINS_LIST = BASEURL + '/admins/list/{pageSize}/{current}' //管理员集合
-export const ADMINS_POWER_GET = BASEURL + '/admins/power/{account}' //获取权限列表
-export const ADMINS_INFO_UPDATE = BASEURL + '/admin/opera' //添加管理员或更新管理员密码
-export const ADMINS_POWER_SET = BASEURL + '/admins/power/set' //设置单个权限或一组权限
+export const ADMINS_TOTAL = BASEURL + '/adminTotal' //管理员总页数
+export const ADMINS_LIST = BASEURL + '/getAdmins/{pageSize}/{current}' //管理员集合
+export const ADMINS_POWER_GET = BASEURL + '/power/{account}' //获取权限列表
+export const ADMINS_INFO_UPDATE = BASEURL + '/opera' //添加管理员或更新管理员密码
+export const ADMINS_POWER_SET = BASEURL + '/powerSet' //设置单个权限或一组权限
 
 
 /*

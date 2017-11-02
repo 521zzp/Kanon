@@ -37,7 +37,7 @@ function Admins({
 		  title: '状态',
 		  dataIndex: 'locked',
 		  key: 'locked',
-		  render: (text, record) => text ? <span style={{color: 'yellowgreen'}}>已激活</span> : <span style={{color: 'red'}}>已锁定</span>
+		  render: (text, record) => text ? <span style={{color: 'red'}}>已锁定</span> : <span style={{color: 'yellowgreen'}}>已激活</span>
 		},
 		{
 		  title: '权限设置',
@@ -53,7 +53,7 @@ function Admins({
 		  		onMenuClick={e => handleMenuClick(record, e)} 
 		  		menuOptions={[
 		  			{ key: 'edit', name: '编辑账号' }, 
-		  			record.status == 0 ? { key: 'on', name: '激活账号' } : { key: 'off', name: '锁定账号' }, 
+		  			record.locked ? { key: 'on', name: '激活账号' } : { key: 'off', name: '锁定账号' },
 		  			{ key: 'delete', name: '删除账号' },
 		  		]} />
 		},

@@ -1,6 +1,15 @@
-import main from '../models/main'  //核心公用书记，相当于根节点
 import { message } from 'antd';
 
+
+let token; //请求用户唯一识别存储
+
+export const tokenSet = (value) => {
+	token = value
+}
+
+export const tokenGet = () => {
+	return token
+}
 
 
 export const json = (response) => response.json();
@@ -35,11 +44,13 @@ export const analy = (response) => Promise.resolve(response).then(status).then(j
 export const resultAny = (datas) => {
 	
 	console.log(JSON.stringify(datas)) //数据打印
+	datas.result = datas.result ? datas.result : {}
 	if (datas.code === 200) {
 		if (Object.getOwnPropertyNames(datas.result).length === 1 && datas.result.list && Array.isArray(datas.result.list)) { 
 			//返回数据里面仅有一个属性，属性名为list，且对应值类型为Array时返回该list
 			return datas.result.list
 		} else {
+			
 			return Object.assign({}, {msg: datas.message}, datas.result )
 		}
 	} else {
@@ -81,8 +92,6 @@ export const onanaly = (response) => Promise.resolve(response).then(status).then
  */
 export const postModel = ( params ) => {
 	console.log('1112222')
-	console.log(main.state)
-	console.log(main.state.token)
 	return {
 		method: 'post',
 		credentials: 'include',
@@ -91,7 +100,7 @@ export const postModel = ( params ) => {
 		    'Content-Type': 'application/json'
 		},
 		body: JSON.stringify( 
-			Object.assign( {}, {token: main.state.token}, {datas: params})
+			Object.assign( {}, { token }, {datas: params})
 		)
 	}
 }
