@@ -7,6 +7,12 @@ var Socket, Dispatch;
 // 'CUSTOMER_CONNECT', 'CLERK_CONNECT', 'CUSTOMER_SEND', 'CLERK_SEND', 'CUSTOMER_DISCONNECT' 
 // 'CHAT_HISTORY_RECORDS'
 
+const customerSort = (a, b) => {
+	const x = a.online ? 1 : 0
+	const y = b.online ? 1 : 0
+	return y - x
+}
+
 export default {
   namespace: 'onlineService',
   state: {
@@ -15,6 +21,34 @@ export default {
   	scrollBehavior: 'bottom',// top, bottom, stable
   	records: [],
   	chats: []
+  	//chats结构
+  	/*chats: [
+  		{
+  			userId: '',
+  			records: [
+  				{
+  					content: '',
+  					id: '',
+  					sender: 0, 
+  					serviceId: '',
+  					serviceNickName: '',
+  					time: '',
+  					type: 1, //1表示文本消息，2表示图片消息
+  					userId: '',
+  					userImg: '',
+  					userNickName: '',
+  				}
+  			],
+  			online: true,
+  			more: true,
+  			unread: 0,
+  			face: '',
+  			account: '',
+  			name: '',
+  			chatting: true, 
+  		}
+  	]*/
+  	
   },
   reducers: {
   	update (state, { payload: obj }) {
@@ -30,7 +64,41 @@ export default {
   		if (state.chats.length === 0 ) {
   			first = true
   		}
-  		const chat = {
+  		//判断是否有已经连接的相同客户
+  		
+  		const connected = state.chats.filter(
+  			item => item.userId === obj.userId
+  		)
+  		console.log(obj)
+  		console.log(connected)
+  		
+  		if (connected.length > 0) {
+  			//已经有已连接的客户重复连接
+  			const tempChats = [].concat(state.chats)
+  			const connect = connected[0]
+  			const chat = {
+	  			userId: obj.userId,
+	  			records: obj.records,
+	  			online: true,
+	  			more: obj.more,
+	  			unread: connect.chatting ? 0 : connect.unread + 1,
+	  			face: obj.face,
+	  			account: obj.account,
+	  			name: obj.name,
+	  			chatting: connect.chatting, 
+	  		}  
+  			tempChats.splice(tempChats.indexOf(connect), 1, chat)
+  			
+  			
+  			tempChats.sort(customerSort)
+  			console.log('re conncetion')
+  			console.log(tempChats)
+  			
+  			return { ...state, chats: tempChats }
+  			
+  		} else{
+  			//来的是新客户
+  			const chat = {
   			userId: obj.userId,
   			records: obj.records,
   			online: true,
@@ -41,15 +109,28 @@ export default {
   			name: obj.name,
   			chatting: first, 
   		}
-  		console.log('new conncetion')
-  		console.log(chat)
-  		return { ...state, chats: [ ...state.chats, chat ] }
+  			console.log('bofroe redux')
+  			console.log(chat)
+  			console.log('state chats:')
+  			console.log(state.chats)
+  			
+  			const tempChats = [ ...state.chats, chat ]
+  			console.log('after redux')
+  			console.log(tempChats)
+  			tempChats.sort(customerSort)
+  			console.log('new conncetion')
+  			console.log(tempChats)
+  			return { ...state, chats: tempChats }
+  		}
+  		
   	},
   	clerkConnect (state, { payload: obj }) {
   		return { ...state, serviceId: obj.serviceId }
   	},
   	customerDisconnected (state, { payload: obj }) {
-  		const disconnect = state.chats.filter(
+  		
+  		//客户断开连接直接清除用户
+  		/*const disconnect = state.chats.filter(
 	  		item => item.userId === obj.userId
 	  	)[0]
   		const temp = [].concat(state.chats)
@@ -58,7 +139,24 @@ export default {
 				const first = { ...temp[0], chatting: true }
 				temp.splice(0, 1, first)
 			}  	
-			return { ...state, chats: temp }
+			return { ...state, chats: temp }*/
+			
+			//客户断开连接变成灰色
+			const disconnect = state.chats.filter(
+	  		item => item.userId === obj.userId
+	  	)[0]
+	  	if (disconnect) {
+	  		const temp = [].concat(state.chats)
+	  		temp.splice(state.chats.indexOf(disconnect), 1, { ...disconnect, online: false }) 
+	  		temp.sort(customerSort)
+	  		return { ...state, chats: temp }
+	  	} else{
+	  		return { ...state }
+	  	}
+  		
+  		
+			
+			
   	},
   	clerkDisconnect (state, { payload: obj }) {
   		return  {
@@ -150,7 +248,7 @@ export default {
   		//Socket = new WebSocket("ws://192.168.3.8:8090/webSocketOneToOne/sss" );
   		//Socket = new WebSocket("ws://localhost:4000/customer/service" );
   		//const socketurl = "ws://" + location.host + CUSTOMER_SERVICE_SOCKET + "/0/" + id;
-    	const socketurl = 'ws://www.shangnongtou.com:8090/websocket'+ "/0/" + id;
+    	const socketurl = 'ws://www.zhangguijf.com:8090/websocket'+ "/0/" + id;
 		  //const socketurl = 'ws://192.168.3.8:8090/websocket'+ "/0/" + id;
   		console.log(socketurl)
   		Socket = new WebSocket(socketurl);

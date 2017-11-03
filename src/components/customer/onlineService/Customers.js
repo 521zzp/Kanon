@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, Badge } from 'antd';
 import styles from './Customers.css';
 import { Scrollbars } from 'react-custom-scrollbars';
-
+import classnames from 'classnames';
 
 
 
@@ -21,17 +21,27 @@ function Customers({
 	}
 	//onClick={ () => talkSwitch( item.chatting, item.id) }
 	
-	const online = chats.filter(
-		item => item.online
-	).map(
-		(item, index) => <li onClick={ item.chatting ? () => {} : () => chattingSwitch(item.userId) } className={ item.chatting ? styles.activity : '' } key={ index }>
-			    			<Avatar className={ styles.face } 
-			    			src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" 
-			    			>{item.name[0]}</Avatar>
-			    			<span className={ styles.account }>{item.account}</span>
-			    			<span className={ styles.name }>{item.name}</span>
-			    			<Badge className={ styles.badge } count={item.unread}/>
-			    		</li>
+	
+	
+	//是否显示不在线的用户
+	const online = chats.map(
+		(item, index) =>{
+			console.log('customer item infomation:')
+			console.log(item)
+			const liClass = classnames({
+			    [styles.activity]: item.chatting,
+				[styles.offLine]: !item.online
+			});
+			return  <li onClick={ item.chatting ? () => {} : () => chattingSwitch(item.userId) } className={ liClass } key={ index }>
+		    			<Avatar className={ styles.face } 
+		    			src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" 
+		    			>{item.name[0]}</Avatar>
+		    			<span className={ styles.account }>{item.account}</span>
+		    			<span className={ styles.name }>{item.name}</span>
+		    			<Badge className={ styles.badge } count={item.unread}/>
+		    		</li>
+					
+		}
 	)
 	
   return (
