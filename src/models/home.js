@@ -21,7 +21,7 @@ export default {
   		console.log('redux update:')
   		console.log(obj)
   		
-  		return { ...state, ... obj }
+  		return { ...state, ...obj }
   	}
   },
   effects: {
