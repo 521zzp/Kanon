@@ -140,6 +140,44 @@ const Routers = function ({ history, app}) {
 					//component: Product,
 				},
 				/*
+				 * 商城管理
+				 */
+				{
+					path: '/shop', //权限管理
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Shop/GoodsList'))
+            }, 'shop')
+          },
+				},
+				/*
+				 * 审核相关
+				 */
+				{
+					path: '/clerkPromote',
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Check/ClerkPromote'))
+            }, 'clerkPromote')
+          },
+				},
+				{
+					path: '/merchantRegister', 
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Check/MerchantRegister'))
+            }, 'merchantRegister')
+          },
+				},
+				{
+					path: '/merchantPromote', 
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Check/MerchantPromote'))
+            }, 'merchantPromote')
+          },
+				},
+				/*
 				 * 系统设置
 				 */
 				{

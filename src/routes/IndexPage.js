@@ -90,9 +90,6 @@ class IndexPage extends Component {
 			}
 		)
 		
-		console.log('nav group:')
-		console.log(navs)
-		
 		
 	    return (
 		    <Layout className={styles.main}>
@@ -142,7 +139,7 @@ class IndexPage extends Component {
 				    <Menu.Item key="16"><Link to="/raise">理财统计</Link></Menu.Item>
 				  </SubMenu>
 				  <SubMenu key="sub9" title={<span><Icon type="shop" />商城管理</span>}>
-				    <Menu.Item key="16"><Link to="/raise">商品列表</Link></Menu.Item>
+				    <Menu.Item key="16"><Link to="/shop">商品列表</Link></Menu.Item>
 				  </SubMenu>
 				  <SubMenu key="sub5" title={<span><Icon type="notification" />新闻管理</span>}>
 				    <Menu.Item key="17"><Link to="/news/add">发布新闻</Link></Menu.Item>
@@ -150,6 +147,11 @@ class IndexPage extends Component {
 				    <Menu.Item key="19"><Link to="/experience">短信群发</Link></Menu.Item>
 				    <Menu.Item key="20"><Link to="/raise">滚动新闻</Link></Menu.Item>
 				    <Menu.Item key="21"><Link to="/raise">移动推送</Link></Menu.Item>
+				  </SubMenu>
+				   <SubMenu key="sub10" title={<span><Icon type="hourglass" />审核中心</span>}>
+				    <Menu.Item key="31"><Link to="/clerkPromote">员工推广</Link></Menu.Item>
+				    <Menu.Item key="32"><Link to="/merchantRegister">商户审核</Link></Menu.Item>
+				    <Menu.Item key="33"><Link to="/merchantPromote">商户下级</Link></Menu.Item>
 				  </SubMenu>
 				  <SubMenu key="sub6" title={<span><Icon type="setting" />系统设置</span>}>
 				    <Menu.Item key="22"><Link to="/news/add">网站设置</Link></Menu.Item>

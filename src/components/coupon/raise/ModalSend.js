@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Form, Input, Modal, Select, Button, Popover  } from 'antd'
+import { Form, Input, Modal  } from 'antd'
 
 import styles from './ModalAdd.css';
 

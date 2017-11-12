@@ -19,8 +19,7 @@ function Raise({
 	sendModalVisiable,
 	form: {
     getFieldDecorator,
-    validateFieldsAndScroll,
-    getFieldsError, getFieldError, isFieldTouched,validateFields
+    getFieldsError, getFieldError,validateFields
   }
 }) {
 	
@@ -97,41 +96,6 @@ function Raise({
 		  ),
 		}
 	];
-	
-	const datas = [
-		{
-			name: '加息券测试',
-			point: 0.06,
-			createTime: '2017-8-10 17:33:45',
-			cycle: 10,
-			id: 1,
-			key: 0, 
-		},
-		{
-			name: '加息券测试',
-			point: 0.06,
-			createTime: '2017-8-10 17:33:45',
-			cycle: 10,
-			id: 2,
-			key: 1, 
-		},
-		{
-			name: '加息券测试',
-			point: 0.06,
-			createTime: '2017-8-10 17:33:45',
-			cycle: 10,
-			id: 3,
-			key: 2, 
-		},
-		{
-			name: '加息券测试',
-			point: 0.06,
-			createTime: '2017-8-10 17:33:45',
-			cycle: 10,
-			id: 4,
-			key: 3, 
-		},
-	]
 	
 	const pagination = {
 		current, 

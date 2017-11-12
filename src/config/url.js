@@ -47,6 +47,7 @@ export const USER_RE_INVITE_LIST = BASEURL + '/user/records/invete/list' //用�
 
 
 
+
 /*
  * 收款管理
  */
@@ -70,6 +71,26 @@ export const RAISE_LIST = BASEURL + '/raise/list' //加息券数据集合
 export const PRODUCT_TOAL = BASEURL + '/product/total' //理财产品总条数
 export const PRODUCT_LIST = BASEURL + '/product/list' //理财产品数据集合
 export const PRODUCT_DETAILS = BASEURL + '/product/details' //产品更详细信息
+
+
+/*
+ * 商城管理
+ */
+export const SHOP_GODDS_TOTAL = BASEURL + '/shop/goods/total' //商品总条数
+export const SHOP_GOODS_LIST = BASEURL + '/shop/goods/list' //商品数据集合
+export const SHOP_GOODS_DETAILS = BASEURL + '/shop/goods/details' //单个商品详细信息
+export const SHOP_GOODS_ADD = BASEURL + '/shop/goods/add' //添加商品
+export const SHOP_GOODS_EDIT = BASEURL + '/shop/goods/edit' //编辑商品信息
+
+
+/*
+ * 审核中心
+ */
+export const PROMOTE_REGISTER_TOTAL = BASEURL + '/promote/register/total' //推广注册总条数
+export const PROMOTE_REGISTER_LIST = BASEURL + '/promote/register/list' //推广注册集合
+export const PROMOTE_REGISTER_CHECK = BASEURL + '/promote/register/check' //推广注册审核接口
+export const PROMOTE_REGISTER_CHECK_IMAGE = BASEURL + '/promote/register/checkIMG' //审核图片
+
 
 
 /*
