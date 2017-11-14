@@ -19,5 +19,19 @@
 			"key": "至尊VIP",
 			"value": 5
 		}
+	],
+	"promoteRegisterStatus": [
+		{
+			"key": "未审核",
+			"value": 1
+		},
+		{
+			"key": "已通过",
+			"value": 2
+		},
+		{
+			"key": "未通过",
+			"value": -1
+		}
 	]
 }

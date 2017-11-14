@@ -86,8 +86,8 @@ export const SHOP_GOODS_EDIT = BASEURL + '/shop/goods/edit' //编辑商品信息
 /*
  * 审核中心
  */
-export const PROMOTE_REGISTER_TOTAL = BASEURL + '/promote/register/total' //推广注册总条数
-export const PROMOTE_REGISTER_LIST = BASEURL + '/promote/register/list' //推广注册集合
+export const PROMOTE_REGISTER_TOTAL = BASEURL + '/register/total' //推广注册总条数
+export const PROMOTE_REGISTER_LIST = BASEURL + '/register/list' //推广注册集合
 export const PROMOTE_REGISTER_CHECK = BASEURL + '/promote/register/check' //推广注册审核接口
 export const PROMOTE_REGISTER_CHECK_IMAGE = BASEURL + '/promote/register/checkIMG' //审核图片
 

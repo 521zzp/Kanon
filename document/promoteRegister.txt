@@ -1,0 +1,72 @@
+
+获取总数
+params: 
+{
+	type: '', // 'clerkPromote' 普通推广, 'merchantRegister'商户认证，'merchantPromote'商户邀请注册
+	status: '', //审核状态 ：  1：未审核,2：已通过， -1： 未通过  0表示所有
+	account: '', //商户账号
+	superior: '', //上级账号
+}
+
+获取集合
+{
+	type: '', // 'clerkPromote' 普通推广, 'merchantRegister'商户认证，'merchantPromote'商户邀请注册
+	status: '', //审核状态 ：  1：未审核,2：已通过， -1： 未通过  0表示所有
+	account: '', //商户账号
+	superior: '', //上级账号
+	pageSize: 10, //分页大小
+	current: 1, //当前页数
+	
+}
+
+返回，如果type是  clerkPromote 或者  merchantPromote
+返回：
+{
+	account: '',
+	superior: '',
+	time: '',
+	name: '',
+	idCard: '',
+	gps: '',
+	addr: '',
+	status: ,
+	id: '', //记录Id
+}
+如果是merchantRegister
+返回
+{
+	account: '',
+	fzrPhone: '',
+	time: '',
+	name: '',
+	idCard: '',
+	gps: '',
+	addr: '',
+	status: ,
+	id: '', //记录Id
+	customers: '',//日人流量
+	turnover: '' //日营业额
+}
+
+
+审核接口
+params:
+{
+	id: '',//记录id
+	check: true/false, //通过或不通过
+}
+
+返回： 无特殊
+
+查看图片
+params:
+{
+	id: '', //记录id
+	type: 1, //1表示3张或4张  2表示商户审核后面的5张图片
+}
+返回
+{
+	list: [ 'url1', 'url2', 'url3', 'url4' ]
+}
+
+

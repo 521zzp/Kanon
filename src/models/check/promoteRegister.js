@@ -15,7 +15,9 @@ export default {
 	  	status: '', //审核状态 ：  1：未审核,2：已通过， -1： 未通过  0表示所有
 	  	account: '', //商户账号
 	  	superior: '', //上级账号
-  	}
+  	},
+  	modalVisiable: false,
+  	modalImgs: [],
   	
   },
   reducers: {
@@ -25,12 +27,10 @@ export default {
   },
   effects: {
   	*getTotal ({ payload: obj }, { put, select }) {
-  		yield put({ type: 'update', payload: { params: obj } })
+  		obj ? yield put({ type: 'update', payload: { params: obj } }) : ''
   		const { type, params } = yield select(state => state.promoteRegister )
-  		console.log('paramsparamsparamsparamsparams')
-  		console.log(params)
-	  	console.log(type)
   		const { total } = yield fetch(PROMOTE_REGISTER_TOTAL, postModel({ type, ...params })).then(onanaly);
+  		yield put({ type: 'update', payload: { total } });
   		if (total && total >0) {
   			yield put({ type: 'getList' })
   		} else {
@@ -39,13 +39,28 @@ export default {
   	},
   	*getList ({ payload: obj }, { put, select }) {
   		const current = obj ? obj : 1
-			obj ? yield put({ type: 'update', payload: { current } }) : ''
+			yield put({ type: 'update', payload: { current } })
 			const { type, pageSize, params } = yield select(state => state.promoteRegister)
 			const result = yield fetch(PROMOTE_REGISTER_LIST, postModel({ type, current, pageSize, ...params })).then(onanaly)
   		const list = result.map(
   			(item, index) => ({ ...item, key: index })
   		)
   		yield put({ type: 'update', payload: { list: list } })
+  	},
+  	*paramsChange ({ payload: obj }, { put, select }) {
+  		yield put({ type: 'update', payload: { params: obj } })
+  		yield put({ type: 'getTotal' }) 
+  	},
+  	*checkImage ({ payload: obj }, { put, select }) {
+  		const result = yield fetch(PROMOTE_REGISTER_CHECK_IMAGE, postModel(obj)).then(onanaly)
+  		/*const list = result.map(
+  			(item, index) => ({ ...item, key: index })
+  		)*/
+  		yield put({ type: 'update', payload: { modalImgs: result, modalVisiable: true } })
+  	},
+  	*checkApply ({ payload: obj }, { put, select }) {
+  		const result = yield fetch(PROMOTE_REGISTER_CHECK, postModel(obj)).then(onanaly)
+  		result ? yield put({ type: 'getTotal' }) : ''
   	}
   },
   subscriptions: {
@@ -58,7 +73,7 @@ export default {
             	type: 'clerkPromote',
             	list: [],
             	params: {
-						  	status: 'ss', 
+						  	status: '', 
 						  	account: '', 
 						  	superior: '', 
 					  	}
