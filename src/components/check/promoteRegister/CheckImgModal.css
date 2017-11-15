@@ -4,4 +4,12 @@
 
 .image{
 	max-width: 100%;
+	display: inline-block;
+}
+.img-info{
+	display: block;
+	text-align: center;
+}
+.item{
+	text-align: center;
 }

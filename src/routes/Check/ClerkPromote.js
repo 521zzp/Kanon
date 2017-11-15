@@ -84,7 +84,7 @@ function MerchantPromote({
 			    	});
 		  		}
 		  	}>查看照片</a>
-		  	<span className="ant-divider"/>
+		  	{ record.status === 1 && <span className="ant-divider"/> }
 		 	{ record.status === 1 && <DropOption 
 		  		onMenuClick={e => handleMenuClick(record, e)} 
 		  		menuOptions={[

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Table, Select, Card } from 'antd';
+import { Form, Input, Button, Table, Select, Card , Avatar } from 'antd';
+import DropOption from '../../components/common/DropOption';
 import styles from './GoodsList.css';
 
 
@@ -24,6 +25,8 @@ function GoodsList({
 		  title: '商品图片',
 		  dataIndex: 'img',
 		  key: 'img',
+			render: (text, record) => 
+				<Avatar shape="square" src={ text } size="large" />
 		},
 		{
 		  title: '商品名称',
@@ -37,18 +40,36 @@ function GoodsList({
 		},
 		{
 		  title: '可兑换数',
-		  dataIndex: 'cycle',
-		  key: 'cycle',
+		  dataIndex: 'stock',
+		  key: 'stock',
+		},
+		{
+		  title: '状态',
+		  dataIndex: 'on',
+		  key: 'on',
+		  render: (text, record) => {
+		  	if (text) {
+		  		return <span style={{color: 'yellowgreen'}}>已上架</span>
+		  	} else {
+		  		return <span style={{color: 'red'}}>已下架</span>
+		  	}
+		  }
 		},
 		{
 		  title: '操作',
-		  dataIndex: 'id',
-		  key: 'id',
+		  dataIndex: 'top',
+		  key: 'top',
 		  render: (text, record) => (
 		    <span>
-		      <a onClick={() => send(text) }>发放</a>
-		      <span className="ant-divider" />
-		      <a>查看加息券</a>
+		    	{ !text && <a onClick={() => addTop(record.id) }>置顶</a> }
+		    	{ !text && <span className="ant-divider" /> }
+		    	<DropOption 
+			  		onMenuClick={e => handleMenuClick(record, e)} 
+			  		menuOptions={[
+			  			{ key: 'delete', name: '删除商品' },
+			  			{ key: 'edit', name: '编辑商品' },
+			  			record.on ? { key: 'off', name: '商品下架' } : { key: 'on', name: '商品上架' }
+		  			]} />
 		    </span>
 		  ),
 		}
@@ -70,14 +91,38 @@ function GoodsList({
 		e.preventDefault();
 		validateFields((err, values) => {
 			if (!err) {
-				console.log('Received values of form: ', values);
+				dispatch({
+			    	type: 'goodsList/paramsChange',
+			    	payload: values
+		    	});
 			}
 		})
 	}
 	
 	
 	
-	
+	const datas = [
+		{
+			img: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+			name: '夏目友人帐',
+			point: 10,
+			stock: 99,
+			top: true, //是否在置顶状态
+			id: '', //商品Id
+			key: 0,
+			on: true, //是否在上架状态
+		},
+		{
+			img: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+			name: 'Clannad',
+			point: 1077,
+			stock: 45,
+			top: false, //是否在置顶状态
+			id: '', //商品Id
+			key: 2,
+			on: false, //是否在上架状态
+		}
+	]
 	
 	
 	
@@ -117,7 +162,7 @@ function GoodsList({
 	      </Form>
     	</Card>
     	<Card bordered={ false } style={{marginTop: '10px'}} className={ styles['content-card'] }>
-    		<Table loading={ loading } columns={columns} dataSource={ list }  pagination={ pagination } />
+    		<Table loading={ loading } columns={ columns } dataSource={ list }  pagination={ pagination } />
     	</Card>
     	
     </div>
@@ -132,8 +177,6 @@ function mapStateToProps(state) {
   	current, 
   	list, 
   	pageSize,
-  	
-  	
   };
 }
 

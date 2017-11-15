@@ -102,13 +102,13 @@ function MerchantRegister({
 			    	});
 		  		}
 		  	}>商户照片</a>
-		  	<span className="ant-divider"/>
+		  	{ record.status === 1 && <span className="ant-divider"/> }
 		 		{ record.status === 1 && <DropOption 
 		  		onMenuClick={e => handleMenuClick(record, e)} 
 		  		menuOptions={[
 		  			{ key: 'accept', name: '审核通过' }, 
 		  			{ key: 'reject', name: '审核不通过' },
-	  		]} /> }
+	  			]} /> }
 		  </div>
 		},
 	]
@@ -121,10 +121,10 @@ function MerchantRegister({
 			    title: '通过确认！',
 			    content: '确认通过该用户的审核？',
 			    onOk() {
-			      console.log('确认');
-			    },
-			    onCancel() {
-			      console.log('取消');
+			      dispatch({
+				    	type: 'promoteRegister/checkApply',
+				    	payload: { id: record.id, check: true }
+			    	});
 			    },
 			  });
 				break;
@@ -133,10 +133,10 @@ function MerchantRegister({
 			    title: '驳回确认！',
 			    content: '确认驳回该用户的审核？',
 			    onOk() {
-			      console.log('确认');
-			    },
-			    onCancel() {
-			      console.log('取消');
+			      dispatch({
+				    	type: 'promoteRegister/checkApply',
+				    	payload: { id: record.id, check: false }
+			    	});
 			    },
 			  });
 				break;

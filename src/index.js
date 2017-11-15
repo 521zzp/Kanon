@@ -20,6 +20,8 @@ app.use(createLoading());
 
 app.model(require("./models/login"));
 
+app.model(require("./models/shop/goodsDetails"));
+
 app.model(require("./models/shop/goodsList"));
 
 app.model(require("./models/check/promoteRegister"));

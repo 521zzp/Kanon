@@ -140,7 +140,7 @@ const Routers = function ({ history, app}) {
 					//component: Product,
 				},
 				/*
-				 * 商城管理
+				 * 商城管理GoodsDetails
 				 */
 				{
 					path: '/shop', //权限管理
@@ -148,6 +148,22 @@ const Routers = function ({ history, app}) {
             require.ensure([], (require) => {
               cb(null, require('./routes/Shop/GoodsList'))
             }, 'shop')
+          },
+				},
+				{	
+					path: '/goods/add', //添加商品
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Shop/GoodsDetails'))
+            }, 'goods')
+          },
+				},
+				{	
+					path: '/goods/edit/:id', //编辑商品商品
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Shop/GoodsDetails'))
+            }, 'goods')
           },
 				},
 				/*

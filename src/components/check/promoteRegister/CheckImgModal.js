@@ -21,7 +21,10 @@ function CheckImgModal({
           onCancel={handleOk}
         >
     	{ list.map(
-    		(item,index) => <img className={ styles.image } src={ item } key={ index } />
+    		(item,index) => <div key={ index } className={ styles.item } >
+    				<h3 className={ styles['img-info'] }>{ item.name }</h3>
+    				<img className={ styles.image } src={ item.path }  />
+    				</div>
     	) }
     	</Modal>
     </div>
