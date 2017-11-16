@@ -90,7 +90,8 @@ export default {
   	*singleCheck ({ payload: obj }, { put, select }) {
   		console.log('singleCheck')
   		console.log(obj)
-  		const result = yield fetch(ADMINS_POWER_SET, postModel({ ...obj, type: 'single' })).then(onanaly)
+  		const { account } = yield select(state => state.admins)
+  		const result = yield fetch(ADMINS_POWER_SET, postModel({ ...obj, type: 'single', account })).then(onanaly)
   		if (result) {
   			yield put({ type: 'singleCheckRedux', payload: obj})
   		}
@@ -98,7 +99,8 @@ export default {
   	*groupCheck ({ payload: obj }, { put, select }) {
   		console.log('groupCheck')
   		console.log(obj)
-  		const result = yield fetch(ADMINS_POWER_SET, postModel({ ...obj, type: 'group' })).then(onanaly)
+  		const { account } = yield select(state => state.admins)
+  		const result = yield fetch(ADMINS_POWER_SET, postModel({ ...obj, type: 'group', account })).then(onanaly)
   		if(result) {
   			yield put({ type: 'groupCheckRedux', payload: obj})
   		}

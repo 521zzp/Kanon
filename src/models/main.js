@@ -15,6 +15,7 @@ try{
 	 console.log('nav:')
 	 console.log(nav)
 	 console.log('id:' + id)
+	 nav = nav ? nav : []
 }catch(e){
 	console.log('从本地存储获取数据异常')
 	token = '';

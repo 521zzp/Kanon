@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button, Table, Select, Card , Avatar } from 'antd';
+import { browserHistory } from 'dva/router';
 import DropOption from '../../components/common/DropOption';
 import styles from './GoodsList.css';
 
@@ -74,6 +75,23 @@ function GoodsList({
 		  ),
 		}
 	];
+	
+	const handleMenuClick = (record, e) => {
+		console.log(record)
+		switch (e.key){
+			case 'edit':
+				browserHistory.push(`/goods/edit/${record.id}`)
+				break;
+			case 'on':
+				break;
+			case 'off':
+				break;
+			case 'delete':
+				break;
+			default:
+				break;
+		}
+	}
 	
 	const pagination = {
 		current, 

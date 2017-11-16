@@ -170,7 +170,7 @@ const Routers = function ({ history, app}) {
 				 * 审核相关
 				 */
 				{
-					path: '/clerkPromote',
+					path: '/promoteRegister',
 					getComponent (nextState, cb) {
             require.ensure([], (require) => {
               cb(null, require('./routes/Check/ClerkPromote'))
@@ -183,14 +183,6 @@ const Routers = function ({ history, app}) {
             require.ensure([], (require) => {
               cb(null, require('./routes/Check/MerchantRegister'))
             }, 'merchantRegister')
-          },
-				},
-				{
-					path: '/merchantPromote', 
-					getComponent (nextState, cb) {
-            require.ensure([], (require) => {
-              cb(null, require('./routes/Check/MerchantPromote'))
-            }, 'merchantPromote')
           },
 				},
 				/*

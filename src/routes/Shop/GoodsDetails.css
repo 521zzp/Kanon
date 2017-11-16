@@ -1,3 +1,53 @@
 
 .normal {
+	min-height: calc(100vh - 88px);
+	background-color: #FFFFFF;
+	padding: 10px;
+}
+
+.form-wrap{
+	float: left;
+	width: 400px;
+	text-align: center;
+}
+
+.normal:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.editor-title{
+	text-align: left;
+	padding-left: 30px;
+	color: #000000;
+	margin: 5px 0;
+}
+
+
+
+
+
+
+
+.avatar-uploader{
+	margin-left: auto;
+	margin-right: auto;
+}
+.avatar-uploader,
+.avatar-uploader-trigger,
+.avatar {
+  width: 150px;
+  height: 150px;
+}
+.avatar-uploader {
+  display: block;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.avatar-uploader-trigger {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 28px;
+  color: #999;
 }

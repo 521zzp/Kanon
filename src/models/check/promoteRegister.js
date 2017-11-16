@@ -66,11 +66,11 @@ export default {
   subscriptions: {
   	setup({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        if (pathname === '/clerkPromote') {
+        if (pathname === '/promoteRegister') {
           dispatch({
             type: 'update',
             payload: {
-            	type: 'clerkPromote',
+            	type: 'promoteRegister',
             	list: [],
             	params: {
 						  	status: '', 
@@ -100,7 +100,7 @@ export default {
             type: 'getTotal'
           });
         }
-        if (pathname === '/merchantPromote') {
+        /*if (pathname === '/merchantPromote') {
           dispatch({
             type: 'update',
             payload: {
@@ -116,7 +116,7 @@ export default {
           dispatch({
             type: 'getTotal'
           });
-        }
+        }*/
       });
     },
   },
