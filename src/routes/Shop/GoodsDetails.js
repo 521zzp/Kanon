@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Card, Form, InputNumber, Input, Upload, Select, Icon } from 'antd';
+import { Card, Form, InputNumber, Input, Upload, Select, Icon, Button } from 'antd';
 import Editor from '../../components/common/Editor';
 import styles from './GoodsDetails.css';
 
@@ -35,6 +35,8 @@ function GoodsDetails({
 	}
 }) {
 	
+	console.log("iiiiiiitttttttttteeeeeeeeeeemmmmmmmm")
+	console.log(item)
 	
 	
 	const beforeUpload = (file) => {
@@ -65,11 +67,14 @@ function GoodsDetails({
 		})
 	}
 	const rechargeIllustrateChange = (value) => {
-		console.log()
 		dispatch({
 			type: 'goodsDetails/editorContentChange',
 			payload: { rechargeIllustrate: value }
 		})
+	}
+	
+	const goodsInfoUpdate = () => {
+		
 	}
 	
 	
@@ -129,11 +134,19 @@ function GoodsDetails({
 			    </Select>
 	          )}
 	        </FormItem>
+	        
+	        
+	        
 	      	<div className={ styles['editor-title'] }>商品说明:</div>
-	      	<Editor change= { goodsIllustrateChange } initState={ goodsIllustrate } config={ editorConfig } />
+	      	<Editor change= { goodsIllustrateChange } initState={ item.goodsIllustrate } config={ editorConfig } />
 	      	<div className={ styles['editor-title'] }>兑换说明:</div>
-	      	<Editor change= { rechargeIllustrateChange } initState={ rechargeIllustrate } config={ editorConfig } />
+	      	<Editor change= { rechargeIllustrateChange } initState={ item.rechargeIllustrate } config={ editorConfig } />
 	      	
+	      	
+	      	<FormItem>
+	      		<Button>取消</Button>
+	      		<Button type="primary">保存</Button>
+	      	</FormItem>
 	      </Form>
 	      
     	</div>
@@ -143,11 +156,10 @@ function GoodsDetails({
 }
 
 function mapStateToProps(state) {
-	const { goodsIllustrate, rechargeIllustrate } = state.goodsDetails
+	const { params, rechargeIllustrate } = state.goodsDetails
 	
   return {
-  	goodsIllustrate,
-  	rechargeIllustrate
+  	item: params
   };
 }
 

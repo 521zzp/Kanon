@@ -110,7 +110,7 @@ class IndexPage extends Component {
 			          style={{ borderRight: 0 }}
 			        >
 			        
-			        <SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
+					<SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
 				    <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
 				    <Menu.Item key="6"><Link to="/userRecords">用户记录</Link></Menu.Item>
 				    <Menu.Item key="7">添加商户</Menu.Item>
@@ -150,8 +150,9 @@ class IndexPage extends Component {
 				    <Menu.Item key="21"><Link to="/raise">移动推送</Link></Menu.Item>
 				  </SubMenu>
 				   <SubMenu key="sub10" title={<span><Icon type="hourglass" />审核中心</span>}>
-				    <Menu.Item key="31"><Link to="/promoteRegister">推广注册审核</Link></Menu.Item>
+				    <Menu.Item key="31"><Link to="/clerkPromote">员工推广</Link></Menu.Item>
 				    <Menu.Item key="32"><Link to="/merchantRegister">商户审核</Link></Menu.Item>
+				    <Menu.Item key="33"><Link to="/merchantPromote">商户下级</Link></Menu.Item>
 				  </SubMenu>
 				  <SubMenu key="sub6" title={<span><Icon type="setting" />系统设置</span>}>
 				    <Menu.Item key="22"><Link to="/news/add">网站设置</Link></Menu.Item>
@@ -163,9 +164,7 @@ class IndexPage extends Component {
 				  <SubMenu key="sub8" title={<span><Icon type="customer-service" />在线客服</span>}>
 				    <Menu.Item key="31"><Link to="/onlineService">我的客服</Link></Menu.Item>
 				  </SubMenu>
-			        
-			        
-			          
+					
 			        </Menu>
 			        
 			        <div className = { switchWrap } >
