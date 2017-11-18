@@ -150,25 +150,25 @@ function GoodsList({
     <div className={styles.normal}>
     	<Card bordered={ false }>
     		<Form layout="inline" >
-	        <FormItem label="关键字搜索："
-	        >
-	          {getFieldDecorator('keyword', {})(
-	            <Input  placeholder="商品名称/编号" />
-	          )}
-	        </FormItem>
-	        <FormItem label="类型" >
-	        	{getFieldDecorator('type', {
-	        		initialValue: '0'
-	        	})(
-	        		<Select style={{width: '120px'}}>
-				        <Option value="0">全部</Option>
-				        <Option value="1">实物</Option>
-				        <Option value="2">虚拟物品</Option>
-				      </Select>
-	          )}
-			      
-			    </FormItem>
-	        <FormItem>
+		        <FormItem label="关键字搜索："
+		        >
+		          {getFieldDecorator('keyword', {})(
+		            <Input  placeholder="商品名称/编号" />
+		          )}
+		        </FormItem>
+		        <FormItem label="类型" >
+		        	{getFieldDecorator('type', {
+		        		initialValue: '0'
+		        	})(
+		        		<Select style={{width: '120px'}}>
+					        <Option value="0">全部</Option>
+					        <Option value="1">实物</Option>
+					        <Option value="2">虚拟物品</Option>
+					      </Select>
+		          )}
+				      
+				    </FormItem>
+		        <FormItem>
 	          <Button
 	            type="primary"
 	            icon="search"

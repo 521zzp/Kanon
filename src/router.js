@@ -84,6 +84,14 @@ const Routers = function ({ history, app}) {
           },
 				},
 				{
+					path: '/investIdentification',
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/User/InvestIdentification'))
+            }, 'InvestIdentification')
+          },
+				},
+				{
 					path: '/gathered',
 					getComponent (nextState, cb) {
             require.ensure([], (require) => {

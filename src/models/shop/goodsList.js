@@ -1,5 +1,5 @@
 import { SHOP_GODDS_TOTAL, SHOP_GOODS_LIST, SHOP_GOODS_DETAILS } from '../../config/url'
-import { postModel, getModel, onanaly, restful } from '../../utils/net'
+import { postModel, onanaly } from '../../utils/net'
 
 export default {
   namespace: 'goodsList',

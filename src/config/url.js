@@ -43,8 +43,10 @@ export const USER_RE_POINT_TOTAL = BASEURL + '/user/records/point/total' //用�
 export const USER_RE_POINT_LIST = BASEURL + '/user/records/point/list' //用户积分流水集合
 export const USER_RE_INVITE_TOTAL = BASEURL + '/user/records/invte/total' //用户邀请记录总条数
 export const USER_RE_INVITE_LIST = BASEURL + '/user/records/invete/list' //用户邀请记录集合
-
-
+//投资绑卡统计
+export const INVEST_IDENTI_TOTAL = BASEURL + '/user/investSituationTotal'  //投资绑卡总条数
+export const INVEST_IDENTI_LIST = BASEURL + '/user/investSituation' //投资绑卡集合
+export const INVEST_IDENTI_MODAL_LIST = BASEURL + '/user/investDetails' //投资绑卡统计弹框集合
 
 
 
