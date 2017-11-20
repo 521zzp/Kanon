@@ -83,7 +83,8 @@ export const SHOP_GOODS_LIST = BASEURL + '/shop/goods/list' //商品数据集合
 export const SHOP_GOODS_DETAILS = BASEURL + '/shop/goods/details' //单个商品详细信息
 export const SHOP_GOODS_ADD = BASEURL + '/shop/goods/add' //添加商品
 export const SHOP_GOODS_EDIT = BASEURL + '/shop/goods/edit' //编辑商品信息
-
+export const SHOP_GOODS_STATUS_CHANGE = BASEURL + '/shop/goods/status/change'  //改变商品状态
+export const SHOP_GOODS_INFO_SAVE = BASEURL + '/shop/goods/info/save' //保存商品信息，添加或编辑
 
 /*
  * 审核中心

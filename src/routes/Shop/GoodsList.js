@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Table, Select, Card , Avatar } from 'antd';
-import { browserHistory } from 'dva/router';
+import { Form, Input, Button, Table, Select, Card , Avatar, Modal } from 'antd';
+import { browserHistory, Link } from 'dva/router';
 import DropOption from '../../components/common/DropOption';
 import styles from './GoodsList.css';
+const confirm = Modal.confirm;
 
 
 const FormItem = Form.Item;
@@ -76,6 +77,25 @@ function GoodsList({
 		}
 	];
 	
+	const addTop = (id) => {
+		confirm({
+		    title: '确认操作',
+		    content: '确认将该商品置顶？',
+		    okText: '确认',
+		    okType: 'danger',
+		    cancelText: '取消',
+		    onOk() {
+		      dispatch({
+		      	type: 'goodsList/goodsStatusChange',
+		      	payload: {
+		      		type: 'top',
+		      		id: id
+		      	}
+		      })
+		    },
+		});
+	}
+	
 	const handleMenuClick = (record, e) => {
 		console.log(record)
 		switch (e.key){
@@ -83,10 +103,58 @@ function GoodsList({
 				browserHistory.push(`/goods/edit/${record.id}`)
 				break;
 			case 'on':
+				confirm({
+				    title: '确认操作',
+				    content: '确认上架该商品？',
+				    okText: '确认',
+				    okType: 'danger',
+				    cancelText: '取消',
+				    onOk() {
+				      dispatch({
+				      	type: 'goodsList/goodsStatusChange',
+				      	payload: {
+				      		type: 'on',
+				      		id: record.id
+				      	}
+				      })
+				    },
+				});
 				break;
 			case 'off':
+				confirm({
+				    title: '确认操作',
+				    content: '确认下架该商品？',
+				    okText: '确认',
+				    okType: 'danger',
+				    cancelText: '取消',
+				    onOk() {
+				      dispatch({
+				      	type: 'goodsList/goodsStatusChange',
+				      	payload: {
+				      		type: 'off',
+				      		id: record.id
+				      	}
+				      })
+				    },
+				});
 				break;
 			case 'delete':
+				confirm({
+				    title: '确认操作',
+				    content: '确认删除该商品？',
+				    okText: '确认',
+				    okType: 'danger',
+				    cancelText: '取消',
+				    onOk() {
+				      dispatch({
+				      	type: 'goodsList/goodsStatusChange',
+				      	payload: {
+				      		type: 'delete',
+				      		id: record.id
+				      	}
+				      })
+				    },
+				});
 				break;
 			default:
 				break;
@@ -169,13 +237,26 @@ function GoodsList({
 				      
 				    </FormItem>
 		        <FormItem>
-	          <Button
-	            type="primary"
-	            icon="search"
-	            htmlType="button"
-	            onClick={handleSubmit}
-	          >搜索
-	          </Button>
+	          <FormItem>
+	          	<Button
+		            type="primary"
+		            icon="search"
+		            htmlType="button"
+		            onClick={handleSubmit}
+		          >搜索
+		          </Button>
+	          </FormItem>
+	          <FormItem>
+	          	<Link to='/goods/add'>
+		          <Button
+		          	size="large"
+		            type="primary"
+		            icon="plus"
+		            htmlType="button"
+		          >添加
+		          </Button>
+		        </Link>
+		        </FormItem>
 	        </FormItem>
 	      </Form>
     	</Card>

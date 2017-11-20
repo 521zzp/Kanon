@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Card, Form, InputNumber, Input, Upload, Select, Icon, Button } from 'antd';
+import { Card, Form, InputNumber, Input, Upload, Select, Icon, Button,  } from 'antd';
 import Editor from '../../components/common/Editor';
 import styles from './GoodsDetails.css';
+
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -34,9 +36,6 @@ function GoodsDetails({
 	    validateFields
 	}
 }) {
-	
-	console.log("iiiiiiitttttttttteeeeeeeeeeemmmmmmmm")
-	console.log(item)
 	
 	
 	const beforeUpload = (file) => {
@@ -77,6 +76,18 @@ function GoodsDetails({
 		
 	}
 	
+	const handleSubmit = (e) => {
+	    e.preventDefault();
+	    validateFields((err, values) => {
+	      if (!err) {
+	        console.log('Received values of form: ', values);
+	        dispatch({
+			      type: 'gathered/getTotal',
+			      payload: values,
+			    });
+	      }
+	    });
+	}
 	
   return (
     <div className={styles.normal}>
@@ -90,8 +101,8 @@ function GoodsDetails({
 	        onChange={ handleChange }
 	      >
 	        {
-	          false ?
-	            <img src='' alt="" className={ styles.avatar } /> :
+	          item.img ?
+	            <img src={ item.img } alt="" className={ styles.avatar } /> :
 	            <Icon type="plus" className={ styles['avatar-uploader-trigger'] } />
 	        }
 	      </Upload>
@@ -125,7 +136,7 @@ function GoodsDetails({
 	        
 	        <FormItem label="是否实物：" hasFeedback {...formItemLayoutTwo}>
 	          {getFieldDecorator('real', {
-	          	initialValue: item.real ,
+	          	initialValue: item.real !== undefined ? item.real.toString() : undefined ,
 	          	rules: [{ required: true, message: '请选择商品类型！' }],
 	          })(
 	          	<Select placeholder="请选择产品类型" >
@@ -143,9 +154,9 @@ function GoodsDetails({
 	      	<Editor change= { rechargeIllustrateChange } initState={ item.rechargeIllustrate } config={ editorConfig } />
 	      	
 	      	
-	      	<FormItem>
+	      	<FormItem style={{ marginTop: '10px'}}>
 	      		<Button>取消</Button>
-	      		<Button type="primary">保存</Button>
+	      		<Button type="primary" style={{ marginLeft: '10px'}} onClick={ handleSubmit }>保存</Button>
 	      	</FormItem>
 	      </Form>
 	      

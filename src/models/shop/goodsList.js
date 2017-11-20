@@ -1,4 +1,4 @@
-import { SHOP_GODDS_TOTAL, SHOP_GOODS_LIST, SHOP_GOODS_DETAILS } from '../../config/url'
+import { SHOP_GODDS_TOTAL, SHOP_GOODS_LIST, SHOP_GOODS_DETAILS, SHOP_GOODS_STATUS_CHANGE } from '../../config/url'
 import { postModel, onanaly } from '../../utils/net'
 
 export default {
@@ -45,6 +45,15 @@ export default {
   		yield put({ type: 'update', payload: { params: obj } })
   		yield put({ type: 'getTotal' }) 
   	},
+  	*goodsStatusChange ({ payload: obj }, { put, select }) {
+  		const result = yield fetch(SHOP_GOODS_STATUS_CHANGE, postModel(obj)).then(onanaly)
+  		if (result) {
+  			yield put({ type: 'getTotal' }) 
+  		}
+  	},
+  	goodsInfoSave ({ payload: obj }, { put, select }) {
+  		
+  	}
   },
   subscriptions: {
   	setup({ dispatch, history }) {
