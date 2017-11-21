@@ -1,8 +1,5 @@
 
 .normal {
+	background-color: #FFFFFF;
 	min-height: calc(100vh - 88px);
-}
-
-.value{
-	font-size: 24px;
 }

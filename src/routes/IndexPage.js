@@ -114,6 +114,7 @@ class IndexPage extends Component {
 					    <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
 					    <Menu.Item key="6"><Link to="/userRecords">用户记录</Link></Menu.Item>
 					    <Menu.Item key="7"><Link to="/investIdentification">投资绑卡统计</Link></Menu.Item>
+					    <Menu.Item key="sub2-7"><Link to="/junior">下级商户</Link></Menu.Item>
 					    <Menu.Item key="8">会员列表</Menu.Item>
 					  </SubMenu>
 					  <SubMenu key="sub1" title={<span><Icon type="red-envelope" />收款管理</span>}>
@@ -123,7 +124,7 @@ class IndexPage extends Component {
 					    <Menu.Item key="4"><Link to="/">回收站</Link></Menu.Item>
 					  </SubMenu>
 					  <SubMenu key="sub7" title={<span><Icon type="wallet" />提现管理</span>}>
-					  	<Menu.Item key="26"><Link to="/news/list">提现申请</Link></Menu.Item>
+					  	<Menu.Item key="26"><Link to="/withdrawApply">提现申请</Link></Menu.Item>
 					    <Menu.Item key="27"><Link to="/experience">等待支付</Link></Menu.Item>
 					    <Menu.Item key="28"><Link to="/raise">提现明细</Link></Menu.Item>
 					  </SubMenu>

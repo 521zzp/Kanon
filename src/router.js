@@ -92,11 +92,36 @@ const Routers = function ({ history, app}) {
           },
 				},
 				{
+					path: '/junior',
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/User/Junior'))
+            }, 'Junior')
+          },
+				},
+				
+				/*
+				 * 收款管理
+				 */
+				//已收款
+				{
 					path: '/gathered',
 					getComponent (nextState, cb) {
             require.ensure([], (require) => {
               cb(null, require('./routes/Gathering/Gathered'))
             }, 'gathered')
+          },
+				},
+				/*
+				 * 提现管理
+				 */
+				//提现申请
+				{
+					path: '/withdrawApply',
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/Withdrawals/WithdrawApply'))
+            }, 'withdrawApply')
           },
 				},
 				/*活动管理*/

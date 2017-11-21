@@ -42,6 +42,8 @@ app.model(require("./models/user/userRecordsRecharge"));
 
 app.model(require("./models/user/userRecordsCapitalStatements"));
 
+app.model(require("./models/user/junior"));
+
 app.model(require("./models/user/userRecordsInvest"));
 
 app.model(require("./models/user/userRecordsCoupon"));
