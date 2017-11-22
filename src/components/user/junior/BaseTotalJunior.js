@@ -9,6 +9,8 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 function BaseTotalJunior({
+	search,
+	datas,
 	form: {
 		getFieldDecorator, getFieldsValue, validateFields
 	}
@@ -26,7 +28,11 @@ function BaseTotalJunior({
     e.preventDefault();
    	validateFields((err, values) => {
       if (!err) {
-        console.log(values)
+        if (values.type === 1) {
+        	search({})
+        } else{
+        	search({ year: values.year })
+        }
       }
     });
   }
@@ -39,15 +45,14 @@ function BaseTotalJunior({
 	            initialValue: 1
 	          })(
 	            <RadioGroup >
-				        <Radio value={1}>全部</Radio>
-				        <Radio value={2}>按年查询</Radio>
-				      </RadioGroup>
+			        <Radio value={1}>全部</Radio>
+			        <Radio value={2}>按年查询</Radio>
+			    </RadioGroup>
 	          )}
 	        </FormItem>
 	        <FormItem > 
 	          {getFieldDecorator('year', {
-	            rules: [
-	            ],
+	            initialValue: '2017'
 	          })(
 	            <Select style={{ width: 100 }} disabled={hasErrors(getFieldsValue())} >
 						    <Option value="2017">2017</Option>
@@ -73,7 +78,7 @@ function BaseTotalJunior({
 	    	<span className={ styles.value }>
 	    		<CountUp
 	            start={0}
-	            end={ 1000 }
+	            end={ datas.registerTotal ? datas.registerTotal : 0 }
 	            duration={2.75}
 	            useEasing
 	            useGrouping
@@ -86,7 +91,7 @@ function BaseTotalJunior({
 	    	<span className={ styles.value }>
 	    		<CountUp
 	            start={0}
-	            end={ 87575 }
+	            end={ datas.investPeople ? datas.investPeople : 0 }
 	            duration={2.75}
 	            useEasing
 	            useGrouping
@@ -99,7 +104,7 @@ function BaseTotalJunior({
 	    	<span className={ styles.value }>
 	    		<CountUp
 	            start={0}
-	            end={ 5404 }
+	            end={ datas.investMoney ? datas.investMoney : 0 }
 	            duration={2.75}
 	            useEasing
 	            useGrouping

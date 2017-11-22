@@ -2,7 +2,9 @@ import React from 'react';
 import { Card, Table } from 'antd';
 import styles from './BaseUserInfo.css';
 
-function BaseUserInfo() {
+function BaseUserInfo({
+	list
+}) {
 	
 	const columns = [
 		{
@@ -83,7 +85,7 @@ function BaseUserInfo() {
 	
   return (
     <Card bordered={ false } style={{marginTop: '10px'}} title='用户信息' >
-    	<Table columns={ columns } dataSource={ mockDatas } rowKey={record => record.id} pagination= { false } />
+    	<Table columns={ columns } dataSource={ list } rowKey={record => record.id} pagination= { false } />
     </Card>
   );
 }

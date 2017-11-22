@@ -50,7 +50,6 @@ export const resultAny = (datas) => {
 			//返回数据里面仅有一个属性，属性名为list，且对应值类型为Array时返回该list
 			return datas.result.list
 		} else {
-			
 			return Object.assign({}, {msg: datas.message}, datas.result )
 		}
 	} else {
@@ -76,6 +75,7 @@ export const onanaly = (response) => Promise.resolve(response).then(status).then
 			}
 			
 			throw new Error(JSON.stringify(err))
+			return undefined
 		} else{
 			return dp;
 		}

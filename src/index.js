@@ -18,6 +18,8 @@ const app = dva({
 
 app.use(createLoading());
 
+app.model(require("./models/user/junior"));
+
 app.model(require("./models/login"));
 
 app.model(require("./models/user/investIdentifications"));
@@ -41,8 +43,6 @@ app.model(require("./models/user/userRecordsShopExchange"));
 app.model(require("./models/user/userRecordsRecharge"));
 
 app.model(require("./models/user/userRecordsCapitalStatements"));
-
-app.model(require("./models/user/junior"));
 
 app.model(require("./models/user/userRecordsInvest"));
 

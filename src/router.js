@@ -99,7 +99,14 @@ const Routers = function ({ history, app}) {
             }, 'Junior')
           },
 				},
-				
+				{
+					path: '/juniorTree/:id',
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/User/JuniorTree'))
+            }, 'JuniorTree')
+          },
+				},
 				/*
 				 * 收款管理
 				 */

@@ -9,11 +9,28 @@ import BaseJuniorInvest from '../../components/user/junior/BaseJuniorInvest';
 
 function Junior({
 	dispatch,
+  	baseUserInfo,
+  	juniorStatistics,
+  	juniorInvestStatistics,
 }) {
 	
 	const baseSearch = (params) => {
 		dispatch({
-			type: 'baseSearch',
+			type: 'junior/getUserInfo',
+			payload: params
+		})
+	}
+	
+	const baseJuniorStatistics = (params) => {
+		dispatch({
+			type: 'junior/getJuniorStatistics',
+			payload: params
+		})
+	}
+	
+	const baseJuniorInvest = (params) => {
+		dispatch({
+			type: 'junior/getJuniorInvestStatistics',
 			payload: params
 		})
 	}
@@ -23,15 +40,20 @@ function Junior({
   return (
     <div className={styles.normal}>
       <BaseInfoFilter search={ baseSearch }/>
-      <BaseUserInfo/>
-      <BaseTotalJunior/>
-      <BaseJuniorInvest/>
+      <BaseUserInfo list = { baseUserInfo }/>
+      <BaseTotalJunior search={ baseJuniorStatistics } datas={ juniorStatistics }/>
+      <BaseJuniorInvest search={ baseJuniorInvest } datas={ juniorInvestStatistics }/>
     </div>
   );
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const { id, baseUserInfo, juniorStatistics, juniorInvestStatistics  } = state.junior
+  return {
+  	baseUserInfo,
+  	juniorStatistics,
+  	juniorInvestStatistics,
+  };
 }
 
 export default connect(mapStateToProps)(Junior);
