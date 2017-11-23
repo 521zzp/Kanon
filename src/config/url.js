@@ -48,11 +48,12 @@ export const INVEST_IDENTI_TOTAL = BASEURL + '/user/investSituationTotal'  //投
 export const INVEST_IDENTI_LIST = BASEURL + '/user/investSituation' //投资绑卡集合
 export const INVEST_IDENTI_MODAL_LIST = BASEURL + '/user/investDetails' //投资绑卡统计弹框集合
 //下级商户
-export const USER_JUNIOR_USER = BASEURL + '/getTotalInfo' //下级商户，用户基本信息
+export const USER_JUNIOR_USER = BASEURL + '/getTotalInfo' //下级商户，本用户基本信息
 export const USER_JUNIOR_STATISTICS = BASEURL + '/getAllsubInfo' //下级商户统计
 export const USER_JUNIOR_INVEST_STATISTICS = BASEURL + '/user/junior/invest/statistics' //下级投资情况统计
-
-
+export const USER_JUNIOR_TREE_SEARCH = BASEURL + '/user/junior/tree/search' //下级树搜索
+export const USER_JUNIOR_INFO = BASEURL + '/user/junior/info' //下级详情信息
+export const USER_JUNIOR_THREE_STATISTICS = BASEURL + '/user/junior/three/statistics' //三层用户情况统计
 
 /*
  * 收款管理
@@ -116,7 +117,6 @@ export const ADMINS_LIST = BASEURL + '/getAdmins/{pageSize}/{current}' //管理�
 export const ADMINS_POWER_GET = BASEURL + '/power/{account}' //获取权限列表
 export const ADMINS_INFO_UPDATE = BASEURL + '/opera' //添加管理员或更新管理员密码
 export const ADMINS_POWER_SET = BASEURL + '/powerSet' //设置单个权限或一组权限
-
 
 /*
  * 客服系统

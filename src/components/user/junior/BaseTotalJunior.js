@@ -77,13 +77,13 @@ function BaseTotalJunior({
 	    	<div>已注册总人数（人）</div>
 	    	<span className={ styles.value }>
 	    		<CountUp
-	            start={0}
-	            end={ datas.registerTotal ? datas.registerTotal : 0 }
-	            duration={2.75}
-	            useEasing
-	            useGrouping
-	            separator=","
-	        />
+		            start={0}
+		            end={ datas.registerTotal ? datas.registerTotal : 0 }
+		            duration={2.75}
+		            useEasing
+		            useGrouping
+		            separator=","
+		        />
 	    	</span>
 	    </Card.Grid>
 	    <Card.Grid style={gridStyle}>

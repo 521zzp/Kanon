@@ -1,0 +1,14 @@
+
+.normal {
+}
+
+.title{
+	display: inline-block;
+	width: 70px;
+	text-align: right;
+}
+.value{
+	padding-left: 20px;
+	font-size: 14px;
+	font-style: italic;
+}
