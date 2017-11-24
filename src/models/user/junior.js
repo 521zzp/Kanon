@@ -54,11 +54,10 @@ export default {
   },
   effects: {
   	*getUserInfo ({ payload: obj }, { put, select }) {
-  		yield put({ type: 'update', payload: { ...obj } })
   		const user = yield fetch(USER_JUNIOR_USER, postModel(obj)).then(onanaly)
 			if (user) {
 				console.log('user', user)
-				yield put({ type: 'update', payload: { baseUserInfo : [user], id: user.id } })
+				yield put({ type: 'update', payload: { baseUserInfo : [user], id: user.id, account: user.account } })
 			}
   	},
   	*getJuniorStatistics ({ payload: obj }, { put, select }) {

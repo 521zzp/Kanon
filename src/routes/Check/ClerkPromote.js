@@ -34,6 +34,11 @@ function MerchantPromote({
 		  key: 'superior',
 		},
 		{
+		  title: '上级类型',
+		  dataIndex: 'superiorType',
+		  key: 'superiorType',
+		},
+		{
 		  title: '申请时间',
 		  dataIndex: 'time',
 		  key: 'time',
