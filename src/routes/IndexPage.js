@@ -110,61 +110,7 @@ class IndexPage extends Component {
 			          style={{ borderRight: 0 }}
 			        >
 						
-					<SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
-					    <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
-					    <Menu.Item key="6"><Link to="/userRecords">用户记录</Link></Menu.Item>
-					    <Menu.Item key="7"><Link to="/investIdentification">投资绑卡统计</Link></Menu.Item>
-					    <Menu.Item key="sub2-7"><Link to="/junior">下级商户</Link></Menu.Item>
-					    <Menu.Item key="8">会员列表</Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub1" title={<span><Icon type="red-envelope" />收款管理</span>}>
-					    <Menu.Item key="1"><Link to="/gathered">已收款</Link></Menu.Item>
-					    <Menu.Item key="2">代收款</Menu.Item>
-					    <Menu.Item key="3">明细</Menu.Item>
-					    <Menu.Item key="4"><Link to="/">回收站</Link></Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub7" title={<span><Icon type="wallet" />提现管理</span>}>
-					  	<Menu.Item key="26"><Link to="/withdrawApply">提现申请</Link></Menu.Item>
-					    <Menu.Item key="27"><Link to="/experience">等待支付</Link></Menu.Item>
-					    <Menu.Item key="28"><Link to="/raise">提现明细</Link></Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub3" title={<span><Icon type="global" />活动管理</span>}>
-					    <Menu.Item key="9">抵用券</Menu.Item>
-					    <Menu.Item key="10"><Link to="/raise">加息券</Link></Menu.Item>
-					    <Menu.Item key="11"><Link to="/experience">体验金</Link></Menu.Item>
-					    <Menu.Item key="12">红包</Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub4" title={<span><Icon type="book" />理财产品</span>}>
-					    <Menu.Item key="13"><Link to="/product">发布理财</Link></Menu.Item>
-					    <Menu.Item key="14"><Link to="/raise">已发布理财</Link></Menu.Item>
-					    <Menu.Item key="15"><Link to="/experience">资金明细</Link></Menu.Item>
-					    <Menu.Item key="16"><Link to="/raise">理财统计</Link></Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub9" title={<span><Icon type="shop" />商城管理</span>}>
-					    <Menu.Item key="16"><Link to="/shop">商品列表</Link></Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub5" title={<span><Icon type="notification" />新闻管理</span>}>
-					    <Menu.Item key="17"><Link to="/news/add">发布新闻</Link></Menu.Item>
-					    <Menu.Item key="18"><Link to="/news/list">新闻列表</Link></Menu.Item>
-					    <Menu.Item key="19"><Link to="/experience">短信群发</Link></Menu.Item>
-					    <Menu.Item key="20"><Link to="/raise">滚动新闻</Link></Menu.Item>
-					    <Menu.Item key="21"><Link to="/raise">移动推送</Link></Menu.Item>
-					  </SubMenu>
-					   <SubMenu key="sub10" title={<span><Icon type="hourglass" />审核中心</span>}>
-					    <Menu.Item key="31"><Link to="/clerkPromote">员工推广</Link></Menu.Item>
-					    <Menu.Item key="32"><Link to="/merchantRegister">商户审核</Link></Menu.Item>
-					    <Menu.Item key="33"><Link to="/merchantPromote">商户下级</Link></Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub6" title={<span><Icon type="setting" />系统设置</span>}>
-					    <Menu.Item key="22"><Link to="/news/add">网站设置</Link></Menu.Item>
-					    <Menu.Item key="23"><Link to="/news/list">APP首页产品设置</Link></Menu.Item>
-					    <Menu.Item key="24"><Link to="/experience">Banner设置</Link></Menu.Item>
-					    <Menu.Item key="27"><Link to="/admins">管理员设置</Link></Menu.Item>
-					    <Menu.Item key="25"><Link to="/raise">其他设置</Link></Menu.Item>
-					  </SubMenu>
-					  <SubMenu key="sub8" title={<span><Icon type="customer-service" />在线客服</span>}>
-					    <Menu.Item key="31"><Link to="/onlineService">我的客服</Link></Menu.Item>
-					  </SubMenu>
+					{navs}
 					
 			        </Menu>
 			        
@@ -206,60 +152,58 @@ IndexPage.propTypes = {
 
 export default connect(mapStateToProps)(IndexPage);
 
-/*
- 
-<SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
-				    <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
-				    <Menu.Item key="6"><Link to="/userRecords">用户记录</Link></Menu.Item>
-				    <Menu.Item key="7"><Link to="/investIdentification">投资绑卡统计</Link></Menu.Item>
-				    <Menu.Item key="8">会员列表</Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub1" title={<span><Icon type="red-envelope" />收款管理</span>}>
-				    <Menu.Item key="1"><Link to="/gathered">已收款</Link></Menu.Item>
-				    <Menu.Item key="2">代收款</Menu.Item>
-				    <Menu.Item key="3">明细</Menu.Item>
-				    <Menu.Item key="4"><Link to="/">回收站</Link></Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub7" title={<span><Icon type="wallet" />提现管理</span>}>
-				  	<Menu.Item key="26"><Link to="/news/list">提现申请</Link></Menu.Item>
-				    <Menu.Item key="27"><Link to="/experience">等待支付</Link></Menu.Item>
-				    <Menu.Item key="28"><Link to="/raise">提现明细</Link></Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub3" title={<span><Icon type="global" />活动管理</span>}>
-				    <Menu.Item key="9">抵用券</Menu.Item>
-				    <Menu.Item key="10"><Link to="/raise">加息券</Link></Menu.Item>
-				    <Menu.Item key="11"><Link to="/experience">体验金</Link></Menu.Item>
-				    <Menu.Item key="12">红包</Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub4" title={<span><Icon type="book" />理财产品</span>}>
-				    <Menu.Item key="13"><Link to="/product">发布理财</Link></Menu.Item>
-				    <Menu.Item key="14"><Link to="/raise">已发布理财</Link></Menu.Item>
-				    <Menu.Item key="15"><Link to="/experience">资金明细</Link></Menu.Item>
-				    <Menu.Item key="16"><Link to="/raise">理财统计</Link></Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub9" title={<span><Icon type="shop" />商城管理</span>}>
-				    <Menu.Item key="16"><Link to="/shop">商品列表</Link></Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub5" title={<span><Icon type="notification" />新闻管理</span>}>
-				    <Menu.Item key="17"><Link to="/news/add">发布新闻</Link></Menu.Item>
-				    <Menu.Item key="18"><Link to="/news/list">新闻列表</Link></Menu.Item>
-				    <Menu.Item key="19"><Link to="/experience">短信群发</Link></Menu.Item>
-				    <Menu.Item key="20"><Link to="/raise">滚动新闻</Link></Menu.Item>
-				    <Menu.Item key="21"><Link to="/raise">移动推送</Link></Menu.Item>
-				  </SubMenu>
-				   <SubMenu key="sub10" title={<span><Icon type="hourglass" />审核中心</span>}>
-				    <Menu.Item key="31"><Link to="/clerkPromote">员工推广</Link></Menu.Item>
-				    <Menu.Item key="32"><Link to="/merchantRegister">商户审核</Link></Menu.Item>
-				    <Menu.Item key="33"><Link to="/merchantPromote">商户下级</Link></Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub6" title={<span><Icon type="setting" />系统设置</span>}>
-				    <Menu.Item key="22"><Link to="/news/add">网站设置</Link></Menu.Item>
-				    <Menu.Item key="23"><Link to="/news/list">APP首页产品设置</Link></Menu.Item>
-				    <Menu.Item key="24"><Link to="/experience">Banner设置</Link></Menu.Item>
-				    <Menu.Item key="27"><Link to="/admins">管理员设置</Link></Menu.Item>
-				    <Menu.Item key="25"><Link to="/raise">其他设置</Link></Menu.Item>
-				  </SubMenu>
-				  <SubMenu key="sub8" title={<span><Icon type="customer-service" />在线客服</span>}>
-				    <Menu.Item key="31"><Link to="/onlineService">我的客服</Link></Menu.Item>
-				  </SubMenu>
- */
+
+/*<SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
+					    <Menu.Item key="5"><Link to="/users">用户列表</Link></Menu.Item>
+					    <Menu.Item key="6"><Link to="/userRecords">用户记录</Link></Menu.Item>
+					    <Menu.Item key="7"><Link to="/investIdentification">投资绑卡统计</Link></Menu.Item>
+					    <Menu.Item key="sub2-7"><Link to="/junior">下级商户</Link></Menu.Item>
+					    <Menu.Item key="8">会员列表</Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub1" title={<span><Icon type="red-envelope" />收款管理</span>}>
+					    <Menu.Item key="1"><Link to="/gathered">已收款</Link></Menu.Item>
+					    <Menu.Item key="2">代收款</Menu.Item>
+					    <Menu.Item key="3">明细</Menu.Item>
+					    <Menu.Item key="4"><Link to="/">回收站</Link></Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub7" title={<span><Icon type="wallet" />提现管理</span>}>
+					  	<Menu.Item key="26"><Link to="/withdrawApply">提现申请</Link></Menu.Item>
+					    <Menu.Item key="27"><Link to="/experience">等待支付</Link></Menu.Item>
+					    <Menu.Item key="28"><Link to="/raise">提现明细</Link></Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub3" title={<span><Icon type="global" />活动管理</span>}>
+					    <Menu.Item key="9">抵用券</Menu.Item>
+					    <Menu.Item key="10"><Link to="/raise">加息券</Link></Menu.Item>
+					    <Menu.Item key="11"><Link to="/experience">体验金</Link></Menu.Item>
+					    <Menu.Item key="12">红包</Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub4" title={<span><Icon type="book" />理财产品</span>}>
+					    <Menu.Item key="13"><Link to="/product">发布理财</Link></Menu.Item>
+					    <Menu.Item key="14"><Link to="/raise">已发布理财</Link></Menu.Item>
+					    <Menu.Item key="15"><Link to="/experience">资金明细</Link></Menu.Item>
+					    <Menu.Item key="16"><Link to="/raise">理财统计</Link></Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub9" title={<span><Icon type="shop" />商城管理</span>}>
+					    <Menu.Item key="16"><Link to="/shop">商品列表</Link></Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub5" title={<span><Icon type="notification" />新闻管理</span>}>
+					    <Menu.Item key="17"><Link to="/news/add">发布新闻</Link></Menu.Item>
+					    <Menu.Item key="18"><Link to="/news/list">新闻列表</Link></Menu.Item>
+					    <Menu.Item key="19"><Link to="/experience">短信群发</Link></Menu.Item>
+					    <Menu.Item key="20"><Link to="/raise">滚动新闻</Link></Menu.Item>
+					    <Menu.Item key="21"><Link to="/raise">移动推送</Link></Menu.Item>
+					  </SubMenu>
+					   <SubMenu key="sub10" title={<span><Icon type="hourglass" />审核中心</span>}>
+					    <Menu.Item key="31"><Link to="/promoteRegister">员工推广</Link></Menu.Item>
+					    <Menu.Item key="32"><Link to="/merchantRegister">商户审核</Link></Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub6" title={<span><Icon type="setting" />系统设置</span>}>
+					    <Menu.Item key="22"><Link to="/news/add">网站设置</Link></Menu.Item>
+					    <Menu.Item key="23"><Link to="/news/list">APP首页产品设置</Link></Menu.Item>
+					    <Menu.Item key="24"><Link to="/experience">Banner设置</Link></Menu.Item>
+					    <Menu.Item key="27"><Link to="/admins">管理员设置</Link></Menu.Item>
+					    <Menu.Item key="25"><Link to="/raise">其他设置</Link></Menu.Item>
+					  </SubMenu>
+					  <SubMenu key="sub8" title={<span><Icon type="customer-service" />在线客服</span>}>
+					    <Menu.Item key="31"><Link to="/onlineService">我的客服</Link></Menu.Item>
+					  </SubMenu>*/

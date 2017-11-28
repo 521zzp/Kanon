@@ -275,22 +275,20 @@ export default {
 	      	 payload: { status: 1 }
 	      })
   		Socket.onerror = function(evt) {
-			    console.log("WebSocketError!");
-			    Dispatch({
-	      	 type: 'clerkDisconnect',
-	      })
-			};
+		    console.log("WebSocketError!");
+		    Dispatch({
+		      	 type: 'clerkDisconnect',
+		      })
+		};
 			
-			Socket.onopen = function()
-	    {
+		Socket.onopen = function() {
 	    	console.log('已连接')
-	      Dispatch({
-	      	 type: 'update', 
-	      	 payload: { status: 1 }
-	      })
+		        Dispatch({
+		      	 type: 'update', 
+		      	 payload: { status: 1 }
+		    })
 	    };
-  		Socket.onmessage = function (evt) 
-      { 
+  		Socket.onmessage = function (evt) { 
           var data = JSON.parse(evt.data);
           console.log("数据已接收...");
           console.log(JSON.stringify(data))

@@ -91,8 +91,8 @@ function MerchantPromote({
 			    	});
 		  		}
 		  	}>查看照片</a>
-		  	{ record.status === 1 && <span className="ant-divider"/> }
-		 	{ record.status === 1 && <DropOption 
+		  	{ record.status === 10 && <span className="ant-divider"/> }
+		 	{ record.status === 10 && <DropOption 
 		  		onMenuClick={e => handleMenuClick(record, e)} 
 		  		menuOptions={[
 		  			{ key: 'accept', name: '审核通过' }, 
