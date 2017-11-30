@@ -226,6 +226,19 @@ const Routers = function ({ history, app}) {
           },
 				},
 				/*
+				 * 异业推广
+				 */
+				{
+					path: '/yunCaiTang', 
+					getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/DiffIndustry/YunCaiTang'))
+            }, 'yunCaiTang')
+          },
+				},
+				
+				
+				/*
 				 * 系统设置
 				 */
 				{

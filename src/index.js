@@ -20,6 +20,8 @@ app.use(createLoading());
 
 app.model(require("./models/user/junior"));
 
+app.model(require("./models/diffIndustry/yuncaitang"));
+
 app.model(require("./models/login"));
 
 app.model(require("./models/user/investIdentifications"));

@@ -99,6 +99,14 @@ export const PROMOTE_REGISTER_LIST = BASEURL + '/register/list' //推广注册�
 export const PROMOTE_REGISTER_CHECK = BASEURL + '/promote/register/check' //推广注册审核接口
 export const PROMOTE_REGISTER_CHECK_IMAGE = BASEURL + '/register/checkIMG' //审核图片
 
+/*
+ * 异业推广
+ */
+export const DIFF_INDUS_YCT_TOTAL = BASEURL + '/couponCount' //蕴才汤总条数
+export const DIFF_INDUS_YCT_LIST = BASEURL + '/couponList' //蕴才汤集合
+export const DIFF_INDUS_YCT_USE = BASEURL + '/check' //蕴才汤设置使用
+
+
 
 
 /*

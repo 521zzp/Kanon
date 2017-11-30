@@ -18,7 +18,8 @@ function GoodsList({
 	list,
 	loading,
 	form: {
-		getFieldDecorator
+		getFieldDecorator,
+		validateFields,
 	}
 }) {
 	
