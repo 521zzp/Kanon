@@ -28,7 +28,6 @@ export const status = (response) => {
 		payload: null, //action带的参数,
 		msg: '您的网络有异常！', //异常原因，提示语
 	}
-	
 	throw new Error(JSON.stringify(err))
 	//throw new Error(response.statusText)
 } 

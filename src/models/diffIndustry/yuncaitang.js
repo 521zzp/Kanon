@@ -9,16 +9,16 @@ export default {
   	total: 0,
   	current: 0,
   	pageSize: 10,
-  	money: 0, //已抵扣总金额
+  	bCount: 0, //已使用浴资券张数
+  	dCount: 0, //已使用抵用券张数
   	list: [],
   	params: {
   		account: '',
   		status: '',
+  		type: '', //礼券类型  2: 浴资券 ， 1: 10元抵用券
   		couponId: '',
+  		time: [ '' , '' ], //使用时间
   	},
-  	
-  	
-  	
   },
   reducers: {
   	update (state, { payload: obj }) {
@@ -29,9 +29,11 @@ export default {
   	*getTotal ({ payload: obj }, { put, select }) {
   		obj ? yield put({ type: 'update', payload: { params: obj } }) : ''
   		const { params } = yield select(state => state.yuncaitang )
+  		console.log('----4444444444----------------------')
   		const { total, money } = yield fetch(DIFF_INDUS_YCT_TOTAL, postModel(params)).then(onanaly);
+  		console.log('==========asfafaq=================')
   		yield put({ type: 'update', payload: { total, money } });
-  		if (total && total >0) {
+  		if (total && total > 0) {
   			yield put({ type: 'getList' })
   		} else {
   			yield put({ type: 'update', payload: { total: 0, list: [] } });
