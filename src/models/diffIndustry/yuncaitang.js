@@ -29,10 +29,8 @@ export default {
   	*getTotal ({ payload: obj }, { put, select }) {
   		obj ? yield put({ type: 'update', payload: { params: obj } }) : ''
   		const { params } = yield select(state => state.yuncaitang )
-  		console.log('----4444444444----------------------')
-  		const { total, money } = yield fetch(DIFF_INDUS_YCT_TOTAL, postModel(params)).then(onanaly);
-  		console.log('==========asfafaq=================')
-  		yield put({ type: 'update', payload: { total, money } });
+  		const { total, bCount, dCount } = yield fetch(DIFF_INDUS_YCT_TOTAL, postModel(params)).then(onanaly);
+  		yield put({ type: 'update', payload: { total, bCount, dCount } });
   		if (total && total > 0) {
   			yield put({ type: 'getList' })
   		} else {

@@ -17,7 +17,7 @@
   },
   "proxy": {
     "/adminapi": {
-      "target": "http://192.168.3.187:8090",
+      "target": "http://localhost:4000",
       "changeOrigin": true
     }
   },
